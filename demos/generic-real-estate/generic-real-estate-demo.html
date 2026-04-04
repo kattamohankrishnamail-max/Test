@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real Estate Sales Demo</title>
+  <link rel="stylesheet" href="./styles-real-estate.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <section class="card intro-card">
+        <p class="eyebrow">Demo Environment</p>
+        <h1>Real Estate Sales Intelligence Agent</h1>
+        <p>
+          A local MVP for residential real estate sales and objection handling with seeded dummy data,
+          grounded answers, and a simple retrieval flow.
+        </p>
+      </section>
+
+      <section class="card">
+        <div class="section-head">
+          <h2>Dataset</h2>
+          <span>Dummy records</span>
+        </div>
+        <ul id="dataset-stats" class="stats-list"></ul>
+      </section>
+
+      <section class="card">
+        <div class="section-head">
+          <h2>Pipeline Funnel</h2>
+          <span>Sales stages</span>
+        </div>
+        <ul id="funnel-stats" class="stats-list"></ul>
+      </section>
+    </aside>
+
+    <main class="workspace">
+      <section class="card hero-card">
+        <div>
+          <p class="eyebrow">Operating Model</p>
+          <h2>Residential Real Estate Copilot</h2>
+          <p>
+            This prototype is framed around a residential real estate sales workflow: project context, objection patterns,
+            approved messaging, and process confidence combined into one response.
+          </p>
+        </div>
+        <div class="pill-row">
+          <span>Dummy data</span>
+          <span>Source-backed</span>
+          <span>Zero dependencies</span>
+        </div>
+      </section>
+
+      <section class="card briefs-card">
+        <div class="section-head briefs-head">
+          <div>
+            <p class="eyebrow">Demo Explainer</p>
+            <h2>Featured Dummy Projects</h2>
+          </div>
+          <span>2-3 sample projects used for demo answers</span>
+        </div>
+        <div class="briefs-intro">
+          These are dummy project names and dummy customer situations used only to simulate real residential real estate sales conversations.
+          Each brief shows the current stage, what the client is worried about, and the latest call context.
+        </div>
+        <div id="project-briefs" class="project-briefs"></div>
+      </section>
+
+      <section class="card chat-card">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Ask The Copilot</p>
+            <h2>Real estate objection handling</h2>
+          </div>
+          <button id="clear-chat" class="ghost-button" type="button">Clear chat</button>
+        </div>
+
+        <div id="chat-log" class="chat-log" aria-live="polite"></div>
+
+        <form id="chat-form" class="chat-form">
+          <label class="sr-only" for="question-input">Question</label>
+          <textarea id="question-input" rows="3" placeholder="Example: How should I handle a price objection for a 4BHK apartment buyer?"></textarea>
+          <div class="chat-actions">
+            <p>Answers show direct guidance, talk track, reasoning, next step, confidence, and sources.</p>
+            <button type="submit" class="primary-button">Ask agent</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <template id="message-template">
+    <article class="message">
+      <div class="message-meta"></div>
+      <div class="message-body"></div>
+    </article>
+  </template>
+
+  <div id="detail-overlay" class="detail-overlay hidden" aria-hidden="true">
+    <div class="detail-backdrop" data-close-detail="true"></div>
+    <aside class="detail-panel" aria-label="Detail panel">
+      <div class="detail-header">
+        <div>
+          <p id="detail-eyebrow" class="eyebrow">Details</p>
+          <h2 id="detail-title">Panel</h2>
+        </div>
+        <button id="close-detail" class="ghost-button" type="button">Close</button>
+      </div>
+      <p id="detail-summary" class="detail-summary"></p>
+      <div id="detail-content" class="detail-content"></div>
+    </aside>
+  </div>
+
+  <script src="./app-real-estate.js"></script>
+</body>
+</html>

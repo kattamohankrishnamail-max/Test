@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real Estate AI Sales OS Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./sales-os-demo.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <section class="panel intro-panel">
+        <p class="eyebrow">Standalone SaaS wedge</p>
+        <h1>Real Estate AI Sales OS</h1>
+        <p class="lede">
+          A lead prioritization and follow-up copilot for residential real estate teams.
+          The demo below shows which leads to act on, why they matter, and what to say next.
+        </p>
+        <div class="mini-stack">
+          <div class="mini-pill">Lead ranking</div>
+          <div class="mini-pill">Engagement score</div>
+          <div class="mini-pill">Next best action</div>
+          <div class="mini-pill">Rep effectiveness</div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-head">
+          <h2>Daily Brief</h2>
+          <span class="section-meta">Top 5 to call</span>
+        </div>
+        <div id="top-leads" class="stack-list"></div>
+      </section>
+
+      <section class="panel">
+        <div class="section-head">
+          <h2>Manager View</h2>
+          <span class="section-meta">Team snapshot</span>
+        </div>
+        <div id="manager-stats" class="metric-grid"></div>
+      </section>
+    </aside>
+
+    <main class="workspace">
+      <section class="hero-card">
+        <div>
+          <p class="eyebrow">Execution board</p>
+          <h2>Lead Prioritization + Follow-up Copilot</h2>
+          <p class="hero-copy">
+            Score leads, spotlight risk, guide the next action, and equip reps with a natural call script in one place.
+          </p>
+        </div>
+        <div class="hero-pills">
+          <span>0-100 lead score</span>
+          <span>Conversion probability</span>
+          <span>Action-now queue</span>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-head">
+          <h2>Sales Agent Ranking</h2>
+          <span class="section-meta">Click a rep to filter leads</span>
+        </div>
+        <div id="rep-ranking" class="rep-grid"></div>
+      </section>
+
+      <section class="panel">
+        <div class="section-head">
+          <h2>Lead Dashboard</h2>
+          <span id="filter-summary" class="section-meta">All active leads</span>
+        </div>
+        <div id="filter-bar" class="filter-bar"></div>
+        <div class="table-wrap">
+          <table class="lead-table">
+            <thead>
+              <tr>
+                <th>Lead</th>
+                <th>Project</th>
+                <th>Status</th>
+                <th>Lead Score</th>
+                <th>Engagement</th>
+                <th>Assigned To</th>
+                <th>Action Now</th>
+              </tr>
+            </thead>
+            <tbody id="lead-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="detail-overlay" class="detail-overlay hidden"></div>
+  <aside id="detail-panel" class="detail-panel hidden" aria-hidden="true">
+    <button id="detail-close" class="detail-close" type="button" aria-label="Close details">Close</button>
+    <p id="detail-eyebrow" class="eyebrow"></p>
+    <h3 id="detail-title"></h3>
+    <p id="detail-subtitle" class="detail-subtitle"></p>
+
+    <div id="detail-summary-grid" class="summary-grid"></div>
+
+    <section class="detail-card">
+      <h4>AI Insights</h4>
+      <div id="detail-insights"></div>
+    </section>
+
+    <section class="detail-card accent-card">
+      <h4>Next Best Action</h4>
+      <div id="detail-action"></div>
+    </section>
+
+    <section class="detail-card">
+      <h4>Call Script</h4>
+      <div id="detail-script"></div>
+    </section>
+  </aside>
+
+  <script src="./sales-os-demo.js"></script>
+</body>
+</html>
