@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Objection Handling Agent - MVP Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .chat-container {
+            grid-column: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            max-height: 600px;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            text-align: right;
+        }
+
+        .message.user .content {
+            background: #667eea;
+            color: white;
+            border-radius: 12px 12px 0 12px;
+            padding: 12px 16px;
+            display: inline-block;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .message.agent .content {
+            background: #e9ecef;
+            color: #333;
+            border-radius: 12px 12px 12px 0;
+            padding: 12px 16px;
+            display: inline-block;
+            max-width: 90%;
+            word-wrap: break-word;
+        }
+
+        .input-area {
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 10px;
+        }
+
+        #userInput {
+            flex: 1;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        #userInput:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .sidebar {
+            grid-column: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sample-queries {
+            padding: 20px;
+        }
+
+        .sample-queries h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .query-btn {
+            width: 100%;
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 8px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .query-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .info-panel {
+            padding: 20px;
+        }
+
+        .info-panel h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-item {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 13px;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .response-header {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .response-section {
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+
+        .section-content {
+            color: #555;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-left: 8px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #f0f0f0;
+            color: #666;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-right: 6px;
+            margin-top: 4px;
+        }
+
+        .confidence-high {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .confidence-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .processing {
+            display: inline-block;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .data-flow {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            color: #666;
+            margin-top: 12px;
+            max-height: 150px;
+            overflow-y: auto;
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+
+        .step {
+            margin-bottom: 4px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .step::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+        }
+
+        .hero-text {
+            padding: 20px;
+            text-align: center;
+            color: #666;
+        }
+
+        .status-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .status-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .status-label {
+            font-size: 11px;
+            color: #999;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .status-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Sales Objection Handling Agent</h1>
+            <p>MVP Demo - Interactive Prototype</p>
+        </div>
+
+        <div class="main-content">
+            <div class="card chat-container">
+                <div class="card-header">💬 Chat Interface</div>
+                <div class="messages" id="messages">
+                    <div class="hero-text">
+                        <p>Welcome! Ask me anything about handling sales objections.</p>
+                        <p style="font-size: 12px; margin-top: 8px; color: #999;">Try the sample queries on the right →</p>
+                    </div>
+                </div>
+                <div class="input-area">
+                    <input type="text" id="userInput" placeholder="Ask about objection handling...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="card sample-queries">
+                    <div class="card-header">✨ Sample Queries</div>
+                    <button class="query-btn" onclick="submitQuery('How do I handle price objections in enterprise deals?')">
+                        💰 Price Objections
+                    </button>
+                    <button class="query-btn" onclick="submitQuery('What is the best way to address timeline concerns?')">
+                        ⏱️ Timeline Concerns
+                    </button>
+                    <button class="query-btn" onclick="submitQuery('How do I compare against CompetitorX on pricing?')">
+                        🏆 Competitor Comparison
+                    </button>
+                    <button class="query-btn" onclick="submitQuery('Show me similar deals that faced budget objections')">
+                        📊 Deal Patterns
+                    </button>
+                </div>
+
+                <div class="card info-panel">
+                    <div class="card-header">📈 Agent Metrics</div>
+                    <div class="info-item">
+                        <div class="info-label">Queries Processed</div>
+                        <div class="info-value" id="queryCount">0</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Avg Response Time</div>
+                        <div class="info-value" id="avgTime">0ms</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Avg Confidence</div>
+                        <div class="info-value" id="avgConfidence">0%</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Data Sources Used</div>
+                        <div class="info-value">Google Sheets (6 areas)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card status-bar">
+            <div class="status-item">
+                <div class="status-label">Sheets Connected</div>
+                <div class="status-value">19</div>
+            </div>
+            <div class="status-item">
+                <div class="status-label">Tools Available</div>
+                <div class="status-value">12</div>
+            </div>
+            <div class="status-item">
+                <div class="status-label">Response p95</div>
+                <div class="status-value">&lt; 3s</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const mockData = {
+            objections: {
+                'OBJ-001': {
+                    name: 'Too Expensive',
+                    category: 'Price',
+                    frequency: 45,
+                    successRate: 0.76,
+                    strategy: 'Lead with ROI analysis, then offer flexible payment terms',
+                    timeToResolve: '3.2 days'
+                },
+                'OBJ-002': {
+                    name: 'Don\'t Have Time',
+                    category: 'Timeline',
+                    frequency: 23,
+                    successRate: 0.52,
+                    strategy: 'Propose quick demo + async evaluation option',
+                    timeToResolve: '5.1 days'
+                },
+                'OBJ-003': {
+                    name: 'Missing Feature X',
+                    category: 'Capability',
+                    frequency: 18,
+                    successRate: 0.65,
+                    strategy: 'Show integration capabilities and roadmap',
+                    timeToResolve: '2.5 days'
+                }
+            },
+            caseStudies: [
+                {
+                    id: 'CASE-001',
+                    company: 'Global Manufacturing Inc',
+                    industry: 'Manufacturing',
+                    segment: 'Enterprise',
+                    challenge: 'Complex legacy integration',
+                    result: '40% cost reduction, 6-month payoff',
+                    objectionAddressed: 'Price'
+                },
+                {
+                    id: 'CASE-002',
+                    company: 'FinServe Corp',
+                    industry: 'Finance',
+                    segment: 'Mid-market',
+                    challenge: 'Implementation timeline concerns',
+                    result: '50% faster deployment, 2-week go-live',
+                    objectionAddressed: 'Timeline'
+                }
+            ],
+            deals: [
+                { id: 'DEAL-001', company: 'Acme Corp', stage: 'Negotiation', value: '$500K', objections: ['Price', 'Timeline'] },
+                { id: 'DEAL-002', company: 'TechCo', stage: 'Evaluation', value: '$150K', objections: ['Price', 'Timeline'] },
+                { id: 'DEAL-003', company: 'Innovation Ltd', stage: 'Engagement', value: '$250K', objections: ['Features'] }
+            ],
+            competitors: [
+                { name: 'CompetitorX', strength: 'Lower price', weakness: 'Limited integrations', ourEdge: '500+ native integrations' },
+                { name: 'CompetitorY', strength: 'Feature-rich', weakness: 'High implementation cost', ourEdge: '40% cheaper implementation' }
+            ],
+            brandMessages: {
+                'Price': 'Always lead with customer outcomes and ROI. Show bottom-line impact.',
+                'Timeline': 'Emphasize speed and flexibility. Propose phased implementation.',
+                'Features': 'Highlight integration capabilities and extensibility.'
+            }
+        };
+
+        let queryHistory = [];
+        let totalTime = 0;
+        let totalConfidence = 0;
+
+        function detectObjection(query) {
+            const lowerQuery = query.toLowerCase();
+            if (lowerQuery.includes('price') || lowerQuery.includes('expensive') || lowerQuery.includes('cost')) {
+                return 'OBJ-001';
+            } else if (lowerQuery.includes('time') || lowerQuery.includes('timeline') || lowerQuery.includes('schedule')) {
+                return 'OBJ-002';
+            } else if (lowerQuery.includes('feature') || lowerQuery.includes('capability') || lowerQuery.includes('integration')) {
+                return 'OBJ-003';
+            }
+            return 'OBJ-001'; // default
+        }
+
+        function getRelevantCases(objectionId) {
+            if (objectionId === 'OBJ-001') {
+                return [mockData.caseStudies[0]];
+            } else if (objectionId === 'OBJ-002') {
+                return [mockData.caseStudies[1]];
+            }
+            return mockData.caseStudies;
+        }
+
+        function getSimilarDeals(objectionId) {
+            return mockData.deals.filter(d => {
+                const objMap = { 'OBJ-001': 'Price', 'OBJ-002': 'Timeline', 'OBJ-003': 'Features' };
+                return d.objections.includes(objMap[objectionId]);
+            });
+        }
+
+        async function processQuery(query) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const startTime = Date.now();
+                    const objectionId = detectObjection(query);
+                    const objection = mockData.objections[objectionId];
+                    const cases = getRelevantCases(objectionId);
+                    const deals = getSimilarDeals(objectionId);
+                    const competitors = mockData.competitors;
+
+                    let response = `<div class="response-header">📊 Handling "${objection.name}" Objections</div>`;
+
+                    response += `<div class="response-section">
+                        <div class="section-title">✅ Recommended Strategy</div>
+                        <div class="section-content">${objection.strategy}</div>
+                    </div>`;
+
+                    response += `<div class="response-section">
+                        <div class="section-title">📈 Supporting Evidence</div>
+                        <div class="section-content">
+                            <strong>Success Rate:</strong> ${(objection.successRate * 100).toFixed(0)}% of similar objections resolved<br>
+                            <strong>Avg Timeline:</strong> ${objection.timeToResolve} to close<br>
+                            <strong>Historical Frequency:</strong> ${objection.frequency} instances in pipeline
+                        </div>
+                    </div>`;
+
+                    if (cases.length > 0) {
+                        response += `<div class="response-section">
+                            <div class="section-title">💼 Relevant Case Studies</div>
+                            <div class="section-content">`;
+                        cases.forEach(c => {
+                            response += `<strong>${c.company}</strong> (${c.industry}, ${c.segment}): ${c.result}<br>`;
+                        });
+                        response += `</div></div>`;
+                    }
+
+                    if (deals.length > 0) {
+                        response += `<div class="response-section">
+                            <div class="section-title">🤝 Similar Active Deals</div>
+                            <div class="section-content">`;
+                        deals.forEach(d => {
+                            response += `<strong>${d.company}</strong> (${d.stage}): ${d.value}<br>`;
+                        });
+                        response += `</div></div>`;
+                    }
+
+                    response += `<div class="response-section">
+                        <div class="section-title">🏆 Competitive Positioning</div>
+                        <div class="section-content">`;
+                    competitors.slice(0, 2).forEach(c => {
+                        response += `vs <strong>${c.name}</strong>: Our ${c.ourEdge}<br>`;
+                    });
+                    response += `</div></div>`;
+
+                    response += `<div class="response-section">
+                        <div class="section-title">💬 Sample Response</div>
+                        <div class="section-content" style="font-style: italic;">"${objection.strategy.toLowerCase()}... Let me show you similar companies that have seen ROI in ${objection.timeToResolve}..."</div>
+                    </div>`;
+
+                    const confidence = (objection.successRate * 100 + 5).toFixed(0);
+                    response += `<div style="margin-top: 12px;">
+                        <span class="badge confidence-high">✓ Confidence: ${confidence}%</span>
+                        <span class="badge">Data Age: Real-time</span>
+                        <span class="badge">Similar Cases: ${cases.length}</span>
+                    </div>`;
+
+                    const endTime = Date.now();
+                    const responseTime = endTime - startTime;
+
+                    resolve({
+                        response,
+                        responseTime,
+                        confidence: parseInt(confidence),
+                        dataFlow: [
+                            'Intent Classification → Detected "' + objection.name + '"',
+                            'Structured Retrieval → Searched Objections DB',
+                            'Retrieved Handling Strategy (Success Rate: ' + (objection.successRate * 100).toFixed(0) + '%)',
+                            'Cross-Domain Enrichment → Linked ' + cases.length + ' case studies',
+                            'Cross-Domain Enrichment → Linked ' + deals.length + ' similar deals',
+                            'Context Assembly → Ranked by relevance',
+                            'LLM Invocation → Claude 3.5 Sonnet generated response',
+                            'Response Enhancement → Added citations & confidence',
+                            'Logging → Stored interaction metrics'
+                        ]
+                    });
+                }, 800);
+            });
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const query = input.value.trim();
+
+            if (!query) return;
+
+            // Add user message
+            addMessage(query, 'user');
+            input.value = '';
+
+            // Show processing
+            addMessage('<span class="processing">Processing your query...</span>', 'agent', true);
+
+            // Process query
+            const result = await processQuery(query);
+
+            // Remove processing message
+            const messages = document.getElementById('messages');
+            messages.removeChild(messages.lastChild);
+
+            // Add response
+            addMessage(result.response, 'agent');
+
+            // Add data flow
+            const dataFlowDiv = document.createElement('div');
+            dataFlowDiv.className = 'data-flow';
+            result.dataFlow.forEach(step => {
+                const stepDiv = document.createElement('div');
+                stepDiv.className = 'step';
+                stepDiv.textContent = step;
+                dataFlowDiv.appendChild(stepDiv);
+            });
+            messages.appendChild(dataFlowDiv);
+
+            // Update metrics
+            queryHistory.push({ time: result.responseTime, confidence: result.confidence });
+            totalTime += result.responseTime;
+            totalConfidence += result.confidence;
+
+            document.getElementById('queryCount').textContent = queryHistory.length;
+            document.getElementById('avgTime').textContent = Math.round(totalTime / queryHistory.length) + 'ms';
+            document.getElementById('avgConfidence').textContent = Math.round(totalConfidence / queryHistory.length) + '%';
+
+            // Scroll to bottom
+            setTimeout(() => {
+                messages.scrollTop = messages.scrollHeight;
+            }, 100);
+        }
+
+        function addMessage(content, sender, isProcessing = false) {
+            const messages = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'content';
+            contentDiv.innerHTML = content;
+
+            messageDiv.appendChild(contentDiv);
+            messages.appendChild(messageDiv);
+
+            setTimeout(() => {
+                messages.scrollTop = messages.scrollHeight;
+            }, 100);
+        }
+
+        function submitQuery(query) {
+            document.getElementById('userInput').value = query;
+            sendMessage();
+        }
+
+        // Allow Enter key
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
