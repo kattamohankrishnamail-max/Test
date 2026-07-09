@@ -1,0 +1,779 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "created": "2024-03-20",
+    "sheets": 6,
+    "totalRows": 45,
+    "description": "Complete test data for Sales Objection Handling Agent MVP"
+  },
+  "salesCallsRepository": {
+    "callLog": [
+      {
+        "CallID": "CALL-001",
+        "Date": "2024-03-15",
+        "SalesRep": "John Smith",
+        "Prospect": "Jane Doe",
+        "Company": "Acme Corp",
+        "Industry": "SaaS",
+        "Duration": 45,
+        "Status": "Won",
+        "TranscriptLink": "https://drive.google.com/file/d/...",
+        "Notes": "Strong budget alignment, legal approval blocker resolved"
+      },
+      {
+        "CallID": "CALL-002",
+        "Date": "2024-03-15",
+        "SalesRep": "Sarah Lee",
+        "Prospect": "Bob Johnson",
+        "Company": "TechCo",
+        "Industry": "Finance",
+        "Duration": 30,
+        "Status": "Lost",
+        "TranscriptLink": "https://drive.google.com/file/d/...",
+        "Notes": "Price sensitive, competitor comparison needed"
+      },
+      {
+        "CallID": "CALL-003",
+        "Date": "2024-03-16",
+        "SalesRep": "Mike Chen",
+        "Prospect": "Lisa Anderson",
+        "Company": "Innovation Ltd",
+        "Industry": "Healthcare",
+        "Duration": 60,
+        "Status": "Active",
+        "TranscriptLink": "https://drive.google.com/file/d/...",
+        "Notes": "Timeline concerns, proposed phased implementation"
+      },
+      {
+        "CallID": "CALL-004",
+        "Date": "2024-03-16",
+        "SalesRep": "Emily Davis",
+        "Prospect": "David Wilson",
+        "Company": "Global Tech Solutions",
+        "Industry": "Manufacturing",
+        "Duration": 50,
+        "Status": "Won",
+        "TranscriptLink": "https://drive.google.com/file/d/...",
+        "Notes": "ROI focused, flexible payment terms accepted"
+      },
+      {
+        "CallID": "CALL-005",
+        "Date": "2024-03-17",
+        "SalesRep": "John Smith",
+        "Prospect": "Rachel White",
+        "Company": "FinServe Corp",
+        "Industry": "Finance",
+        "Duration": 35,
+        "Status": "Pending",
+        "TranscriptLink": "https://drive.google.com/file/d/...",
+        "Notes": "Feature gap on integration, awaiting product demo"
+      }
+    ],
+    "callRemarks": [
+      {
+        "CallID": "CALL-001",
+        "RemarkType": "Objection",
+        "Content": "Budget concerns - worried about $500K investment",
+        "Context": "Enterprise deal, procurement approval needed",
+        "CreatedBy": "John Smith",
+        "DateCreated": "2024-03-15",
+        "Timestamp": "09:15"
+      },
+      {
+        "CallID": "CALL-001",
+        "RemarkType": "Resolution",
+        "Content": "Showed 18-month ROI analysis, offered flexible payment terms",
+        "Context": "Tied to quarterly budget cycle, 3-month payment plan",
+        "CreatedBy": "John Smith",
+        "DateCreated": "2024-03-15",
+        "Timestamp": "09:35"
+      },
+      {
+        "CallID": "CALL-002",
+        "RemarkType": "Objection",
+        "Content": "Too expensive vs CompetitorX - they quoted $20K less",
+        "Context": "SMB segment, budget-conscious buyer",
+        "CreatedBy": "Sarah Lee",
+        "DateCreated": "2024-03-15",
+        "Timestamp": "14:30"
+      },
+      {
+        "CallID": "CALL-002",
+        "RemarkType": "Escalation",
+        "Content": "Prospect considering CompetitorY, need competitive positioning",
+        "Context": "Lost deal to competitor on price",
+        "CreatedBy": "Sarah Lee",
+        "DateCreated": "2024-03-15",
+        "Timestamp": "14:50"
+      },
+      {
+        "CallID": "CALL-003",
+        "RemarkType": "Objection",
+        "Content": "Don't have time to evaluate - busy with current project",
+        "Context": "Mid-market deal, procurement timeline",
+        "CreatedBy": "Mike Chen",
+        "DateCreated": "2024-03-16",
+        "Timestamp": "11:00"
+      },
+      {
+        "CallID": "CALL-003",
+        "RemarkType": "Solution",
+        "Content": "Proposed async evaluation + quick demo next week",
+        "Context": "Extended trial period offered",
+        "CreatedBy": "Mike Chen",
+        "DateCreated": "2024-03-16",
+        "Timestamp": "11:25"
+      },
+      {
+        "CallID": "CALL-004",
+        "RemarkType": "Objection",
+        "Content": "Implementation timeline - need to go live in Q2",
+        "Context": "Enterprise deal, strict deadline",
+        "CreatedBy": "Emily Davis",
+        "DateCreated": "2024-03-16",
+        "Timestamp": "15:00"
+      },
+      {
+        "CallID": "CALL-004",
+        "RemarkType": "Resolution",
+        "Content": "Showed accelerated deployment framework, 4-week go-live possible",
+        "Context": "Rapid onboarding with dedicated team",
+        "CreatedBy": "Emily Davis",
+        "DateCreated": "2024-03-16",
+        "Timestamp": "15:30"
+      }
+    ],
+    "callMetadata": [
+      {
+        "CallID": "CALL-001",
+        "ObjectionsMentioned": "Budget concerns, Legal approval",
+        "KeyPoints": "ROI highlighted, Payment flexibility key, Legal team approval needed",
+        "NextSteps": "Send contract, Legal review, Schedule follow-up",
+        "SentimentScore": 0.85,
+        "ProspectStatus": "Hot"
+      },
+      {
+        "CallID": "CALL-002",
+        "ObjectionsMentioned": "Price, Competitor comparison",
+        "KeyPoints": "Competitor positioning strong, Budget is primary driver, Feature gap minor",
+        "NextSteps": "Competitive analysis, Price adjustment proposal, Follow-up in 1 week",
+        "SentimentScore": 0.45,
+        "ProspectStatus": "Warm"
+      },
+      {
+        "CallID": "CALL-003",
+        "ObjectionsMentioned": "Timeline, Evaluation capacity",
+        "KeyPoints": "Time constraint is main barrier, Interested in solution, Flexible approach appreciated",
+        "NextSteps": "Send async eval materials, Schedule demo, Extended trial offer",
+        "SentimentScore": 0.72,
+        "ProspectStatus": "Hot"
+      },
+      {
+        "CallID": "CALL-004",
+        "ObjectionsMentioned": "Implementation timeline",
+        "KeyPoints": "Strict Q2 deadline, Budget approved, ROI convinced",
+        "NextSteps": "Send implementation plan, Schedule kick-off call, Contract review",
+        "SentimentScore": 0.88,
+        "ProspectStatus": "Hot"
+      },
+      {
+        "CallID": "CALL-005",
+        "ObjectionsMentioned": "Feature gap, Integration concerns",
+        "KeyPoints": "Missing Salesforce integration, Needs custom connectors, Timeline flexible",
+        "NextSteps": "Send product roadmap, Demo integration capabilities, Technical discussion",
+        "SentimentScore": 0.68,
+        "ProspectStatus": "Warm"
+      }
+    ]
+  },
+  "objectionsDatabase": {
+    "objectionCatalog": [
+      {
+        "ObjectionID": "OBJ-001",
+        "Category": "Price",
+        "ObjectionText": "Too expensive",
+        "Frequency": 45,
+        "LastSeen": "2024-03-20",
+        "SuccessfulHandlings": 34,
+        "AverageResolutionTime": "3.2 days"
+      },
+      {
+        "ObjectionID": "OBJ-002",
+        "Category": "Timeline",
+        "ObjectionText": "Don't have time to evaluate",
+        "Frequency": 23,
+        "LastSeen": "2024-03-19",
+        "SuccessfulHandlings": 12,
+        "AverageResolutionTime": "5.1 days"
+      },
+      {
+        "ObjectionID": "OBJ-003",
+        "Category": "Capability",
+        "ObjectionText": "Missing critical feature",
+        "Frequency": 18,
+        "LastSeen": "2024-03-18",
+        "SuccessfulHandlings": 8,
+        "AverageResolutionTime": "2.5 days"
+      },
+      {
+        "ObjectionID": "OBJ-004",
+        "Category": "Integration",
+        "ObjectionText": "Doesn't integrate with our systems",
+        "Frequency": 15,
+        "LastSeen": "2024-03-17",
+        "SuccessfulHandlings": 11,
+        "AverageResolutionTime": "4.0 days"
+      },
+      {
+        "ObjectionID": "OBJ-005",
+        "Category": "Implementation",
+        "ObjectionText": "Implementation too complex/risky",
+        "Frequency": 12,
+        "LastSeen": "2024-03-16",
+        "SuccessfulHandlings": 9,
+        "AverageResolutionTime": "3.8 days"
+      }
+    ],
+    "objectionHandling": [
+      {
+        "ObjectionID": "OBJ-001",
+        "Category": "Price",
+        "HandlingStrategy": "Lead with ROI analysis showing 18-month payoff, then offer flexible payment terms (quarterly, monthly), highlight TCO savings, compare to competitor costs",
+        "SuccessRate": 0.76,
+        "SampleResponses": "Here's how similar companies justified this investment... | Let me show you the 18-month ROI analysis | We can structure this with flexible payment terms",
+        "ApproachType": "ROI-focused",
+        "RelatedValueProp": "VP-003"
+      },
+      {
+        "ObjectionID": "OBJ-002",
+        "Category": "Timeline",
+        "HandlingStrategy": "Propose quick 30-min demo + async evaluation option, offer extended trial period, emphasize speed of deployment, reduce evaluation friction",
+        "SuccessRate": 0.52,
+        "SampleResponses": "We can start with a quick demo and async eval... | Most customers need only 15 min to see value... | Extended trial gives you time without pressure",
+        "ApproachType": "Friction-reduction",
+        "RelatedValueProp": "VP-001"
+      },
+      {
+        "ObjectionID": "OBJ-003",
+        "Category": "Capability",
+        "HandlingStrategy": "Show product roadmap for missing feature, highlight existing capabilities that achieve same goal, offer custom development option, position as partnership",
+        "SuccessRate": 0.65,
+        "SampleResponses": "That feature is on our Q2 roadmap... | We can achieve that goal with these capabilities... | Let's discuss a custom solution",
+        "ApproachType": "Roadmap-focused",
+        "RelatedValueProp": "VP-005"
+      },
+      {
+        "ObjectionID": "OBJ-004",
+        "Category": "Integration",
+        "HandlingStrategy": "Highlight 500+ native integrations, show Salesforce/HubSpot/Slack connectors, offer integration specialist help, emphasize API-first architecture",
+        "SuccessRate": 0.72,
+        "SampleResponses": "We have 500+ native integrations including... | Our integration team can have you live in 2 weeks... | API-first design makes this seamless",
+        "ApproachType": "Integration-showcase",
+        "RelatedValueProp": "VP-001"
+      },
+      {
+        "ObjectionID": "OBJ-005",
+        "Category": "Implementation",
+        "HandlingStrategy": "Show 4-week accelerated deployment framework, case study of complex implementation, offer dedicated implementation team, emphasize risk mitigation",
+        "SuccessRate": 0.68,
+        "SampleResponses": "We have a proven 4-week methodology... | Our team manages the technical complexity... | Implementation specialist assigned to your project",
+        "ApproachType": "Risk-mitigation",
+        "RelatedValueProp": "VP-004"
+      }
+    ],
+    "objectionMappings": [
+      {
+        "ObjectionID": "OBJ-001",
+        "SimilarObjections": "OBJ-004 (budget impact of integration), OBJ-005 (implementation cost)",
+        "RelatedDeals": "DEAL-001, DEAL-002, DEAL-004",
+        "ResolutionRate": 0.76,
+        "TopResolutionApproach": "ROI + Flexible Payment Terms",
+        "BrandMessaging": "Value-first positioning - bottom-line impact"
+      },
+      {
+        "ObjectionID": "OBJ-002",
+        "SimilarObjections": "OBJ-003 (evaluation paralysis)",
+        "RelatedDeals": "DEAL-003, DEAL-005",
+        "ResolutionRate": 0.52,
+        "TopResolutionApproach": "Async-first evaluation with extended trial",
+        "BrandMessaging": "Flexibility + simplicity - minimal friction"
+      },
+      {
+        "ObjectionID": "OBJ-003",
+        "SimilarObjections": "OBJ-004 (feature/integration gap)",
+        "RelatedDeals": "DEAL-005",
+        "ResolutionRate": 0.65,
+        "TopResolutionApproach": "Roadmap transparency + custom development",
+        "BrandMessaging": "Partnership approach - we build together"
+      }
+    ]
+  },
+  "salesFunnel": {
+    "funnelStages": [
+      {
+        "StageID": "STAGE-1",
+        "StageName": "Awareness",
+        "Description": "Initial outreach, marketing content, inbound inquiries",
+        "ExpectedDuration": "2 weeks",
+        "ConversionMetrics": "15% move to Engagement",
+        "PrimaryObjections": "None typical"
+      },
+      {
+        "StageID": "STAGE-2",
+        "StageName": "Engagement",
+        "Description": "Demo, discovery call, initial product exploration",
+        "ExpectedDuration": "3 weeks",
+        "ConversionMetrics": "45% move to Evaluation",
+        "PrimaryObjections": "Feature gaps, timeline concerns"
+      },
+      {
+        "StageID": "STAGE-3",
+        "StageName": "Evaluation",
+        "Description": "Trial/POC, technical deep-dive, use case validation",
+        "ExpectedDuration": "4 weeks",
+        "ConversionMetrics": "30% move to Negotiation",
+        "PrimaryObjections": "Price, competitive positioning, implementation complexity"
+      },
+      {
+        "StageID": "STAGE-4",
+        "StageName": "Negotiation",
+        "Description": "Contract discussion, terms, SLA negotiation",
+        "ExpectedDuration": "2 weeks",
+        "ConversionMetrics": "65% move to Closed Won",
+        "PrimaryObjections": "Payment terms, implementation timeline, SLAs"
+      }
+    ],
+    "dealTracking": [
+      {
+        "DealID": "DEAL-001",
+        "CompanyName": "Acme Corp",
+        "Industry": "SaaS",
+        "Segment": "Enterprise",
+        "Stage": "Negotiation",
+        "Value": "$500K",
+        "ObjectionsFaced": "Price, Legal approval",
+        "LastObjectionDate": "2024-03-18",
+        "LastUpdated": "2024-03-20",
+        "Status": "Active"
+      },
+      {
+        "DealID": "DEAL-002",
+        "CompanyName": "TechCo",
+        "Industry": "Finance",
+        "Segment": "Mid-market",
+        "Stage": "Evaluation",
+        "Value": "$150K",
+        "ObjectionsFaced": "Price, Timeline",
+        "LastObjectionDate": "2024-03-20",
+        "LastUpdated": "2024-03-20",
+        "Status": "At Risk"
+      },
+      {
+        "DealID": "DEAL-003",
+        "CompanyName": "Innovation Ltd",
+        "Industry": "Healthcare",
+        "Segment": "Enterprise",
+        "Stage": "Engagement",
+        "Value": "$350K",
+        "ObjectionsFaced": "Timeline",
+        "LastObjectionDate": "2024-03-16",
+        "LastUpdated": "2024-03-17",
+        "Status": "Active"
+      },
+      {
+        "DealID": "DEAL-004",
+        "CompanyName": "Global Tech Solutions",
+        "Industry": "Manufacturing",
+        "Segment": "Mid-market",
+        "Stage": "Negotiation",
+        "Value": "$200K",
+        "ObjectionsFaced": "Implementation timeline",
+        "LastObjectionDate": "2024-03-16",
+        "LastUpdated": "2024-03-20",
+        "Status": "Active"
+      },
+      {
+        "DealID": "DEAL-005",
+        "CompanyName": "FinServe Corp",
+        "Industry": "Finance",
+        "Segment": "Mid-market",
+        "Stage": "Engagement",
+        "Value": "$180K",
+        "ObjectionsFaced": "Feature gap, Integration",
+        "LastObjectionDate": "2024-03-17",
+        "LastUpdated": "2024-03-17",
+        "Status": "Active"
+      }
+    ],
+    "stageProgression": [
+      {
+        "DealID": "DEAL-001",
+        "FromStage": "Evaluation",
+        "ToStage": "Negotiation",
+        "BlockedByObjection": "Price (initially)",
+        "ResolutionDate": "2024-03-18",
+        "ResolutionApproach": "ROI analysis + flexible payment terms",
+        "Outcome": "Success - moved to negotiation"
+      },
+      {
+        "DealID": "DEAL-002",
+        "FromStage": "Engagement",
+        "ToStage": "Evaluation",
+        "BlockedByObjection": "Timeline",
+        "ResolutionDate": "2024-03-15",
+        "ResolutionApproach": "Extended trial + async eval",
+        "Outcome": "Success - entered evaluation"
+      },
+      {
+        "DealID": "DEAL-003",
+        "FromStage": "Discovery",
+        "ToStage": "Engagement",
+        "BlockedByObjection": "None",
+        "ResolutionDate": "2024-03-16",
+        "ResolutionApproach": "Strong fit, quick demo",
+        "Outcome": "Success - rapid progression"
+      }
+    ]
+  },
+  "marketingGTM": {
+    "gtmStrategy": [
+      {
+        "AssetID": "GTM-001",
+        "Category": "Positioning",
+        "Title": "Enterprise Value Proposition",
+        "Content": "Drive bottom-line impact with 40% faster deployment and 18-month ROI. Seamless integration with existing enterprise systems. Dedicated support team.",
+        "TargetAudience": "Fortune 500 CFOs, Enterprise operations teams",
+        "Version": "2.1",
+        "LastUpdated": "2024-02-15",
+        "RelatedObjections": "OBJ-001 (Price), OBJ-004 (Implementation)"
+      },
+      {
+        "AssetID": "GTM-002",
+        "Category": "Pricing",
+        "Title": "Pricing Strategy Summary",
+        "Content": "Enterprise: Custom pricing with volume discounts, Mid-market: $150K-300K annual, SMB: $30K-80K annual. Flexible payment terms available.",
+        "TargetAudience": "All segments",
+        "Version": "1.8",
+        "LastUpdated": "2024-03-01",
+        "RelatedObjections": "OBJ-001 (Price)"
+      },
+      {
+        "AssetID": "GTM-003",
+        "Category": "Competitive",
+        "Title": "Comparison vs CompetitorX",
+        "Content": "Price: Our $200K vs Their $220K (but 50% more features). Integration: 500+ vs 150 connectors. Deployment: 4 weeks vs 8 weeks.",
+        "TargetAudience": "All segments evaluating alternatives",
+        "Version": "3.2",
+        "LastUpdated": "2024-03-10",
+        "RelatedObjections": "OBJ-001 (Price), OBJ-003 (Features)"
+      },
+      {
+        "AssetID": "GTM-004",
+        "Category": "Implementation",
+        "Title": "Fast-Track Deployment Framework",
+        "Content": "4-week accelerated deployment with dedicated team. Week 1: Setup, Week 2: Integration, Week 3: Testing, Week 4: Go-live.",
+        "TargetAudience": "Enterprise, time-sensitive deals",
+        "Version": "1.5",
+        "LastUpdated": "2024-02-28",
+        "RelatedObjections": "OBJ-002 (Timeline), OBJ-005 (Implementation)"
+      }
+    ],
+    "caseStudies": [
+      {
+        "CaseID": "CASE-001",
+        "ClientName": "Global Manufacturing Inc",
+        "Industry": "Manufacturing",
+        "Segment": "Enterprise",
+        "Challenge": "Complex legacy system integration, 6-month implementation timeline",
+        "Solution": "Built custom connectors, parallel migration strategy, phased rollout",
+        "Result": "40% cost reduction, 6-month payoff period, zero downtime migration",
+        "ObjectionAddressed": "OBJ-001 (Price), OBJ-005 (Implementation)",
+        "MetricsIncluded": "ROI, TCO, Implementation timeline",
+        "PublishStatus": "Published"
+      },
+      {
+        "CaseID": "CASE-002",
+        "ClientName": "FinServe Corp",
+        "Industry": "Finance",
+        "Segment": "Mid-market",
+        "Challenge": "Time-constrained implementation, strict compliance requirements",
+        "Solution": "Rapid deployment framework, compliance specialist assigned, accelerated testing",
+        "Result": "50% faster than industry standard, 2-week go-live, 100% compliance",
+        "ObjectionAddressed": "OBJ-002 (Timeline), OBJ-005 (Implementation)",
+        "MetricsIncluded": "Speed metrics, Compliance metrics, Downtime (0)",
+        "PublishStatus": "Published"
+      },
+      {
+        "CaseID": "CASE-003",
+        "ClientName": "Healthcare Solutions Ltd",
+        "Industry": "Healthcare",
+        "Segment": "Enterprise",
+        "Challenge": "500+ integration points, HIPAA compliance, high availability requirement",
+        "Solution": "Custom integration hub, dedicated security team, 99.99% uptime guarantee",
+        "Result": "All 500+ integrations live in 8 weeks, zero security incidents, 99.99% uptime",
+        "ObjectionAddressed": "OBJ-004 (Integration), OBJ-005 (Risk)",
+        "MetricsIncluded": "Integration count, Uptime %, Security metrics",
+        "PublishStatus": "Published"
+      }
+    ],
+    "competitorAnalysis": [
+      {
+        "CompetitorID": "COMP-001",
+        "CompetitorName": "CompetitorX",
+        "Strength": "Lower price point ($20K less on SMB deals)",
+        "Weakness": "Limited integrations (150 vs our 500+), slow implementation (8-12 weeks)",
+        "OurDifferentiator": "500+ native integrations, 40% faster implementation, better ROI",
+        "RelatedObjection": "OBJ-001 (Price), OBJ-004 (Integration)",
+        "ProspectSegment": "SMB, price-sensitive"
+      },
+      {
+        "CompetitorID": "COMP-002",
+        "CompetitorName": "CompetitorY",
+        "Strength": "Feature-rich, comprehensive analytics",
+        "Weakness": "High implementation cost ($50K+), complex setup, steep learning curve",
+        "OurDifferentiator": "40% cheaper implementation, simple setup (2 weeks), intuitive UX",
+        "RelatedObjection": "OBJ-001 (Price), OBJ-005 (Implementation)",
+        "ProspectSegment": "Enterprise, implementation-conscious"
+      },
+      {
+        "CompetitorID": "COMP-003",
+        "CompetitorName": "CompetitorZ",
+        "Strength": "Market leader, brand recognition",
+        "Weakness": "Legacy technology, slow innovation, enterprise pricing only",
+        "OurDifferentiator": "Modern architecture, quarterly releases, mid-market friendly pricing",
+        "RelatedObjection": "OBJ-001 (Price), OBJ-003 (Features)",
+        "ProspectSegment": "All segments looking for innovation"
+      }
+    ],
+    "productValueProps": [
+      {
+        "ValueID": "VP-001",
+        "Feature": "500+ native integrations",
+        "Benefit": "80% faster deployment vs manual integrations",
+        "ObjectionItAddresses": "OBJ-002 (Timeline), OBJ-004 (Integration)",
+        "EvidenceType": "Quantified case study",
+        "MetricValue": "80% faster deployment",
+        "ProofLink": "CASE-001"
+      },
+      {
+        "ValueID": "VP-002",
+        "Feature": "Flexible pricing model",
+        "Benefit": "Lower entry cost, pay-as-you-grow model",
+        "ObjectionItAddresses": "OBJ-001 (Price)",
+        "EvidenceType": "Pricing comparison",
+        "MetricValue": "35% cheaper than CompetitorX",
+        "ProofLink": "GTM-002"
+      },
+      {
+        "ValueID": "VP-003",
+        "Feature": "ROI calculator tool",
+        "Benefit": "Justify investment upfront with data-driven analysis",
+        "ObjectionItAddresses": "OBJ-001 (Price)",
+        "EvidenceType": "Tool + Case studies",
+        "MetricValue": "Average 18-month payoff",
+        "ProofLink": "CASE-001, CASE-002"
+      },
+      {
+        "ValueID": "VP-004",
+        "Feature": "Accelerated deployment framework",
+        "Benefit": "4-week go-live vs industry standard 8-12 weeks",
+        "ObjectionItAddresses": "OBJ-002 (Timeline), OBJ-005 (Implementation)",
+        "EvidenceType": "Methodology + Case study",
+        "MetricValue": "50% faster than competitors",
+        "ProofLink": "CASE-002"
+      },
+      {
+        "ValueID": "VP-005",
+        "Feature": "Transparent roadmap with quarterly releases",
+        "Benefit": "Missing features delivered in known timeframe",
+        "ObjectionItAddresses": "OBJ-003 (Missing features)",
+        "EvidenceType": "Public roadmap",
+        "MetricValue": "Average 3-month feature delivery",
+        "ProofLink": "GTM-001"
+      }
+    ]
+  },
+  "brandGuidelines": {
+    "brandStandards": [
+      {
+        "GuidelineID": "BRAND-001",
+        "Category": "Positioning",
+        "Rule": "Always lead with customer outcomes and bottom-line impact, not features",
+        "Context": "All communications - pitches, marketing, demos",
+        "ApprovedExamples": "\"Achieve 40% faster deployment\" vs \"Advanced deployment framework\"; \"Drive 18-month ROI\" vs \"Complex analytics engine\"",
+        "ProhibitedLanguage": "Technical jargon, feature-first positioning, capability-focused language"
+      },
+      {
+        "GuidelineID": "BRAND-002",
+        "Category": "Tone",
+        "Rule": "Professional but approachable - be an expert advisor, not a salesperson",
+        "Context": "Sales calls, objection handling, technical discussions",
+        "ApprovedExamples": "\"Let me show you how similar companies handled this...\" vs \"You should buy because...\"; \"Here's what worked for our enterprise clients...\"",
+        "ProhibitedLanguage": "Hard sell, pressure tactics, dismissive responses to objections"
+      },
+      {
+        "GuidelineID": "BRAND-003",
+        "Category": "Partnership",
+        "Rule": "Emphasize partnership and mutual success over transaction",
+        "Context": "All objection handling and customer interactions",
+        "ApprovedExamples": "\"Let's solve this together\" vs \"Take it or leave it\"; \"How can we make this work for you?\" vs \"This is our standard offer\"",
+        "ProhibitedLanguage": "One-way communication, take-it-or-leave-it attitude, dismissal of concerns"
+      }
+    ],
+    "messageFramework": [
+      {
+        "MessageID": "MSG-001",
+        "Persona": "C-suite/CFO",
+        "MessageCore": "Drive bottom-line impact with proven ROI",
+        "KeyValues": "ROI, speed to value, risk mitigation, cost savings",
+        "ObjectionCategory": "Price, Timeline, Risk",
+        "DeliveryTone": "Executive, data-driven, quantified",
+        "SampleScript": "Similar Fortune 500 companies achieved 18-month payoff with our solution. Here's their ROI breakdown... We can structure flexible terms to fit your budget cycle..."
+      },
+      {
+        "MessageID": "MSG-002",
+        "Persona": "IT/Technical Lead",
+        "MessageCore": "Seamless integration with minimal disruption to existing systems",
+        "KeyValues": "Reliability, compatibility, security, support",
+        "ObjectionCategory": "Technical gaps, Integration, Implementation",
+        "DeliveryTone": "Technical, reassuring, solution-focused",
+        "SampleScript": "We integrate with 500+ enterprise systems including your entire stack. Our integration specialist has handled similar environments with 99.99% uptime..."
+      },
+      {
+        "MessageID": "MSG-003",
+        "Persona": "Operations/Procurement",
+        "MessageCore": "Predictable costs with transparent implementation roadmap",
+        "KeyValues": "Transparency, predictability, flexibility, accountability",
+        "ObjectionCategory": "Price, Timeline, Implementation",
+        "DeliveryTone": "Clear, structured, accountable",
+        "SampleScript": "Our 4-week framework is proven across 50+ enterprises. Here's your implementation timeline and fixed costs breakdown. We commit to zero surprises..."
+      }
+    ],
+    "toneLanguage": [
+      {
+        "ToneID": "TONE-001",
+        "ToneType": "Price Objection",
+        "Dos": "Focus on value, Show ROI analysis, Offer flexible options, Be transparent about costs, Share comparable cases",
+        "Donts": "Discount immediately, Apologize for price, Be defensive, Rush decision, Dismiss concerns as invalid",
+        "RelatedObjection": "OBJ-001",
+        "ExampleGood": "I understand cost is important. Let me show you how similar companies achieved payoff in 18 months, which typically justifies the investment...",
+        "ExampleBad": "Our price is high because we have advanced features. You get what you pay for."
+      },
+      {
+        "ToneID": "TONE-002",
+        "ToneType": "Timeline Objection",
+        "Dos": "Propose flexibility, Show success speed, Reduce friction, Offer phased approach, Emphasize quick value",
+        "Donts": "Pressure timeline, Minimize concerns, Rush discussion, Offer reduced scope without discussion, Create urgency artificially",
+        "RelatedObjection": "OBJ-002",
+        "ExampleGood": "Most companies need only 15 minutes to see value. We can start with a quick demo, then move at your pace with an extended trial...",
+        "ExampleBad": "You need to decide now or we move to the next customer. This offer expires Friday."
+      },
+      {
+        "ToneID": "TONE-003",
+        "ToneType": "Feature Gap Objection",
+        "Dos": "Show roadmap, Highlight alternative solutions, Offer custom development, Emphasize partnership, Be honest about timeline",
+        "Donts": "Promise features not in roadmap, Dismiss feature as unimportant, Blame customer for wanting it, Overpromise on timeline",
+        "RelatedObjection": "OBJ-003",
+        "ExampleGood": "That feature is on our Q2 roadmap. In the meantime, we can achieve your goal using our integration framework. Let's discuss options...",
+        "ExampleBad": "That's not a real need. Most customers don't use that feature anyway."
+      }
+    ]
+  },
+  "agentKnowledgeBase": {
+    "faq": [
+      {
+        "FAQID": "FAQ-001",
+        "Question": "What's the typical ROI timeline for your solution?",
+        "Answer": "Most customers see measurable ROI within 12-18 months. Our case studies show an average of 18 months, with some enterprise customers achieving it in 8-10 months through accelerated deployment and quick adoption.",
+        "RelatedObjection": "OBJ-001",
+        "SourceConfidence": 0.95,
+        "LastUpdated": "2024-03-01"
+      },
+      {
+        "FAQID": "FAQ-002",
+        "Question": "How long does implementation take?",
+        "Answer": "Standard implementation is 4-6 weeks with our framework. We've accelerated this to 2-4 weeks for organizations that can dedicate resources. Complex implementations with 500+ integrations typically take 8-12 weeks.",
+        "RelatedObjection": "OBJ-002",
+        "SourceConfidence": 0.92,
+        "LastUpdated": "2024-02-28"
+      },
+      {
+        "FAQID": "FAQ-003",
+        "Question": "What integrations do you support?",
+        "Answer": "We support 500+ native integrations including Salesforce, HubSpot, Slack, Microsoft 365, AWS, and custom APIs. We can also build custom connectors for enterprise systems.",
+        "RelatedObjection": "OBJ-004",
+        "SourceConfidence": 0.98,
+        "LastUpdated": "2024-03-05"
+      },
+      {
+        "FAQID": "FAQ-004",
+        "Question": "Do you offer flexible payment terms?",
+        "Answer": "Yes, we offer quarterly, monthly, and annual billing options. Enterprise customers can negotiate custom payment schedules. Most mid-market customers choose quarterly billing.",
+        "RelatedObjection": "OBJ-001",
+        "SourceConfidence": 0.94,
+        "LastUpdated": "2024-03-10"
+      },
+      {
+        "FAQID": "FAQ-005",
+        "Question": "What level of support do you provide?",
+        "Answer": "All customers receive dedicated support. Enterprise gets 24/7 with named account manager. Mid-market gets business hours with rapid response. We also provide implementation support, training, and best practices.",
+        "RelatedObjection": "OBJ-005",
+        "SourceConfidence": 0.91,
+        "LastUpdated": "2024-03-08"
+      }
+    ],
+    "quickReferences": [
+      {
+        "ReferenceID": "REF-001",
+        "Topic": "Pricing Options",
+        "Content": "Enterprise: Custom ($300K+/year), Mid-market: $150K-300K/year, SMB: $30K-80K/year. Flexible payment terms available for all segments.",
+        "Category": "Pricing",
+        "LastUpdated": "2024-03-01",
+        "UsageCount": 127
+      },
+      {
+        "ReferenceID": "REF-002",
+        "Topic": "Integration List",
+        "Content": "500+ native integrations: Salesforce, HubSpot, Slack, Microsoft 365, AWS, Google Workspace, Marketo, Zendesk, Shopify, WooCommerce, custom APIs via REST/GraphQL",
+        "Category": "Product",
+        "LastUpdated": "2024-02-15",
+        "UsageCount": 89
+      },
+      {
+        "ReferenceID": "REF-003",
+        "Topic": "Implementation Timeline",
+        "Content": "Standard: 4-6 weeks | Accelerated: 2-4 weeks | Enterprise: 8-12 weeks (complex). Includes setup, integration, testing, training, go-live",
+        "Category": "Implementation",
+        "LastUpdated": "2024-02-28",
+        "UsageCount": 156
+      },
+      {
+        "ReferenceID": "REF-004",
+        "Topic": "ROI Calculator",
+        "Content": "Average payoff: 18 months | Range: 8-24 months depending on use case | Cost savings typically 35-40% annually | Uses standardized templates for different industries",
+        "Category": "Sales tools",
+        "LastUpdated": "2024-03-05",
+        "UsageCount": 203
+      },
+      {
+        "ReferenceID": "REF-005",
+        "Topic": "Competitive Positioning",
+        "Content": "vs CompetitorX: 50% cheaper, 500+ more integrations, 50% faster | vs CompetitorY: 40% cheaper implementation, simpler setup | vs CompetitorZ: Modern tech, quarterly innovation, mid-market pricing",
+        "Category": "Competitive",
+        "LastUpdated": "2024-03-10",
+        "UsageCount": 67
+      }
+    ],
+    "performanceMetrics": [
+      {
+        "MetricID": "METRIC-001",
+        "Date": "2024-03-20",
+        "QueryType": "Objection resolution",
+        "SuccessRate": 0.82,
+        "AvgResponseTime": "2.3s",
+        "UserSatisfaction": 4.4,
+        "TopObjectionsHandled": "OBJ-001, OBJ-002, OBJ-003"
+      }
+    ]
+  }
+}
