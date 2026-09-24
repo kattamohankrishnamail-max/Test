@@ -2,6 +2,10 @@
 
 This workspace now has three separate demo prototypes, each grouped into its own folder under `demos/`.
 
+## Luxury Property Discovery POC
+
+`luxury-discovery/` is a Next.js app. Clients describe the home they want, and it returns a ranked shortlist of Bengaluru luxury apartments and villas from an uploaded Excel database, with a reason for each match. See `luxury-discovery/README.md`.
+
 ## Folder Structure
 
 - `demos/entrust-interiors/`
