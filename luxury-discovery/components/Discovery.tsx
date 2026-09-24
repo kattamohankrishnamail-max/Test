@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { BRAND } from "@/lib/brand";
+import { extractBrief, loadProperties } from "@/lib/client-api";
 import { LIFESTYLE_CHOICES, POSSESSION_CHOICES } from "@/lib/config";
 import { extractRequirements, mergeRequirements } from "@/lib/extract";
 import { formatCr } from "@/lib/format";
@@ -54,9 +55,8 @@ export default function Discovery() {
   const resultsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch("/api/properties")
-      .then((r) => r.json())
-      .then((d) => setProperties(d.properties ?? []))
+    loadProperties()
+      .then(setProperties)
       .catch(() => setProperties([]));
     try {
       setShortlist(JSON.parse(localStorage.getItem(SHORTLIST_KEY) ?? "[]"));
@@ -86,13 +86,7 @@ export default function Discovery() {
     const started = Date.now();
     let fromText = extractRequirements(text);
     if (text.trim()) {
-      const res = await fetch("/api/extract", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ text }),
-      }).catch(() => null);
-      const body = res?.ok ? await res.json().catch(() => null) : null;
-      if (body?.requirements) fromText = body.requirements;
+      fromText = (await extractBrief(text)) ?? fromText;
     }
     const merged = mergeRequirements(fromText, explicit);
     const out = matchProperties(properties, merged);
@@ -139,7 +133,7 @@ export default function Discovery() {
   return (
     <div className="min-h-screen">
       <header className="mx-auto flex max-w-7xl items-center justify-between px-6 py-7 sm:px-10">
-        <a href="/" className="leading-none">
+        <a href="#" onClick={(e) => (e.preventDefault(), window.scrollTo({ top: 0, behavior: "smooth" }))} className="leading-none">
           <span className="font-serif text-2xl tracking-wide">{BRAND.name}</span>
           <span className="mt-1 block text-[0.62rem] uppercase tracking-[0.24em] text-stone">{BRAND.tagline}</span>
         </a>
@@ -155,7 +149,7 @@ export default function Discovery() {
 
       <main>
         <section id="brief" className="mx-auto max-w-4xl px-6 pb-20 pt-12 sm:px-10 sm:pt-20">
-          <p className="eyebrow rise">Private residences · Bengaluru</p>
+          <p className="eyebrow rise">{BRAND.name} · Private residences</p>
           <h1 className="rise mt-6 font-serif text-5xl leading-[1.02] tracking-tight sm:text-7xl" style={{ animationDelay: "80ms" }}>
             Find a Home That
             <br />

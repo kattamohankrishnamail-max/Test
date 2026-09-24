@@ -6,7 +6,11 @@ A client-facing concierge page. The client describes the home they want, the sys
 Client brief → requirement extraction → Excel database → matching engine → curated shortlist → advisor
 ```
 
-## Run it
+## Quickest: single HTML file (no install)
+
+Open `dist/luxury-discovery.html` by double-clicking it. Choose the Excel workbook when asked. It is read inside the browser, never uploaded anywhere, and remembered for next time. Everything works offline except the web fonts. This version uses only the rule-based brief reader, and advisor enquiries are saved in that browser. To rebuild it after code changes, run `npm run build:html`.
+
+## Run the full app
 
 ```bash
 cd luxury-discovery
@@ -30,6 +34,7 @@ Optional environment variables (`.env.local`):
 
 | Area | File |
 |---|---|
+| Brand name | `lib/brand.ts` |
 | Match weights, thresholds, budget bands, hidden statuses | `lib/config.ts` |
 | Column mapping (header synonyms, header-row / sheet detection) | `lib/columns.ts` |
 | Excel → normalised properties (price, area, BHK, possession parsing) | `lib/normalize.ts`, `lib/excel.ts` |
@@ -38,6 +43,7 @@ Optional environment variables (`.env.local`):
 | Location vocabulary (e.g. "ORR" or "East Bengaluru" → rows) | `lib/locations.ts` |
 | Matching + reasons + no-match explanation | `lib/match.ts` |
 | Discovery UI | `components/Discovery.tsx` and siblings |
+| Standalone HTML build (local data instead of API routes) | `standalone/`, `scripts/build-standalone.mjs` |
 | Admin (upload, stats, column mapping, enquiries) | `app/admin/page.tsx` |
 
 ## Matching

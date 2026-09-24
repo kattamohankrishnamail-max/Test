@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { sendEnquiry } from "@/lib/client-api";
 import type { Property } from "@/lib/types";
 import { Button, CloseButton } from "./ui";
 
@@ -27,19 +28,14 @@ export default function AdvisorModal({
     e.preventDefault();
     setError(null);
     setState("sending");
-    const res = await fetch("/api/enquiry", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        ...form,
-        brief,
-        propertyIds: properties.map((p) => p.id),
-        propertyNames: properties.map((p) => p.projectName),
-      }),
-    }).catch(() => null);
-    if (!res?.ok) {
-      const body = await res?.json().catch(() => null);
-      setError(body?.error ?? "We couldn't send that just now. Please try again.");
+    const err = await sendEnquiry({
+      ...form,
+      brief,
+      propertyIds: properties.map((p) => p.id),
+      propertyNames: properties.map((p) => p.projectName),
+    });
+    if (err) {
+      setError(err);
       setState("idle");
       return;
     }
