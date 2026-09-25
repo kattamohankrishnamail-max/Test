@@ -1,0 +1,8 @@
+{
+  "slug": "advisor-1",
+  "name": "[[PLACEHOLDER: Advisor name]]",
+  "role": "[[PLACEHOLDER: role, e.g. Founder & Principal Advisor]]",
+  "bio": "[[PLACEHOLDER: short bio — background, years in Bengaluru residential, what clients come to them for. Real people only.]]",
+  "photo": { "src": "placeholder:advisor portrait", "alt": "[[PLACEHOLDER: portrait of advisor name]]" },
+  "order": 1
+}

@@ -1,0 +1,66 @@
+export const advisory = {
+  meta: {
+    title: "How we advise",
+    description: "How Floors & Pillars advises: from your brief to a shortlist, comparisons, visits, negotiation and purchase.",
+  },
+  title: "We advise before we sell.",
+  intro:
+    "Buying a home at this level is rarely about finding more options. It's about narrowing to the right few, understanding the trade-offs, and buying with clarity. This is how we work with you.",
+  journeyTitle: "The journey, step by step",
+  journey: [
+    { stage: "Brief", happens: "You tell us what you're looking for, then we talk it through.", receive: "A written summary of your brief, confirmed with you." },
+    { stage: "Curate", happens: "We filter the market against your brief, across new launches and ready homes.", receive: "Nothing yet. This part is our work, not your time." },
+    { stage: "Shortlist", happens: "We bring forward the homes that genuinely fit.", receive: "A Shortlist Brief of three to seven homes." },
+    { stage: "Compare", happens: "We set the shortlist side by side on the things that matter to you.", receive: "Property Notes and a Comparison Sheet." },
+    { stage: "Visit", happens: "We plan and accompany site visits, and tell you what to look for at each.", receive: "A visit plan and a short note after each visit." },
+    { stage: "Advise", happens: "We give you our honest view — including when a home isn't right.", receive: "A clear recommendation, with the reasoning." },
+    { stage: "Negotiate", happens: "We handle the conversation with the developer or seller.", receive: "Terms summarised in plain language before you commit." },
+    { stage: "Acquire", happens: "We support you through documentation, payments and handover.", receive: "A checklist and a single point of contact to completion." },
+  ],
+  receiveTitle: "What you receive",
+  receive: [
+    { name: "Shortlist Brief", text: "Three to seven homes chosen around your brief, with a one-line reason for each." },
+    { name: "Property Note", text: "One per home: why it's on the list, who it suits and what to weigh carefully." },
+    { name: "Comparison Sheet", text: "Your shortlisted homes side by side — location, product, developer, price and trade-offs." },
+  ],
+  noteMock: {
+    title: "A Property Note, in outline",
+    caption: "Illustrative template. Every note is written for one client and one home.",
+    home: "[[PLACEHOLDER: Home name]]",
+    sections: [
+      { heading: "Why we selected it", body: "[[PLACEHOLDER: two lines linking the home to the client's brief]]" },
+      { heading: "Who it suits", body: "[[PLACEHOLDER: the household this home works best for]]" },
+      { heading: "What makes it distinctive", body: "[[PLACEHOLDER: what sets it apart in its price band]]" },
+      { heading: "What we like", body: "[[PLACEHOLDER: three specific positives]]" },
+      { heading: "What to weigh carefully", body: "[[PLACEHOLDER: the honest trade-offs]]" },
+      { heading: "Alternatives", body: "[[PLACEHOLDER: one or two homes to compare it with, and why]]" },
+    ],
+  },
+  standard: {
+    eyebrow: "Our standard",
+    quote: "Sometimes the most useful thing we can tell you is: this isn't the right home for what you've described.",
+  },
+  paidTitle: "How we're paid",
+  audienceTitle: "Who we work with",
+  audience: [
+    { who: "Founders and entrepreneurs", ask: "“Which of these will still feel right in ten years, not just this year?”" },
+    { who: "CXOs and senior professionals", ask: "“I have very little time — can you do the filtering and just show me what's worth a visit?”" },
+    { who: "Business families", ask: "“We need space for three generations, and privacy for each of them.”" },
+    { who: "NRIs buying in Bengaluru", ask: "“How do I buy with confidence when I can only be in the city for a week?”" },
+    { who: "Families upgrading", ask: "“We've outgrown our apartment — what's the right next step, and where?”" },
+    { who: "Villa seekers", ask: "“How do I judge a villa community before it's built?”" },
+  ],
+  faqTitle: "Questions we're often asked",
+  faq: [
+    { q: "What does it cost to work with you?", a: "[[PLACEHOLDER: answer depends on the fee model — to be confirmed]]" },
+    { q: "Do you only show homes you're paid on?", a: "[[PLACEHOLDER: answer depends on the fee model and developer relationships — to be confirmed]]" },
+    { q: "Can you help if I live outside India?", a: "[[PLACEHOLDER: describe remote support for NRI clients — video walkthroughs, documentation, power of attorney guidance — once confirmed]]" },
+    { q: "Do you handle resale homes?", a: "[[PLACEHOLDER: confirm whether resale is in scope]]" },
+    { q: "How long does it take?", a: "[[PLACEHOLDER: typical timeline from brief to shortlist, and from shortlist to purchase]]" },
+    {
+      q: "Which areas do you cover?",
+      a: "We advise across Bengaluru's residential markets — central neighbourhoods, the eastern and southern corridors, and the north towards the airport. The Bengaluru section of this site sets out how we think about each.",
+    },
+  ],
+  cta: { title: "Tell us what you're looking for.", label: "Share your brief" },
+};

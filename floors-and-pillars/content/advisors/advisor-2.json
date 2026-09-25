@@ -1,0 +1,8 @@
+{
+  "slug": "advisor-2",
+  "name": "[[PLACEHOLDER: Advisor name]]",
+  "role": "[[PLACEHOLDER: role, e.g. Senior Advisor]]",
+  "bio": "[[PLACEHOLDER: short bio — background, years in Bengaluru residential, what clients come to them for. Real people only.]]",
+  "photo": { "src": "placeholder:advisor portrait", "alt": "[[PLACEHOLDER: portrait of advisor name]]" },
+  "order": 2
+}

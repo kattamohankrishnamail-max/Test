@@ -1,0 +1,10 @@
+[
+  { "slug": "central-bengaluru", "name": "Central Bengaluru", "zone": "Central", "summary": "[[PLACEHOLDER: one-line character of Central Bengaluru]]" },
+  { "slug": "koramangala-hsr", "name": "Koramangala & HSR", "zone": "South-East", "summary": "[[PLACEHOLDER: one-line character of Koramangala & HSR]]" },
+  { "slug": "indiranagar-old-airport-road", "name": "Indiranagar & Old Airport Road", "zone": "Central", "summary": "[[PLACEHOLDER: one-line character of Indiranagar & Old Airport Road]]" },
+  { "slug": "whitefield", "name": "Whitefield", "zone": "East", "summary": "[[PLACEHOLDER: one-line character of Whitefield]]" },
+  { "slug": "sarjapur-road", "name": "Sarjapur Road", "zone": "East", "summary": "[[PLACEHOLDER: one-line character of Sarjapur Road]]" },
+  { "slug": "hebbal", "name": "Hebbal", "zone": "North", "summary": "[[PLACEHOLDER: one-line character of Hebbal]]" },
+  { "slug": "north-bengaluru", "name": "North Bengaluru & Devanahalli", "zone": "North", "summary": "[[PLACEHOLDER: one-line character of North Bengaluru]]" },
+  { "slug": "south-bengaluru", "name": "Bannerghatta & Kanakapura Road", "zone": "South", "summary": "[[PLACEHOLDER: one-line character of South Bengaluru]]" }
+]
