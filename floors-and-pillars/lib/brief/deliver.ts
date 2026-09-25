@@ -96,3 +96,41 @@ export function formatBriefText(b: DeliveredBrief): string {
     .filter(Boolean)
     .join("\n");
 }
+
+export interface ContactMessage {
+  id: string;
+  receivedAt: string;
+  name: string;
+  phone: string;
+  message: string;
+}
+
+/** Short contact-page messages use the same BRIEF_DELIVERY channel. */
+export async function deliverMessage(msg: ContactMessage): Promise<void> {
+  const mode = process.env.BRIEF_DELIVERY || "console";
+  if (mode === "console") {
+    console.info("[contact] received\n" + JSON.stringify(msg, null, 2));
+  } else if (mode === "webhook") {
+    const url = process.env.BRIEF_WEBHOOK_URL;
+    if (!url) throw new Error("BRIEF_WEBHOOK_URL is not set");
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ type: "contact", message: msg }),
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) throw new Error(`Webhook responded ${res.status}`);
+  } else if (mode === "file") {
+    const file = path.join(process.cwd(), "data", "messages.json");
+    await fs.mkdir(path.dirname(file), { recursive: true });
+    let all: ContactMessage[] = [];
+    try {
+      all = JSON.parse(await fs.readFile(file, "utf8"));
+    } catch {
+      /* first message */
+    }
+    await fs.writeFile(file, JSON.stringify([msg, ...all], null, 2));
+  } else {
+    throw new Error(`Contact delivery via "${mode}" is not configured. See lib/brief/deliver.ts.`);
+  }
+}
