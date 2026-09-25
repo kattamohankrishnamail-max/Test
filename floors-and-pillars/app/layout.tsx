@@ -33,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen">
         <a
           href="#main"
-          className="sr-only z-50 bg-ink px-4 py-3 text-limestone focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+          className="sr-only z-50 bg-ink px-5 text-limestone focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:inline-flex focus:min-h-12 focus:items-center"
         >
           Skip to content
         </a>

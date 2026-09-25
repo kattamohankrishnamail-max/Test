@@ -43,7 +43,7 @@ export default function ContactForm({ initialState }: { initialState?: "sent" | 
         <input id={`c-${name}`} name={name} type={type} required autoComplete={name === "name" ? "name" : "tel"} aria-invalid={!!errors[name]} aria-describedby={errors[name] ? `c-${name}-e` : undefined} className="mt-2 min-h-12 w-full border border-line bg-white px-4 focus:border-ink focus:outline-none" />
       )}
       {errors[name] && (
-        <p id={`c-${name}-e`} className="mt-2 text-[0.9rem] text-[#8a3a2b]">
+        <p id={`c-${name}-e`} className="mt-2 text-[0.9rem] text-error">
           {errors[name]}
         </p>
       )}
@@ -65,7 +65,7 @@ export default function ContactForm({ initialState }: { initialState?: "sent" | 
       {field("phone", copy.phone, "tel")}
       {field("message", copy.message)}
       {state === "error" && (
-        <p role="alert" className="text-[0.95rem] text-[#8a3a2b]">
+        <p role="alert" className="text-[0.95rem] text-error">
           {copy.error}
         </p>
       )}

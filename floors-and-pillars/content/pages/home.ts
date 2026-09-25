@@ -11,7 +11,7 @@ export const home = {
     support: "We help you find, evaluate and buy a home that fits not just your requirements, but the way you want to live.",
     primary: { label: "Tell us what you're looking for", href: "/brief" },
     secondary: { label: "Explore homes worth considering", href: "/homes" },
-    image: "hero photograph — a home at dusk, full-bleed",
+    image: "placeholder:hero photograph — a home at dusk, full-bleed",
   },
   teaser: {
     eyebrow: "Start here",

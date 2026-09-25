@@ -51,7 +51,7 @@ export default async function HomeDetailPage({ params }: { params: Promise<{ slu
     [copy.glance.price, priceFrom(h)],
     [copy.glance.possession, h.possession],
     [copy.glance.developer, h.developer],
-    [copy.glance.rera, h.reraId ?? "[[PLACEHOLDER: RERA ID]]"],
+    [copy.glance.rera, h.reraId ?? null],
   ];
 
   return (

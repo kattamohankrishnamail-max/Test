@@ -67,6 +67,10 @@ for (const file of scanned) {
       for (const m of line.matchAll(/\[\[PLACEHOLDER:?\s*([^\]]*)\]\]/g)) {
         placeholders.push({ file, line: i + 1, text: m[1].trim() || "(unspecified)" });
       }
+      // Image sources still pointing at a neutral block (photography to supply).
+      for (const m of line.matchAll(/["']placeholder:([^"']+)["']/g)) {
+        placeholders.push({ file, line: i + 1, text: `image: ${m[1].trim()}` });
+      }
     });
 }
 
@@ -120,6 +124,8 @@ const PAIRS: [string, string, number][] = [
   ["limestone", "verdigris", 4.5],
   ["white", "verdigris", 4.5],
   ["ink", "limestone-deep", 4.5],
+  ["error", "white", 4.5],
+  ["error", "limestone", 4.5],
   ["bronze", "limestone", 3], // large text / decoration only
 ];
 const contrast: string[] = [];

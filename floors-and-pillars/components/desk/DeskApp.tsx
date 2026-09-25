@@ -260,7 +260,7 @@ export default function DeskApp({ needsPasscode, markets }: { needsPasscode: boo
                       <li key={r}>+ {r}</li>
                     ))}
                     {m.gaps.map((g) => (
-                      <li key={g} className="text-[#8a3a2b]">
+                      <li key={g} className="text-error">
                         – {g}
                       </li>
                     ))}

@@ -32,7 +32,7 @@ export function Hero() {
           </div>
         </Container>
         <div className="relative min-h-[46svh] lg:min-h-0">
-          <Placeholder label={h.image} ratio="auto" className="absolute inset-0 h-full" />
+          <Placeholder label={h.image.replace(/^placeholder:/, "")} ratio="auto" className="absolute inset-0 h-full" />
         </div>
       </div>
     </section>

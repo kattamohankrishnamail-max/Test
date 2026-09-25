@@ -71,7 +71,7 @@ export const BriefSchema = StepHome.extend(StepBudget.shape)
 
 export type Brief = z.infer<typeof BriefSchema>;
 export const STEPS = [StepHome, StepBudget, StepPriorities, StepYou] as const;
-export const STEP_TITLES = ["The home", "Budget & location", "What matters most", "You"] as const;
+export { STEP_TITLES } from "./steps";
 
 /** Converts form data (native POST or FormData from JS) into the shape the schema expects. */
 export function formDataToInput(fd: FormData | URLSearchParams) {

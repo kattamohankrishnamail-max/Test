@@ -19,7 +19,10 @@ import { briefPage as copy } from "@/content/pages/brief";
 import { track } from "@/lib/analytics";
 import { HONEYPOT_FIELD } from "@/lib/brief/honeypot";
 import { DESCRIBE_KEY, SUBMITTED_KEY, draftFromText, type BriefDraft } from "@/lib/brief/prefill";
-import { STEPS, STEP_TITLES, fieldErrors } from "@/lib/brief/schema";
+import { STEP_TITLES } from "@/lib/brief/steps";
+
+// Zod + phone metadata are sizeable; load them on first interaction, not with the page.
+const loadSchema = () => import("@/lib/brief/schema");
 
 interface Values {
   propertyType: string;
@@ -108,6 +111,7 @@ export default function BriefForm({
     if (!started.current) {
       started.current = true;
       track("brief_start", { source: "brief_page" });
+      void loadSchema();
     }
     setV((prev) => ({ ...prev, ...patch }));
     setErrors((prev) => {
@@ -157,16 +161,16 @@ export default function BriefForm({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const stepValues = (i: number) => {
-    const all = { ...v, consent: v.consent ? true : undefined, bestTime: v.bestTime || undefined };
-    const keys = Object.keys(STEPS[i].shape) as (keyof typeof all)[];
+  const stepValues = (shapeKeys: string[]) => {
+    const all = { ...v, consent: v.consent ? true : undefined, bestTime: v.bestTime || undefined } as Record<string, unknown>;
     // Empty text fields stay "" so their own messages show; empty choices become undefined.
     const TEXT = new Set(["minSizeSqft", "name", "phone", "email", "notes"]);
-    return Object.fromEntries(keys.map((k) => [k, all[k] === "" && !TEXT.has(k) ? undefined : all[k]]));
+    return Object.fromEntries(shapeKeys.map((k) => [k, all[k] === "" && !TEXT.has(k) ? undefined : all[k]]));
   };
 
-  const validateStep = (i: number) => {
-    const r = STEPS[i].safeParse(stepValues(i));
+  const validateStep = async (i: number) => {
+    const { STEPS, fieldErrors } = await loadSchema();
+    const r = STEPS[i].safeParse(stepValues(Object.keys(STEPS[i].shape)));
     if (r.success) return true;
     setErrors(fieldErrors(r.error));
     requestAnimationFrame(() => {
@@ -184,8 +188,8 @@ export default function BriefForm({
     });
   };
 
-  const next = () => {
-    if (!validateStep(step)) return;
+  const next = async () => {
+    if (!(await validateStep(step))) return;
     track("brief_step_complete", { step: step + 1, name: STEP_TITLES[step] });
     goTo(step + 1);
   };
@@ -193,15 +197,16 @@ export default function BriefForm({
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     if (!enhanced) return; // native POST
     e.preventDefault();
+    const form = e.currentTarget; // capture before any await: currentTarget is cleared after dispatch
     setBanner(null);
-    for (let i = 0; i < STEPS.length; i++) {
-      if (!validateStep(i)) {
+    for (let i = 0; i < STEP_TITLES.length; i++) {
+      if (!(await validateStep(i))) {
         if (i !== step) goTo(i);
         return;
       }
     }
     setStatus("sending");
-    const fd = new FormData(e.currentTarget);
+    const fd = new FormData(form);
     const payload = {
       ...v,
       consent: v.consent,
@@ -271,7 +276,7 @@ export default function BriefForm({
       </div>
 
       {banner && (
-        <p id="brief-banner" role="alert" className="mb-8 border border-[#8a3a2b] bg-white px-5 py-4 text-[0.95rem] text-[#8a3a2b]">
+        <p id="brief-banner" role="alert" className="mb-8 border border-error bg-white px-5 py-4 text-[0.95rem] text-error">
           {banner}
         </p>
       )}
@@ -313,6 +318,7 @@ export default function BriefForm({
         )}
       </div>
 
+      <p className="mb-6 text-[0.9rem] text-stone">{copy.requiredNote}</p>
       {enhanced && (
         <ol className="mb-10 grid grid-cols-4 gap-2" aria-label="Progress">
           {STEP_TITLES.map((t, i) => (
@@ -427,7 +433,7 @@ export default function BriefForm({
             ← {copy.back}
           </button>
         )}
-        {enhanced && step < STEPS.length - 1 ? (
+        {enhanced && step < STEP_TITLES.length - 1 ? (
           <button type="button" onClick={next} className="ml-auto inline-flex min-h-12 items-center bg-ink px-8 text-[0.95rem] tracking-wide text-limestone hover:bg-verdigris">
             {copy.continue}
           </button>
@@ -474,7 +480,7 @@ function StepShell({
 function FieldError({ id, error }: { id: string; error?: string }) {
   if (!error) return null;
   return (
-    <p id={id} className="mt-2 text-[0.9rem] text-[#8a3a2b]">
+    <p id={id} className="mt-2 text-[0.9rem] text-error">
       {error}
     </p>
   );
@@ -506,7 +512,10 @@ function Choice({
   const selected = Array.isArray(value) ? value : value ? [value] : [];
   const errorId = `${name}-error`;
   return (
-    <fieldset aria-describedby={error ? errorId : hint ? `${name}-hint` : undefined} aria-required={required || undefined}>
+    <fieldset
+      aria-describedby={error ? errorId : hint ? `${name}-hint` : undefined}
+      {...(type === "radio" ? { role: "radiogroup", "aria-required": required || undefined } : {})}
+    >
       <legend className="text-[0.95rem] font-medium text-ink">
         {label}
         {!required && <span className="ml-2 font-normal text-stone">(optional)</span>}
@@ -524,7 +533,7 @@ function Choice({
             <label
               key={o.value}
               className={`inline-flex min-h-11 cursor-pointer items-center border px-4 text-[0.95rem] transition-colors has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-verdigris ${
-                checked ? "border-ink bg-ink text-limestone" : error ? "border-[#8a3a2b] bg-white text-ink-soft" : "border-line bg-white text-ink-soft hover:border-stone"
+                checked ? "border-ink bg-ink text-limestone" : error ? "border-error bg-white text-ink-soft" : "border-line bg-white text-ink-soft hover:border-stone"
               } ${disabled ? "cursor-not-allowed opacity-45" : ""}`}
             >
               <input
@@ -596,7 +605,7 @@ function TextField({
         onChange={(e) => onChange(e.target.value)}
         aria-invalid={!!error}
         aria-describedby={describedBy}
-        className={`mt-3 min-h-12 w-full border bg-white px-4 text-ink focus:border-ink focus:outline-none ${error ? "border-[#8a3a2b]" : "border-line"}`}
+        className={`mt-3 min-h-12 w-full border bg-white px-4 text-ink focus:border-ink focus:outline-none ${error ? "border-error" : "border-line"}`}
       />
       <FieldError id={`${name}-error`} error={error} />
     </div>

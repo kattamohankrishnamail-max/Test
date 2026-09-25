@@ -12,6 +12,7 @@
   --bronze-deep: #7e5530; /* links and small accent text (≈5.6:1 on limestone) */
   --verdigris: #3f5b4e;
   --white: #ffffff;
+  --error: #8a3a2b;
   color-scheme: light;
 }
 
@@ -26,6 +27,7 @@
   --color-bronze-deep: var(--bronze-deep);
   --color-verdigris: var(--verdigris);
   --color-white: var(--white);
+  --color-error: var(--error);
   --font-serif: var(--font-cormorant), "Iowan Old Style", Georgia, serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --ease-calm: cubic-bezier(0.22, 1, 0.36, 1);

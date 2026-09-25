@@ -38,6 +38,7 @@ export const briefPage = {
     consent: "I agree to Floors & Pillars contacting me about this brief, as described in the",
     privacyLink: "privacy notice",
   },
+  requiredNote: "Everything is required unless marked optional.",
   continue: "Continue",
   back: "Back",
   submit: "Curate my shortlist",

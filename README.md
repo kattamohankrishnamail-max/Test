@@ -2,6 +2,10 @@
 
 This workspace now has three separate demo prototypes, each grouped into its own folder under `demos/`.
 
+## Floors & Pillars website
+
+`floors-and-pillars/` is the launch website: a Next.js app built around one conversion, the client brief. It also has an internal advisor desk that shortlists homes from the Excel database. See `floors-and-pillars/README.md` and `floors-and-pillars/LAUNCH_CHECKLIST.md`.
+
 ## Luxury Property Discovery POC
 
 `luxury-discovery/` is a Next.js app. Clients describe the home they want, and it returns a ranked shortlist of Bengaluru luxury apartments and villas from an uploaded Excel database, with a reason for each match. See `luxury-discovery/README.md`.

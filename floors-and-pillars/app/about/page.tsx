@@ -40,9 +40,9 @@ export default async function AboutPage() {
         </h2>
         <ul className="mt-12 grid gap-12 md:grid-cols-2">
           {advisors.map((a) => (
-            <li key={a.slug} className="grid gap-6 sm:grid-cols-[10rem_1fr]">
+            <li key={a.slug} className="grid min-w-0 gap-6 sm:grid-cols-[10rem_minmax(0,1fr)]">
               <ContentImage image={a.photo} ratio="4/5" sizes="160px" />
-              <div>
+              <div className="min-w-0 break-words">
                 <h3 className="display-sm">{a.name}</h3>
                 <p className="text-[0.92rem] text-stone">{a.role}</p>
                 <p className="mt-4 text-ink-soft">{a.bio}</p>
