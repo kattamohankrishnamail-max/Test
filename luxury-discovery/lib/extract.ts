@@ -69,8 +69,9 @@ export function extractBudget(text: string): { min: number | null; max: number |
 }
 
 function extractPossession(t: string): Possession | null {
-  if (/ready[- ]to[- ]move|ready possession|immediate|move in (now|soon|immediately)|\bready\b/i.test(t)) return "ready";
+  // Timelines first: "ready within a year" means 12 months, not ready to move.
   if (/within (a|one|1) year|within 12 months|next 12 months|this year/i.test(t)) return "12m";
+  if (/ready[- ]to[- ]move|ready possession|immediate|move in (now|soon|immediately)|\bready\b/i.test(t)) return "ready";
   if (/1\s*[-–to]+\s*2 years|next year|within (two|2) years|in a year or two/i.test(t)) return "1-2y";
   if (/(2|two)\+? years|under[- ]construction (is )?(fine|ok)|can wait|no rush|don'?t mind waiting/i.test(t)) return "2y+";
   if (/flexible (on )?(timing|possession)|any possession/i.test(t)) return "flexible";

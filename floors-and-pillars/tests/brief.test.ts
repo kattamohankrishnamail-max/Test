@@ -121,3 +121,8 @@ test("thank-you matching ranks the fitting home first", () => {
   assert.ok(a.score > b.score);
   assert.ok(a.score >= 75);
 });
+
+test("'ready within a year' reads as a 12-month timeline", () => {
+  assert.equal(draftFromText("4 BHK, ready within a year", markets).possession, "12m");
+  assert.equal(draftFromText("4 BHK, ready to move", markets).possession, "ready");
+});

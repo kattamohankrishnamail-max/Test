@@ -26,6 +26,22 @@ npm run dev                  # http://localhost:3000
 
 The Playwright scripts use Playwright's own Chromium. If that isn't installed, set `CHROMIUM_PATH` to a local Chromium or Chrome.
 
+## Single-file demo
+
+`dist/floors-and-pillars.html` is the whole site as one file you can double-click. There's no install and no server. It includes draft guides and articles.
+
+- Briefs and contact messages are kept in that browser's `localStorage`, not sent anywhere.
+- The advisor desk isn't included, because it needs a server.
+
+To rebuild it after changes:
+
+```bash
+SHOW_DRAFTS=1 npm run build && SHOW_DRAFTS=1 npm start     # terminal 1
+BASE_URL=http://localhost:3000 npm run build:html          # terminal 2
+```
+
+The script captures every page from the production build, re-mounts the interactive parts (brief, teaser, filters, menu, contact form) from the same components, and inlines the fonts.
+
 ## Where things live
 
 ```
