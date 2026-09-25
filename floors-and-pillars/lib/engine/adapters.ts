@@ -55,7 +55,7 @@ export function homeToProperty(h: HomeMeta, market: Market | undefined, now = ne
 export interface SubmittedBrief {
   propertyType?: string;
   configurations?: string[];
-  minSizeSqft?: string;
+  minSizeSqft?: string | number | null;
   possession?: string;
   budget?: string;
   areas?: string[];
