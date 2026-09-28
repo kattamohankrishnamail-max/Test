@@ -16,14 +16,12 @@ export default function HomesGrid({ homes, marketNames }: { homes: HomeMeta[]; m
   const shown = homes.filter((h) => (type === "all" || h.type === type) && (band === "all" || h.priceBand === band));
 
   const chip = (active: boolean) =>
-    `inline-flex min-h-11 items-center border px-4 text-[0.92rem] transition-colors ${
-      active ? "border-ink bg-ink text-limestone" : "border-line bg-white text-ink-soft hover:border-stone"
-    }`;
+    `inline-flex min-h-11 items-center border px-4 text-[0.9rem] ${active ? "border-ink bg-ink text-limestone" : "border-line bg-paper text-ink hover:border-ink"}`;
 
   return (
     <>
       {enhanced && (
-        <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-8" role="group" aria-label="Filter the collection">
+        <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-8" role="group" aria-label="Filter the collection">
           <div className="flex flex-wrap gap-2">
             {(["all", "apartment", "villa"] as const).map((t) => (
               <button key={t} type="button" aria-pressed={type === t} className={chip(type === t)} onClick={() => setType(t)}>
@@ -41,13 +39,13 @@ export default function HomesGrid({ homes, marketNames }: { homes: HomeMeta[]; m
         </div>
       )}
       {shown.length ? (
-        <ul className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {shown.map((h) => (
+        <ol className="border-b border-ink">
+          {shown.map((h, i) => (
             <li key={h.slug}>
-              <HomeCard home={h} market={marketNames[h.microMarket]} headingLevel="h2" />
+              <HomeCard home={h} market={marketNames[h.microMarket]} index={i} headingLevel="h2" />
             </li>
           ))}
-        </ul>
+        </ol>
       ) : (
         <p className="lede" role="status">
           {copy.empty}

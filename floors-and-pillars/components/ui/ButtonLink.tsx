@@ -4,11 +4,12 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { track, type AnalyticsEvent, type AnalyticsProps } from "@/lib/analytics";
 
+/* Flat, square buttons. State changes are instant (no hover animation). */
 const styles = {
   primary: "bg-ink text-limestone hover:bg-verdigris",
   secondary: "border border-ink text-ink hover:bg-ink hover:text-limestone",
-  light: "bg-limestone text-ink hover:bg-white",
-  text: "text-bronze-deep underline underline-offset-[0.3em] decoration-1 hover:text-verdigris px-0",
+  light: "bg-limestone text-ink hover:bg-paper",
+  text: "px-0 text-ink underline decoration-1 underline-offset-[0.3em] hover:decoration-2",
 };
 
 export default function ButtonLink({
@@ -28,8 +29,8 @@ export default function ButtonLink({
 }) {
   const base =
     variant === "text"
-      ? "inline-flex min-h-11 items-center gap-2 text-[0.95rem]"
-      : "inline-flex min-h-12 items-center justify-center gap-2 px-7 text-[0.95rem] tracking-wide transition-colors duration-300";
+      ? "inline-flex min-h-11 items-center text-[0.95rem]"
+      : "inline-flex min-h-12 items-center justify-center px-7 text-[0.92rem] font-medium tracking-[0.02em]";
   return (
     <Link href={href} className={`${base} ${styles[variant]} ${className}`} onClick={() => event && track(event, eventProps)}>
       {children}

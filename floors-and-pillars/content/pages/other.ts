@@ -1,8 +1,8 @@
 export const bengaluruPage = {
-  meta: { title: "Bengaluru, understood", description: "How we think about Bengaluru's residential markets — by how people live, not only by price." },
+  meta: { title: "Bengaluru, understood", description: "How we read Bengaluru's residential markets: by how people live, and then by price." },
   title: "Bengaluru, understood.",
   intro:
-    "Price per square foot tells you very little about a neighbourhood. We know the city by how people live in it — the school run, the commute, the weekend, the quiet streets and the ones that never are.",
+    "Price per square foot says little about a neighbourhood. We know the city by how people live in it: the school run, the commute, the weekend, the quiet streets and the busy ones.",
   indexTitle: "Micro-markets",
   guide: {
     whoItSuits: "Who it suits",
@@ -20,7 +20,7 @@ export const bengaluruPage = {
 export const journalPage = {
   meta: { title: "Journal", description: "Notes on buying well in Bengaluru, from the Floors & Pillars advisors." },
   title: "Journal.",
-  intro: "Notes on buying well in Bengaluru — what to look for, what to question, and what the brochures leave out.",
+  intro: "Notes on buying well in Bengaluru: what to look for, what to question, and what the brochures leave out.",
   empty: "The first articles are in preparation.",
   minRead: (n: number) => `${n} min read`,
   by: "By",
@@ -35,9 +35,9 @@ export const aboutPage = {
   name: "Floors for the homes we live in. Pillars for what holds them up: foundation, permanence, trust.",
   approachTitle: "Our approach",
   principles: [
-    { name: "Curation over inventory", text: "We would rather show you four homes worth your weekend than forty that aren't." },
-    { name: "Honesty over enthusiasm", text: "Every home has trade-offs. We tell you what they are before you visit, not after you've paid." },
-    { name: "Your brief, not our mandates", text: "What we recommend starts with what you asked for." },
+    { name: "Curation over inventory", text: "Four homes worth your weekend will serve you better than forty that need ruling out." },
+    { name: "Honesty over enthusiasm", text: "Every home has trade-offs. We set them out before you visit." },
+    { name: "Your brief comes first", text: "What we recommend starts with what you asked for." },
   ],
   advisorsTitle: "The people you'll speak to",
   cta: { title: "Start with a conversation.", label: "Talk to an Advisor" },
@@ -46,7 +46,7 @@ export const aboutPage = {
 export const contactPage = {
   meta: { title: "Contact", description: "Reach Floors & Pillars by phone, WhatsApp or email, or share your brief." },
   title: "Contact.",
-  intro: "The most useful way to start is to share your brief — it lets an advisor come prepared. If you'd rather simply talk, reach us below.",
+  intro: "The most useful way to start is to share your brief, so an advisor comes prepared. If you'd rather simply talk, reach us below.",
   briefLink: "Share your brief",
   details: { phone: "Phone", whatsapp: "WhatsApp", email: "Email", address: "Office", hours: "Hours" },
   form: {
@@ -56,7 +56,7 @@ export const contactPage = {
     message: "Message",
     submit: "Send message",
     sending: "Sending…",
-    sent: "Thank you — we'll be in touch.",
+    sent: "Thank you. We'll be in touch.",
     error: "We couldn't send that just now. Please try again, or share your brief instead.",
   },
 };

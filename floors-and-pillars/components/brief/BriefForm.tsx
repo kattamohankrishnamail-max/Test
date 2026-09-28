@@ -261,7 +261,7 @@ export default function BriefForm({
       aria-describedby={banner ? "brief-banner" : undefined}
     >
       {homeName && (
-        <p className="mb-8 border-l-2 border-bronze pl-4 text-ink-soft">
+        <p className="mb-8 border border-ink bg-paper px-4 py-3 text-ink-soft">
           {copy.enquiringAbout} <span className="font-medium text-ink">{homeName}</span>
         </p>
       )}
@@ -276,13 +276,13 @@ export default function BriefForm({
       </div>
 
       {banner && (
-        <p id="brief-banner" role="alert" className="mb-8 border border-error bg-white px-5 py-4 text-[0.95rem] text-error">
+        <p id="brief-banner" role="alert" className="mb-8 border border-error bg-paper px-5 py-4 text-[0.95rem] text-error">
           {banner}
         </p>
       )}
 
       {/* Free text → pre-fill */}
-      <div className="mb-12 bg-white p-6 sm:p-8">
+      <div className="mb-12 bg-paper p-6 sm:p-8">
         <label htmlFor="description" className="display-sm block">
           {copy.describe.label}
         </label>
@@ -305,7 +305,7 @@ export default function BriefForm({
               type="button"
               onClick={() => v.description.trim() && applyText(v.description, false)}
               disabled={!v.description.trim()}
-              className="inline-flex min-h-11 items-center border border-ink px-5 text-[0.92rem] text-ink transition-colors hover:bg-ink hover:text-limestone disabled:cursor-not-allowed disabled:opacity-40"
+              className="inline-flex min-h-11 items-center border border-ink px-5 text-[0.92rem] text-ink hover:bg-ink hover:text-limestone disabled:cursor-not-allowed disabled:opacity-40"
             >
               {copy.describe.button}
             </button>
@@ -323,7 +323,7 @@ export default function BriefForm({
         <ol className="mb-10 grid grid-cols-4 gap-2" aria-label="Progress">
           {STEP_TITLES.map((t, i) => (
             <li key={t} aria-current={i === step ? "step" : undefined}>
-              <span className={`block h-0.5 ${i <= step ? "bg-ink" : "bg-line"}`} />
+              <span className={`block h-1 ${i <= step ? "bg-ink" : "bg-line"}`} />
               <span className={`mt-2 hidden text-[0.8rem] sm:block ${i === step ? "text-ink" : "text-stone"}`}>
                 {i + 1}. {t}
               </span>
@@ -385,7 +385,7 @@ export default function BriefForm({
             onChange={(e) => set({ notes: e.target.value })}
             aria-invalid={!!err("notes")}
             aria-describedby={err("notes") ? "notes-error" : undefined}
-            className="mt-3 w-full resize-y border border-line bg-white px-4 py-3 text-ink focus:border-ink focus:outline-none"
+            className="mt-3 w-full resize-y border border-line bg-paper px-4 py-3 text-ink focus:border-ink focus:outline-none"
           />
           <FieldError id="notes-error" error={err("notes")} />
         </div>
@@ -469,7 +469,7 @@ function StepShell({
         tabIndex={-1}
         className="display-md focus:outline-none"
       >
-        <span className="mr-3 font-serif text-bronze">{String(i + 1).padStart(2, "0")}</span>
+        <span className="numeral mr-4">{String(i + 1).padStart(2, "0")}</span>
         {title}
       </h2>
       {children}
@@ -532,8 +532,8 @@ function Choice({
           return (
             <label
               key={o.value}
-              className={`inline-flex min-h-11 cursor-pointer items-center border px-4 text-[0.95rem] transition-colors has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-verdigris ${
-                checked ? "border-ink bg-ink text-limestone" : error ? "border-error bg-white text-ink-soft" : "border-line bg-white text-ink-soft hover:border-stone"
+              className={`inline-flex min-h-11 cursor-pointer items-center border px-4 text-[0.95rem] has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ink ${
+                checked ? "border-ink bg-ink text-limestone" : error ? "border-error bg-paper text-ink-soft" : "border-line bg-paper text-ink hover:border-ink"
               } ${disabled ? "cursor-not-allowed opacity-45" : ""}`}
             >
               <input
@@ -605,7 +605,7 @@ function TextField({
         onChange={(e) => onChange(e.target.value)}
         aria-invalid={!!error}
         aria-describedby={describedBy}
-        className={`mt-3 min-h-12 w-full border bg-white px-4 text-ink focus:border-ink focus:outline-none ${error ? "border-error" : "border-line"}`}
+        className={`mt-3 min-h-12 w-full border bg-paper px-4 text-ink focus:border-ink focus:outline-none ${error ? "border-error" : "border-line"}`}
       />
       <FieldError id={`${name}-error`} error={error} />
     </div>

@@ -95,7 +95,7 @@ export function locationFit(property: Property, wanted: string[]): LocationFit |
     if (!place) {
       // Unknown free-text location: plain substring match against the sheet.
       if (placeText(property).toLowerCase().includes(w.toLowerCase().trim())) {
-        return { score: 1, reason: `${where} — in your preferred area`, gap: null };
+        return { score: 1, reason: `${where}, in your preferred area`, gap: null };
       }
       continue;
     }
@@ -106,7 +106,7 @@ export function locationFit(property: Property, wanted: string[]): LocationFit |
       continue;
     }
     if (place.patterns.some((re) => re.test(placeText(property)))) {
-      return { score: 1, reason: `${where} — in your preferred ${place.name} area`, gap: null };
+      return { score: 1, reason: `${where}, in your preferred ${place.name} area`, gap: null };
     }
     if (!corridor && place.zones.includes(zoneOf(property))) corridor = place.name;
   }
@@ -114,7 +114,7 @@ export function locationFit(property: Property, wanted: string[]): LocationFit |
   if (corridor) {
     return {
       score: 0.6,
-      reason: `${where} — same ${property.zone} Bengaluru corridor as ${corridor}`,
+      reason: `${where}, in the same ${property.zone} Bengaluru corridor as ${corridor}`,
       gap: `in ${where} rather than ${corridor} itself`,
     };
   }

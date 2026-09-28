@@ -8,11 +8,11 @@ export const briefPage = {
     "Tell us a little about the home you have in mind. An advisor will review it personally and come back with the first homes worth considering.",
   describe: {
     label: "Describe it in your own words",
-    hint: "Optional. We'll use it to fill in the form for you — you can adjust anything.",
+    hint: "Optional. We'll use it to fill in the form for you, and you can adjust anything.",
     placeholder: "e.g. A large 4 BHK for my family, somewhere quiet and green, with reasonable access to Whitefield. Budget around ₹6 Cr.",
     button: "Fill in the form from this",
     applied: "We've filled in what we understood. Please check each step.",
-    nothing: "We couldn't pick out specific details — please use the form below.",
+    nothing: "We couldn't pick out specific details. Please use the form below.",
   },
   enquiringAbout: "You're asking about",
   labels: {

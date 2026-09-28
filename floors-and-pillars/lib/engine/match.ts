@@ -100,7 +100,7 @@ function configurationFit(p: Property, r: Requirements): Omit<CriterionResult, "
     const s = d <= 0.5 ? 0.8 : d <= 1 ? (larger ? 0.6 : 0.35) : 0;
     if (s > best) {
       best = s;
-      bestReason = s >= 0.6 ? `Offers ${label} — close to your ${n} BHK brief` : null;
+      bestReason = s >= 0.6 ? `Offers ${label}, close to your ${n} BHK brief` : null;
     }
   }
   return {
@@ -140,7 +140,7 @@ function possessionFit(p: Property, r: Requirements, now: Date): Omit<CriterionR
     return { score: 1, reason: `Ready to move in${label}`, gap: null };
   }
   if (p.possessionMonth <= deadline) {
-    return { score: 1, reason: `Possession ${p.possessionLabel} — within your timeline`, gap: null };
+    return { score: 1, reason: `Possession ${p.possessionLabel}, within your timeline`, gap: null };
   }
   const late = p.possessionMonth - deadline;
   return {
@@ -177,7 +177,7 @@ function lifestyleEvidence(p: Property, pref: Lifestyle): string | null {
       return null;
     case "low-density":
       if (p.unitsPerAcre !== null && p.unitsPerAcre <= MATCHING.lowDensityUnitsPerAcre)
-        return `Low-density — about ${Math.round(p.unitsPerAcre)} homes per acre`;
+        return `Low-density: about ${Math.round(p.unitsPerAcre)} homes per acre`;
       if (/boutique|low-density|villa/i.test(arch)) return `Low-density ${arch.toLowerCase()} development`;
       return null;
     case "private-villa":
@@ -200,7 +200,7 @@ function lifestyleEvidence(p: Property, pref: Lifestyle): string | null {
       return null;
     case "airport":
       if (p.airportDistanceKm !== null && p.airportDistanceKm <= MATCHING.airportDistanceKm) return `${p.airportDistanceKm} km from the airport`;
-      return AIRPORT_CORRIDOR.test(place) ? `${p.microMarket} — on the airport corridor` : null;
+      return AIRPORT_CORRIDOR.test(place) ? `${p.microMarket}, on the airport corridor` : null;
     case "schools": {
       const q = quote(p, /school/i);
       return q ? `“${q}”` : null;
@@ -211,7 +211,7 @@ function lifestyleEvidence(p: Property, pref: Lifestyle): string | null {
       if (/boutique/i.test(arch)) return `${arch} project`;
       return null;
     case "community":
-      if (/township/i.test(arch)) return `${arch} — a larger community setting`;
+      if (/township/i.test(arch)) return `${arch}: a larger community setting`;
       if (p.units !== null && p.units >= 400) return `A community of ${p.units.toLocaleString("en-IN")} homes`;
       return null;
     case "design": {
@@ -226,7 +226,7 @@ function lifestyleEvidence(p: Property, pref: Lifestyle): string | null {
         return q ? `“${q}”` : null;
       }
     case "rental":
-      return OFFICE_CORRIDOR.test(place) ? `${p.microMarket} — close to major office corridors` : null;
+      return OFFICE_CORRIDOR.test(place) ? `${p.microMarket}, close to major office corridors` : null;
   }
 }
 
@@ -323,7 +323,7 @@ function explain(alts: Match[]): string | null {
   const join = (xs: string[]) => (xs.length <= 1 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}`);
   if (fits.length && misses.length) return `These homes fit your ${join(fits)}, but most ${join(misses.slice(0, 2))}.`;
   if (misses.length) return `The closest homes in our collection ${join(misses.slice(0, 2))}.`;
-  return "Each is a close fit on most of your brief — the notes on every home show where it differs.";
+  return "Each is a close fit on most of your brief. The notes on every home show where it differs.";
 }
 
 export function matchProperties(all: Property[], r: Requirements, now = new Date()): MatchResult {

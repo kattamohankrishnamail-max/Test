@@ -1,5 +1,5 @@
-import { MarketIndex } from "@/components/home/Sections";
-import { ClosingCta } from "@/components/home/Sections";
+import { ClosingCta, MarketIndex } from "@/components/home/Sections";
+import PageHead from "@/components/ui/PageHead";
 import { Container } from "@/components/ui/Section";
 import { bengaluruPage as copy } from "@/content/pages/other";
 import { getGuides, getMarkets } from "@/lib/content/load";
@@ -11,14 +11,10 @@ export default async function BengaluruPage() {
   const guides = await getGuides();
   return (
     <>
-      <Container className="grid gap-14 py-16 sm:py-24 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
-        <div>
-          <p className="eyebrow">Bengaluru</p>
-          <h1 className="display-xl mt-5">{copy.title}</h1>
-          <p className="lede mt-6">{copy.intro}</p>
-        </div>
+      <PageHead label="Bengaluru" title={copy.title} lede={copy.intro} />
+      <Container className="pb-20">
         <section aria-labelledby="markets-title">
-          <h2 id="markets-title" className="eyebrow mb-4">
+          <h2 id="markets-title" className="sr-only">
             {copy.indexTitle}
           </h2>
           <MarketIndex markets={getMarkets()} guideSlugs={guides.map((g) => g.meta.slug)} />

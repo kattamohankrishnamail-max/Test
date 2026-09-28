@@ -1,6 +1,6 @@
 // End-to-end check of the brief, against a running server:
 //   BASE_URL=http://localhost:3000 npm run test:e2e
-// Covers: teaser → prefilled brief, free-text prefill, the 3-priority cap, step validation,
+// Covers: home reader → prefilled brief, the 3-priority cap, step validation,
 // JS submission → thank-you with collection matches, no-JS submission → 303, honeypot.
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
@@ -13,22 +13,26 @@ const step = (msg) => console.log(`✓ ${msg}`);
 try {
   const p = await browser.newPage({ viewport: { width: 1280, height: 900 } });
   p.on("pageerror", (e) => pageErrors.push(e.message));
-  const teaser = p.locator("form[aria-labelledby=teaser-title]");
   await p.goto(B + "/", { waitUntil: "networkidle" });
-  await teaser.locator("label", { hasText: /^Villa$/ }).click();
-  await teaser.locator("label", { hasText: "₹7.5–10 Cr" }).click();
-  for (const t of ["Privacy", "Greenery", "Airport access"]) await teaser.locator("label", { hasText: new RegExp(`^${t}$`) }).click();
-  assert.equal(await teaser.locator("input[name=priorities][value=schools]").isDisabled(), true, "fourth priority should be disabled");
-  step("teaser caps priorities at three");
-  await p.fill("#teaser-describe", "A 5 BHK villa in North Bengaluru, ready to move, quiet and green");
-  await teaser.getByRole("button", { name: "Curate my shortlist" }).click();
-  await p.waitForURL(/\/brief\?/);
+  await p.fill("#reader-text", "A 5 BHK villa in North Bengaluru, ready to move, quiet and green, around 9 crore");
+  const reading = await p.locator("#reader table").innerText();
+  for (const v of ["Villa", "5+ BHK", "Ready to move", "North Bengaluru"]) assert.ok(reading.includes(v), `reader should show ${v}`);
+  step("home-page reader reads the brief live");
+  await p.getByRole("button", { name: "Continue with this brief" }).click();
+  await p.waitForURL(/\/brief/);
   await p.waitForSelector("text=We've filled in what we understood");
   const checked = await p.$$eval("input:checked", (els) => els.map((e) => `${e.name}=${e.value}`));
   for (const v of ["propertyType=villa", "budget=7.5-10", "configurations=5+", "possession=ready", "areas=north-bengaluru"]) assert.ok(checked.includes(v), `expected ${v}`);
-  step("teaser values and free text pre-fill the brief");
+  step("reader text pre-fills the brief");
 
-  for (let i = 0; i < 3; i++) {
+  await p.getByRole("button", { name: "Continue" }).click();
+  await p.waitForTimeout(250);
+  await p.getByRole("button", { name: "Continue" }).click();
+  await p.waitForTimeout(250);
+  for (const t of ["Space"]) await p.locator("label", { hasText: new RegExp(`^${t}$`) }).click();
+  assert.equal(await p.locator("input[name=priorities][value=schools]").isDisabled(), true, "fourth priority should be disabled");
+  step("brief caps priorities at three");
+  for (let i = 0; i < 1; i++) {
     await p.getByRole("button", { name: "Continue" }).click();
     await p.waitForTimeout(250);
   }

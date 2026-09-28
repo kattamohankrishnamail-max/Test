@@ -19,7 +19,7 @@ export async function POST(req: Request) {
 
   if (isBot(input[HONEYPOT_FIELD])) return isJson ? Response.json({ ok: true }) : redirect("/contact?sent=1");
   if (!rateLimit(`contact:${clientKey(req)}`).ok) {
-    return isJson ? Response.json({ error: "Too many messages — please try again shortly." }, { status: 429 }) : redirect("/contact?error=1");
+    return isJson ? Response.json({ error: "Too many messages. Please try again shortly." }, { status: 429 }) : redirect("/contact?error=1");
   }
   const parsed = ContactSchema.safeParse(input);
   if (!parsed.success) {

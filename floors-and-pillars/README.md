@@ -20,7 +20,7 @@ npm run dev                  # http://localhost:3000
 | `npm run lint` | ESLint using `eslint-config-next` (Next 16 removed `next lint`). |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm test` | Unit tests: brief schema, phone numbers, prefill, rate limit, matching engine. |
-| `npm run content:check` | Content validation, placeholder report, banned-word lint and colour contrast. See *Launch gate* below. |
+| `npm run content:check` | Content validation, placeholder report, banned-word lint, design lint and colour contrast. See *Launch gate* and *Design rules* below. |
 | `npm run test:e2e` | Browser test of the brief, with and without JavaScript. Needs a running server: `BASE_URL=http://localhost:3000 npm run test:e2e`. |
 | `npm run screenshots` | Screenshots every route at 390px and 1440px into `screenshots/`. Also checks 360–1440px for horizontal scroll, tap targets under 44px and the number of `<h1>` elements. Needs a running server and `BASE_URL`. |
 
@@ -40,7 +40,41 @@ SHOW_DRAFTS=1 npm run build && SHOW_DRAFTS=1 npm start     # terminal 1
 BASE_URL=http://localhost:3000 npm run build:html          # terminal 2
 ```
 
-The script captures every page from the production build, re-mounts the interactive parts (brief, teaser, filters, menu, contact form) from the same components, and inlines the fonts.
+The script captures every page from the production build, re-mounts the interactive parts (brief, home-page reader, filters, menu, contact form) from the same components, and inlines the fonts.
+
+## Design rules
+
+The site is designed as a **drawing set**: an architect's sheet set or a printed monograph.
+
+- **Structure:** a 12-column grid, sheet numbers in the margin, heavy ink rules over each sheet, and figure captions on imagery.
+- **Lists:** numbered registers and schedules take the place of card rows.
+- **Type:** display in **Instrument Serif**; text in **Libre Franklin**. Libre Franklin also supplies the ₹ glyph, which Instrument Serif lacks.
+- **Surfaces:** `limestone` (page), `paper` (raised surfaces) and `limestone-deep` (image blocks and bands). There is never any pure white.
+
+It was built to avoid a list of patterns that make a site read as generated. `content:check` enforces the ones that can be detected in source:
+
+| Pattern | How the site handles it | Enforced by `content:check` |
+|---|---|---|
+| Harsh gradients, radial orbs, dot grids | Flat fills only | Gradients |
+| Lucide or other icon libraries, sparkle icons | No icon library; two hand-drawn SVGs (wordmark, placeholder cross) | Icon imports, sparkle glyphs |
+| Pure white background | `limestone` / `paper` / `limestone-deep` | `white`, `#fff` |
+| Rainbow, neon, basic pastels, purple and black | Brand palette only: ink, limestone, bronze, verdigris | Review |
+| Drop shadows, liquid glass | None | `shadow-*`, `backdrop-blur` |
+| Three feature cards in a row, bento grids | Numbered registers, tables and schedules | Review |
+| Emoji, checkmark bullets, animated arrows | Roman and Arabic numerals, underlined text links | Emoji, check, sparkle and arrow glyphs |
+| Em dashes; "It's not X, it's Y" | Rewritten copy | Both, in all visitor-facing text |
+| Inter, Geist, Space Grotesk | Instrument Serif + Libre Franklin | Font imports |
+| Coloured left stripe | Full borders or ink bands | `border-l-2/4/8` |
+| Fake testimonials | None; "questions we often hear" is set as a plain table | Review |
+| Terminal windows | None (the desk shows a definition list) | Review |
+| Soft corner radius | Square corners, set globally | `rounded-*` |
+| Hover animations | Instant state changes only | `transition`, `duration-*`, `animate-*` |
+| No skeleton loaders | Flat skeletons while the advisor desk loads its data. Pages are server-rendered, so they never wait behind a skeleton. | Review |
+| No real product demo | The home-page **brief reader** runs the real extraction engine live as you type | Review |
+| No terms, no privacy policy | `/terms` and `/privacy` (drafts pending legal review) | Review |
+| Three pricing tiers | None | Review |
+
+To add a rule, append a pattern to `DESIGN_RULES` in `scripts/content-check.ts`.
 
 ## Where things live
 
@@ -168,7 +202,8 @@ No vendor is connected. To connect one, call `setAnalyticsHandler((event, props)
 - Fails on banned voice words: *best deals, prime, world-class, ultra-luxury, hurry, exclusive offer, dream home*.
 - Fails on "independent" while `isIndependentFeeModel` is false.
 - Warns when "luxury" appears more than twice in one file.
-- Checks every brand colour pair against WCAG AA. Bronze #9C6B3E on limestone is 3.96:1, so bronze is reserved for large text and decoration; links use `--bronze-deep` #7E5530 (5.62:1).
+- Checks every brand colour pair against WCAG AA. Bronze #9C6B3E on limestone is 3.96:1, so it is reserved for large display accents and decoration; links and numerals use `--bronze-deep` #7E5530 (5.62:1).
+- Fails on the design patterns listed under *Design rules*.
 
 Run it with `LAUNCH_MODE=production` and it also **fails while any placeholder remains**, so the site can't go live with them. Make that part of your production deploy, for example as the Vercel build command:
 

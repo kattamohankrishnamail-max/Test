@@ -53,18 +53,18 @@ export default function CollectionMatches({
   if (!matches.length) return null;
   const names = Object.fromEntries(markets.map((m) => [m.slug, m.name]));
   return (
-    <section aria-labelledby="matches-title" className="mt-24">
+    <section aria-labelledby="matches-title" className="mt-16 border-t border-ink pt-6">
       <h2 id="matches-title" className="display-md">
         {title}
       </h2>
       <p className="lede mt-3">{intro}</p>
-      <ul className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {matches.map(({ h }) => (
+      <ol className="mt-8 border-b border-ink">
+        {matches.map(({ h }, i) => (
           <li key={h.slug}>
-            <HomeCard home={h} market={names[h.microMarket]} />
+            <HomeCard home={h} market={names[h.microMarket]} index={i} />
           </li>
         ))}
-      </ul>
+      </ol>
     </section>
   );
 }

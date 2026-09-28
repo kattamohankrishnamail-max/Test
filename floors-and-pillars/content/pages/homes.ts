@@ -5,7 +5,7 @@ export const homesPage = {
   },
   title: "Homes worth considering.",
   intro:
-    "A small, deliberately chosen collection. If a home isn't here, it's either not right for most of our clients, or we're still forming a view.",
+    "A small, deliberately chosen collection. A home earns a place here when it suits most of our clients and we have formed a clear view of it.",
   filterAll: "All",
   empty: "Nothing in the collection matches that combination right now.",
   endCta: {

@@ -16,19 +16,19 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const g = await getGuide((await params).slug);
-  return g ? pageMetadata({ title: `${g.meta.name} — a guide`, description: g.meta.dek, path: `/bengaluru/${g.meta.slug}` }) : {};
+  return g ? pageMetadata({ title: `${g.meta.name}: a guide`, description: g.meta.dek, path: `/bengaluru/${g.meta.slug}` }) : {};
 }
 
 function List({ items }: { items: string[] }) {
   return (
-    <ul className="space-y-3 text-ink-soft">
-      {items.map((x) => (
-        <li key={x} className="flex gap-3">
-          <span aria-hidden className="mt-[0.8em] h-px w-4 shrink-0 bg-bronze" />
+    <ol className="border-t border-line text-ink">
+      {items.map((x, i) => (
+        <li key={x} className="grid grid-cols-[2.5rem_1fr] border-b border-line py-3">
+          <span className="numeral">{String(i + 1).padStart(2, "0")}</span>
           {x}
         </li>
       ))}
-    </ul>
+    </ol>
   );
 }
 
@@ -41,24 +41,26 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
   const market = getMarkets().find((m) => m.slug === g.slug);
 
   const block = (id: string, title: string, content: React.ReactNode) => (
-    <section aria-labelledby={id} className="grid gap-6 border-t border-line py-12 lg:grid-cols-[1fr_2.2fr] lg:gap-16">
-      <h2 id={id} className="display-md">
+    <section aria-labelledby={id} className="grid grid-cols-12 gap-x-6 gap-y-6 border-t border-ink py-10">
+      <h2 id={id} className="display-md col-span-12 lg:col-span-4">
         {title}
       </h2>
-      <div className="measure">{content}</div>
+      <div className="measure col-span-12 lg:col-span-8">{content}</div>
     </section>
   );
 
   return (
     <>
-      <Container className="py-16 sm:py-24">
-        <p className="eyebrow">Bengaluru · {market?.zone ?? "Guide"}</p>
-        <h1 className="display-xl mt-5">{g.name}</h1>
-        <p className="lede mt-6">{g.dek}</p>
+      <Container className="pb-16 pt-10 sm:pt-14">
+        <p className="label">Bengaluru · {market?.zone ?? "Guide"}</p>
+        <h1 className="display-xl mt-6">{g.name}</h1>
+        <div className="mt-10 grid grid-cols-12 gap-x-6 border-t border-ink pt-6">
+          <p className="lede col-span-12 md:col-span-8 lg:col-span-6">{g.dek}</p>
+        </div>
         {g.image && (
-          <div className="mt-12">
-            <ContentImage image={g.image} ratio="21/9" sizes="100vw" priority />
-          </div>
+          <figure className="mt-10">
+            <ContentImage image={g.image} ratio="21/9" sizes="100vw" priority figure="Fig. 1" className="max-sm:!aspect-[4/3]" />
+          </figure>
         )}
         <div className="mt-12">
           <Mdx source={guide.body} />
@@ -85,23 +87,23 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             block(
               "drawbacks",
               G.drawbacks,
-              <div className="border-l-2 border-verdigris bg-white px-6 py-5">
+              <div className="bg-ink px-6 py-5 text-limestone [&_li]:border-limestone/25 [&_ol]:border-limestone/40 [&_.numeral]:text-limestone/60 [&_ol]:text-limestone">
                 <List items={g.drawbacks} />
               </div>,
             )}
         </div>
-        <section aria-labelledby="watching" className="border-t border-line py-12">
+        <section aria-labelledby="watching" className="border-t border-ink py-10">
           <h2 id="watching" className="display-md">
             {G.homes}
           </h2>
           {homes.length ? (
-            <ul className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {homes.map((h) => (
+            <ol className="mt-8 border-b border-ink">
+              {homes.map((h, i) => (
                 <li key={h.meta.slug}>
-                  <HomeCard home={h.meta} market={g.name} />
+                  <HomeCard home={h.meta} market={g.name} index={i} />
                 </li>
               ))}
-            </ul>
+            </ol>
           ) : (
             <p className="mt-4 text-ink-soft">{G.noHomes}</p>
           )}

@@ -42,7 +42,7 @@ export const site: SiteConfig = SiteConfigSchema.parse({
   },
   reraAgentNumber: "[[PLACEHOLDER: K-RERA agent registration no.]]",
   feeDisclosure: "[[PLACEHOLDER: one-line fee disclosure, e.g. how Floors & Pillars is paid]]",
-  feeModelDetail: "[[PLACEHOLDER: fee model disclosure — to be confirmed]]",
+  feeModelDetail: "[[PLACEHOLDER: fee model disclosure, to be confirmed]]",
   isIndependentFeeModel: false,
   responseTime: "[[PLACEHOLDER: response time, e.g. 48 hours]]",
   social: [],

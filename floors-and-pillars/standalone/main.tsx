@@ -6,7 +6,7 @@
 import { createRoot, type Root } from "react-dom/client";
 import BriefForm from "@/components/brief/BriefForm";
 import CollectionMatches from "@/components/brief/CollectionMatches";
-import BriefTeaser from "@/components/home/BriefTeaser";
+import BriefReader from "@/components/home/BriefReader";
 import HomesGrid from "@/components/homes/HomesGrid";
 import ContactForm from "@/components/layout/ContactForm";
 import Header from "@/components/layout/Header";
@@ -69,6 +69,7 @@ function mount(el: Element | null | undefined, node: React.ReactNode) {
 
 function reveal() {
   const els = main.querySelectorAll(".reveal");
+  if (!els.length) return;
   if (!("IntersectionObserver" in window)) return els.forEach((e) => e.classList.add("is-visible"));
   const io = new IntersectionObserver(
     (entries) => entries.forEach((e) => e.isIntersecting && (e.target.classList.add("is-visible"), io.unobserve(e.target))),
@@ -87,7 +88,7 @@ function render() {
   window.scrollTo(0, 0);
 
   if (path === "/") {
-    mount(main.querySelector('form[aria-labelledby="teaser-title"]')?.parentElement, <BriefTeaser />);
+    mount(main.querySelector('[data-island="reader"]'), <BriefReader markets={markets} />);
   }
   if (path === "/brief") {
     const params = Object.fromEntries(new URLSearchParams(search));
@@ -107,7 +108,7 @@ function render() {
     }
   }
   if (path === "/homes") {
-    mount(main.querySelector("ul.grid")?.parentElement, <HomesGrid homes={homes} marketNames={marketNames} />);
+    mount(main.querySelector('[data-island="homes"]'), <HomesGrid homes={homes} marketNames={marketNames} />);
   }
   if (path === "/contact") {
     mount(main.querySelector('form[aria-labelledby="contact-form-title"]')?.parentElement, <ContactForm />);

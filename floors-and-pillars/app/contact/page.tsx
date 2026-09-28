@@ -19,17 +19,17 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
     [d.hours, site.contact.hours],
   ];
   return (
-    <Container className="grid gap-16 py-16 sm:py-24 lg:grid-cols-2 lg:gap-24">
-      <div>
-        <p className="eyebrow">Contact</p>
-        <h1 className="display-xl mt-5">{copy.title}</h1>
-        <p className="lede mt-6">{copy.intro}</p>
+    <Container className="grid grid-cols-12 gap-x-6 gap-y-14 pb-20 pt-10 sm:pt-14">
+      <div className="col-span-12 lg:col-span-6">
+        <p className="label">Contact</p>
+        <h1 className="display-xl mt-6">{copy.title}</h1>
+        <p className="lede mt-8 border-t border-ink pt-5">{copy.intro}</p>
         <div className="mt-8">
           <ButtonLink href="/brief" event="advisor_cta_click" eventProps={{ location: "contact" }}>
             {copy.briefLink}
           </ButtonLink>
         </div>
-        <dl className="mt-14 border-t border-line">
+        <dl className="mt-12 border-t border-ink">
           {rows.map(([k, v]) => (
             <div key={k} className="grid grid-cols-[7rem_1fr] gap-4 border-b border-line py-4">
               <dt className="text-stone">{k}</dt>
@@ -38,7 +38,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
           ))}
         </dl>
       </div>
-      <div>
+      <div className="col-span-12 lg:col-span-5 lg:col-start-8">
         <ContactForm initialState={sp.sent ? "sent" : sp.error ? "error" : undefined} />
       </div>
     </Container>

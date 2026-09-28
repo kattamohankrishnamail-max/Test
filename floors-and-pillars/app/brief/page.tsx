@@ -15,13 +15,13 @@ export default async function BriefPage({ searchParams }: { searchParams: Promis
   const error = typeof params.error === "string" ? params.error : undefined;
 
   return (
-    <Container className="grid gap-12 py-16 sm:py-24 lg:grid-cols-[1fr_1.6fr] lg:gap-20">
-      <div className="lg:sticky lg:top-32 lg:self-start">
-        <p className="eyebrow">Share your brief</p>
-        <h1 className="display-xl mt-5">{briefPage.title}</h1>
-        <p className="lede mt-6">{briefPage.intro}</p>
+    <Container className="grid grid-cols-12 gap-x-6 gap-y-10 pb-20 pt-10 sm:pt-14">
+      <div className="col-span-12 lg:sticky lg:top-24 lg:col-span-4 lg:self-start">
+        <p className="label">Share your brief</p>
+        <h1 className="display-lg mt-6">{briefPage.title}</h1>
+        <p className="lede mt-6 border-t border-ink pt-5">{briefPage.intro}</p>
       </div>
-      <div>
+      <div className="col-span-12 lg:col-span-7 lg:col-start-6">
         <BriefForm
           initial={{ ...draft, home: home ? draft.home : undefined }}
           markets={markets.map(({ slug, name, zone }) => ({ slug, name, zone }))}

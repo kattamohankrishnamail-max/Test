@@ -113,20 +113,24 @@ const ratio = (a: string, b: string) => {
 // [foreground, background, minimum] — 4.5 for body text, 3 for large text / UI only.
 const PAIRS: [string, string, number][] = [
   ["ink", "limestone", 4.5],
+  ["ink", "paper", 4.5],
+  ["ink", "limestone-deep", 4.5],
   ["ink-soft", "limestone", 4.5],
+  ["ink-soft", "paper", 4.5],
+  ["ink-soft", "limestone-deep", 4.5],
   ["stone", "limestone", 4.5],
-  ["stone", "white", 4.5],
+  ["stone", "paper", 4.5],
   ["stone", "limestone-deep", 4.5],
   ["bronze-deep", "limestone", 4.5],
-  ["bronze-deep", "white", 4.5],
+  ["bronze-deep", "paper", 4.5],
   ["verdigris", "limestone", 4.5],
   ["limestone", "ink", 4.5],
   ["limestone", "verdigris", 4.5],
-  ["white", "verdigris", 4.5],
-  ["ink", "limestone-deep", 4.5],
-  ["error", "white", 4.5],
+  ["limestone", "stone", 4.5],
+  ["error", "paper", 4.5],
   ["error", "limestone", 4.5],
-  ["bronze", "limestone", 3], // large text / decoration only
+  ["bronze", "limestone", 3], // numerals and display accents only
+  ["bronze", "paper", 3],
 ];
 const contrast: string[] = [];
 for (const [fg, bg, min] of PAIRS) {
@@ -134,6 +138,45 @@ for (const [fg, bg, min] of PAIRS) {
   const ok = r >= min;
   contrast.push(`${ok ? "✓" : "✗"} ${fg} on ${bg}: ${r.toFixed(2)}:1 (needs ${min})`);
   if (!ok) errors.push(`Contrast: ${fg} on ${bg} is ${r.toFixed(2)}:1, needs ${min}`);
+}
+
+// ── 5. Design lint: patterns that make a site read as generated ─────────────
+// Checked in source so the "drawing set" system can't drift. See README → Design rules.
+const componentFiles = [...walk("app", [".tsx", ".ts", ".css"]), ...walk("components", [".tsx", ".ts"])];
+const DESIGN_RULES: [RegExp, string][] = [
+  [/\b(bg|text|border|from|to|via)-white\b|#fff(fff)?\b/i, "pure white (use limestone or paper)"],
+  [/\bshadow-(?!none)|box-shadow:/, "drop shadow"],
+  [/backdrop-blur|backdrop-filter/, "glass blur"],
+  [/bg-gradient|linear-gradient|radial-gradient|conic-gradient/, "gradient"],
+  [/\brounded(-(?!none)[a-z0-9[\]]+)?\b(?![-\w])/, "rounded corners (square only)"],
+  [/\bborder-l-(2|4|8)\b|border-left:\s*[2-9]px/, "coloured left stripe"],
+  [/\btransition(-\w+)?\b|\bduration-\d|\banimate-(?!none)/, "hover/transition animation"],
+  [/lucide|heroicons|react-icons/, "icon library"],
+  [/[✓✔✨⭐→➜➔]/u, "checkmark, sparkle or arrow glyph"],
+  [/(?![©®™])\p{Extended_Pictographic}/u, "emoji"],
+  [/\b(Inter|Geist|Space_Grotesk|Space Grotesk)\b\s*[,(]/, "Inter/Geist/Space Grotesk"],
+];
+for (const file of componentFiles) {
+  if (file === "app/globals.css") continue; // tokens + the skeleton keyframes live here by design
+  readFileSync(path.join(root, file), "utf8")
+    .split("\n")
+    .forEach((line, i) => {
+      const code = /^\s*(\*|\/\*)/.test(line) ? "" : line.replace(/\/\/.*$|\/\*.*?\*\/|\{\/\*.*?\*\/\}/g, "");
+      for (const [re, what] of DESIGN_RULES) if (re.test(code)) errors.push(`${file}:${i + 1} ${what}`);
+    });
+}
+// Copy: em dashes and "not X, it's Y" constructions in anything a visitor reads.
+const copySources = [...walk("content", [".mdx", ".json", ".ts"]), ...componentFiles.filter((f) => !f.endsWith(".css")), "site.config.ts"];
+for (const file of copySources) {
+  readFileSync(path.join(root, file), "utf8")
+    .split("\n")
+    .forEach((line, i) => {
+      const code = file.startsWith("content/") ? line : line.replace(/^\s*(\/\/|\*|\/\*).*$/, "").replace(/\/\/.*$|\{\/\*.*?\*\/\}/g, "");
+      if (code.includes("—")) errors.push(`${file}:${i + 1} em dash in copy`);
+      if (/\b(isn't|is not|it's not|it is not)\b[^.]{0,80}\.\s+It(')?s\b|\bnot (just|only|about) [^,.]{1,60}, (but|it's)\b/i.test(code)) {
+        errors.push(`${file}:${i + 1} "not X, it's Y" construction`);
+      }
+    });
 }
 
 // ── Report ────────────────────────────────────────────────────────────────────

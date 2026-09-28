@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Instrument_Serif, Libre_Franklin } from "next/font/google";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import MobileBriefBar from "@/components/layout/MobileBriefBar";
@@ -7,14 +7,12 @@ import { JsonLd, organizationJsonLd } from "@/lib/seo";
 import { site } from "@/site.config";
 import "./globals.css";
 
-const serif = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-cormorant",
-  display: "swap",
-});
-const sans = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+/*
+ * Instrument Serif for display: tall, condensed, architectural at large sizes.
+ * Libre Franklin for text: a classic American grotesque with signage roots.
+ */
+const display = Instrument_Serif({ subsets: ["latin", "latin-ext"], weight: "400", style: ["normal", "italic"], variable: "--font-display", display: "swap" });
+const text = Libre_Franklin({ subsets: ["latin", "latin-ext"], weight: ["400", "500", "600"], variable: "--font-text", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -29,7 +27,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={`${serif.variable} ${sans.variable}`}>
+    <html lang="en-IN" className={`${display.variable} ${text.variable}`}>
       <body className="min-h-screen">
         <a
           href="#main"

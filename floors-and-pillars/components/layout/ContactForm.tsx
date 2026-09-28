@@ -26,7 +26,7 @@ export default function ContactForm({ initialState }: { initialState?: "sent" | 
 
   if (state === "sent") {
     return (
-      <p role="status" className="display-sm bg-white p-8">
+      <p role="status" className="display-sm border border-ink bg-paper p-8">
         {copy.sent}
       </p>
     );
@@ -38,9 +38,9 @@ export default function ContactForm({ initialState }: { initialState?: "sent" | 
         {label}
       </label>
       {name === "message" ? (
-        <textarea id={`c-${name}`} name={name} rows={4} required aria-invalid={!!errors[name]} aria-describedby={errors[name] ? `c-${name}-e` : undefined} className="mt-2 w-full border border-line bg-white px-4 py-3 focus:border-ink focus:outline-none" />
+        <textarea id={`c-${name}`} name={name} rows={4} required aria-invalid={!!errors[name]} aria-describedby={errors[name] ? `c-${name}-e` : undefined} className="mt-2 w-full border border-ink bg-paper px-4 py-3 focus:outline-none focus-visible:outline-2" />
       ) : (
-        <input id={`c-${name}`} name={name} type={type} required autoComplete={name === "name" ? "name" : "tel"} aria-invalid={!!errors[name]} aria-describedby={errors[name] ? `c-${name}-e` : undefined} className="mt-2 min-h-12 w-full border border-line bg-white px-4 focus:border-ink focus:outline-none" />
+        <input id={`c-${name}`} name={name} type={type} required autoComplete={name === "name" ? "name" : "tel"} aria-invalid={!!errors[name]} aria-describedby={errors[name] ? `c-${name}-e` : undefined} className="mt-2 min-h-12 w-full border border-ink bg-paper px-4 focus:outline-none focus-visible:outline-2" />
       )}
       {errors[name] && (
         <p id={`c-${name}-e`} className="mt-2 text-[0.9rem] text-error">
@@ -52,7 +52,7 @@ export default function ContactForm({ initialState }: { initialState?: "sent" | 
 
   return (
     <form method="post" action="/api/contact" onSubmit={submit} noValidate={enhanced} className="space-y-6" aria-labelledby="contact-form-title">
-      <h2 id="contact-form-title" className="display-md">
+      <h2 id="contact-form-title" className="display-md border-t border-ink pt-5">
         {copy.title}
       </h2>
       <div aria-hidden="true" className="absolute left-[-10000px] h-px w-px overflow-hidden">

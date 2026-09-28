@@ -82,7 +82,7 @@ export async function deliver(brief: DeliveredBrief): Promise<void> {
 /** Plain-text rendering for email or chat providers. */
 export function formatBriefText(b: DeliveredBrief): string {
   return [
-    `New brief ${b.id} — ${b.receivedAt}`,
+    `New brief ${b.id}, ${b.receivedAt}`,
     b.homeName ? `Asking about: ${b.homeName}` : null,
     `Name: ${b.name}`,
     `Phone: ${b.phone} · Email: ${b.email}`,

@@ -28,7 +28,7 @@ export const StepHome = z.object({
   propertyType: z.enum(values(PROPERTY_TYPES), { error: "Choose a home type." }),
   configurations: z.array(z.enum(values(CONFIGURATIONS))).min(1, "Choose at least one configuration."),
   minSizeSqft: z
-    .union([z.literal(""), z.coerce.number().int().min(500, "Enter a size in sq ft, e.g. 3000.").max(30000, "That seems too large — please check.")])
+    .union([z.literal(""), z.coerce.number().int().min(500, "Enter a size in sq ft, e.g. 3000.").max(30000, "That seems too large. Please check.")])
     .optional()
     .transform((v) => (v === "" || v === undefined ? null : v)),
   possession: z.enum(values(POSSESSION), { error: "Choose a possession timeline." }),
@@ -53,7 +53,7 @@ export const StepYou = z.object({
     .string()
     .trim()
     .min(1, "Please share a phone number.")
-    .refine((v) => normalisePhone(v) !== null, "Enter a valid number — include the country code (e.g. +44) if outside India."),
+    .refine((v) => normalisePhone(v) !== null, "Enter a valid number, with the country code (e.g. +44) if outside India."),
   email: z.string().trim().email("Enter a valid email address.").max(160),
   basedIn: z.enum(values(BASED_IN), { error: "Tell us where you're based." }),
   contactPref: z.enum(values(CONTACT_PREFS), { error: "Choose how we should contact you." }),

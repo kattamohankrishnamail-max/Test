@@ -6,21 +6,23 @@ import Placeholder from "./Placeholder";
 export default function ContentImage({
   image,
   ratio = "4/3",
-  sizes = "(min-width: 1024px) 33vw, 100vw",
+  sizes = "(min-width: 1024px) 40vw, 100vw",
   priority = false,
   className = "",
+  figure,
 }: {
   image: ImageT;
   ratio?: string;
   sizes?: string;
   priority?: boolean;
   className?: string;
+  figure?: string;
 }) {
   if (image.src.startsWith("placeholder:")) {
-    return <Placeholder label={image.src.slice("placeholder:".length)} ratio={ratio} className={className} />;
+    return <Placeholder label={image.src.slice("placeholder:".length)} ratio={ratio} className={className} figure={figure} />;
   }
   return (
-    <div className={`relative w-full overflow-hidden bg-limestone-deep ${className}`} style={{ aspectRatio: ratio }}>
+    <div className={`relative w-full bg-limestone-deep ${className}`} style={{ aspectRatio: ratio }}>
       <Image src={image.src} alt={image.alt} fill sizes={sizes} priority={priority} className="object-cover" />
     </div>
   );

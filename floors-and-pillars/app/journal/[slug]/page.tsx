@@ -33,14 +33,14 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     <article>
       <Container className="py-16 sm:py-24">
         <div className="mx-auto max-w-[68ch]">
-          <p className="eyebrow">
-            <Link href="/journal" className="hover:text-ink">
+          <p className="label">
+            <Link href="/journal" className="hover:underline">
               Journal
             </Link>
           </p>
-          <h1 className="display-xl mt-5">{a.title}</h1>
+          <h1 className="display-lg mt-6">{a.title}</h1>
           <p className="lede mt-6">{a.dek}</p>
-          <p className="mt-8 border-t border-line pt-4 text-[0.92rem] text-stone">
+          <p className="mt-8 border-t border-ink pt-4 text-[0.92rem] text-stone">
             {author && (
               <>
                 {copy.by} <span className="text-ink">{author.name}</span> ·{" "}
@@ -53,14 +53,14 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           </div>
 
           {related.length > 0 && (
-            <section aria-labelledby="related" className="mt-20 border-t border-line pt-8">
+            <section aria-labelledby="related" className="mt-20 border-t border-ink pt-6">
               <h2 id="related" className="eyebrow">
                 {copy.related}
               </h2>
               <ul className="mt-4">
                 {related.map((r) => (
                   <li key={r.href} className="border-b border-line">
-                    <Link href={r.href} className="flex min-h-14 items-center justify-between gap-4 py-3 hover:text-verdigris">
+                    <Link href={r.href} className="flex min-h-14 items-center justify-between gap-4 py-3 hover:underline hover:decoration-1 hover:underline-offset-4">
                       <span className="font-serif text-[1.35rem]">{r.label}</span>
                       <span className="text-[0.8rem] uppercase tracking-[0.14em] text-stone">{r.kind}</span>
                     </Link>

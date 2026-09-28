@@ -4,7 +4,7 @@ import HomeCard from "@/components/homes/HomeCard";
 import TrackView from "@/components/homes/TrackView";
 import ButtonLink from "@/components/ui/ButtonLink";
 import ContentImage from "@/components/ui/ContentImage";
-import { Container, Rule } from "@/components/ui/Section";
+import { Container } from "@/components/ui/Section";
 import { homeDetail as copy } from "@/content/pages/homes";
 import { getHome, getHomes, getMarkets, marketName, sections } from "@/lib/content/load";
 import { priceFrom, sizeRange, typeLabel } from "@/lib/content/format";
@@ -25,11 +25,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 function Block({ id, title, children, className = "" }: { id: string; title: string; children: ReactNode; className?: string }) {
   return (
-    <section aria-labelledby={id} className={`grid gap-8 border-t border-line py-14 lg:grid-cols-[1fr_2.2fr] lg:gap-16 ${className}`}>
-      <h2 id={id} className="display-md">
+    <section aria-labelledby={id} className={`grid grid-cols-12 gap-x-6 gap-y-6 border-t border-ink py-12 ${className}`}>
+      <h2 id={id} className="display-md col-span-12 lg:col-span-4">
         {title}
       </h2>
-      <div>{children}</div>
+      <div className="col-span-12 lg:col-span-8">{children}</div>
     </section>
   );
 }
@@ -57,22 +57,26 @@ export default async function HomeDetailPage({ params }: { params: Promise<{ slu
   return (
     <article>
       <TrackView event="home_view" props={{ slug: h.slug }} />
-      <Container className="pt-14 sm:pt-20">
-        <p className="eyebrow">
-          {marketName(h.microMarket)} · {typeLabel(h.type)}
+      <Container className="pt-10 sm:pt-14">
+        <p className="label">
+          Homes · {marketName(h.microMarket)} · {typeLabel(h.type)}
         </p>
-        <h1 className="display-xl mt-5 max-w-4xl">{h.name}</h1>
-        <p className="lede mt-6">{h.summary}</p>
-        <div className="mt-8 flex flex-wrap items-center gap-6">
-          <ButtonLink href={`/brief?home=${h.slug}`} event="advisor_cta_click" eventProps={{ location: "home_detail_top", home: h.slug }}>
-            {copy.cta}
-          </ButtonLink>
+        <h1 className="display-xl mt-6 max-w-5xl">{h.name}</h1>
+        <div className="mt-10 grid grid-cols-12 gap-x-6 gap-y-6 border-t border-ink pt-6">
+          <p className="lede col-span-12 md:col-span-7">{h.summary}</p>
+          <div className="col-span-12 md:col-span-4 md:col-start-9 md:text-right">
+            <ButtonLink href={`/brief?home=${h.slug}`} event="advisor_cta_click" eventProps={{ location: "home_detail_top", home: h.slug }}>
+              {copy.cta}
+            </ButtonLink>
+          </div>
         </div>
       </Container>
 
-      <Container className="mt-14">
-        <ContentImage image={h.images[0]} ratio="16/9" sizes="100vw" priority />
-        {h.images[0].caption && <p className="mt-3 text-[0.88rem] text-stone">{h.images[0].caption}</p>}
+      <Container className="mt-10">
+        <figure>
+          <ContentImage image={h.images[0]} ratio="16/9" sizes="100vw" priority figure="Fig. 1" />
+          {h.images[0].caption && <figcaption className="mt-2 text-[0.85rem] text-stone">{h.images[0].caption}</figcaption>}
+        </figure>
       </Container>
 
       <Container className="py-10">
@@ -93,14 +97,14 @@ export default async function HomeDetailPage({ params }: { params: Promise<{ slu
 
         <Block id="stands-out" title={s.standsOut}>
           {body[s.standsOut] && <Mdx source={body[s.standsOut]} />}
-          <ul className="mt-6 space-y-3 text-ink-soft">
-            {h.whyWeLikeIt.map((w) => (
-              <li key={w} className="flex gap-3">
-                <span aria-hidden className="mt-[0.8em] h-px w-4 shrink-0 bg-bronze" />
+          <ol className="mt-6 border-t border-line">
+            {h.whyWeLikeIt.map((w, i) => (
+              <li key={w} className="grid grid-cols-[2.5rem_1fr] border-b border-line py-3 text-ink">
+                <span className="numeral">{["i", "ii", "iii", "iv"][i]}</span>
                 {w}
               </li>
             ))}
-          </ul>
+          </ol>
         </Block>
 
         <Block id="lifestyle" title={s.lifestyle}>
@@ -168,7 +172,7 @@ export default async function HomeDetailPage({ params }: { params: Promise<{ slu
                   [copy.numbers.maintenance, h.numbers.maintenance],
                 ] as const
               ).map(([k, v]) => (
-                <div key={k} className="border-t border-bronze/60 pt-4">
+                <div key={k} className="border-t border-ink pt-3">
                   <dt className="eyebrow">{k}</dt>
                   <dd className="mt-2 text-ink">{v}</dd>
                 </div>
@@ -179,45 +183,48 @@ export default async function HomeDetailPage({ params }: { params: Promise<{ slu
           )}
         </Block>
 
-        <section aria-labelledby="weigh" className="my-6 border-l-2 border-verdigris bg-white px-6 py-10 sm:px-12">
-          <p className="eyebrow !text-verdigris">Our honest view</p>
-          <h2 id="weigh" className="display-md mt-3">
-            {s.weigh}
-          </h2>
-          <p className="measure mt-3 text-ink-soft">{copy.weighIntro}</p>
-          <ul className="mt-8 space-y-4">
-            {h.whatToWeigh.map((w) => (
-              <li key={w} className="flex gap-4 text-ink">
-                <span aria-hidden className="mt-[0.35em] font-serif text-xl leading-none text-verdigris">
-                  —
-                </span>
-                {w}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-8 text-ink-soft">
-            <span className="font-medium text-ink">Consider it if </span>
-            {h.considerIf}
-          </p>
+        <section aria-labelledby="weigh" className="my-8 bg-ink px-6 py-10 text-limestone sm:px-10">
+          <div className="grid grid-cols-12 gap-x-6 gap-y-6 border-t border-limestone/60 pt-5">
+            <div className="col-span-12 lg:col-span-4">
+              <p className="text-[0.78rem] font-semibold tracking-[0.16em] text-limestone/75">OUR HONEST VIEW</p>
+              <h2 id="weigh" className="display-md mt-3 text-limestone">
+                {s.weigh}
+              </h2>
+              <p className="mt-3 text-limestone/80">{copy.weighIntro}</p>
+            </div>
+            <div className="col-span-12 lg:col-span-8">
+              <ol className="border-t border-limestone/40">
+                {h.whatToWeigh.map((w, i) => (
+                  <li key={w} className="grid grid-cols-[2.5rem_1fr] border-b border-limestone/25 py-4 text-limestone">
+                    <span className="font-serif text-[1.2rem] text-limestone/60">{String(i + 1).padStart(2, "0")}</span>
+                    {w}
+                  </li>
+                ))}
+              </ol>
+              <p className="mt-6 text-limestone/85">
+                <span className="font-semibold text-limestone">Consider it if </span>
+                {h.considerIf}
+              </p>
+            </div>
+          </div>
         </section>
 
         {similar.length > 0 && (
-          <section aria-labelledby="similar" className="border-t border-line py-16">
+          <section aria-labelledby="similar" className="border-t border-ink py-12">
             <h2 id="similar" className="display-md">
               {s.similar}
             </h2>
-            <ul className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {similar.map((x) => (
+            <ol className="mt-8 border-b border-ink">
+              {similar.map((x, i) => (
                 <li key={x.meta.slug}>
-                  <HomeCard home={x.meta} market={names[x.meta.microMarket]} />
+                  <HomeCard home={x.meta} market={names[x.meta.microMarket]} index={i} />
                 </li>
               ))}
-            </ul>
+            </ol>
           </section>
         )}
 
-        <Rule />
-        <div className="flex flex-col items-start gap-6 py-16 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col items-start gap-6 border-t border-ink py-12 sm:flex-row sm:items-center sm:justify-between">
           <p className="display-md max-w-xl">{copy.cta}.</p>
           <ButtonLink href={`/brief?home=${h.slug}`} event="advisor_cta_click" eventProps={{ location: "home_detail_end", home: h.slug }}>
             {copy.cta}

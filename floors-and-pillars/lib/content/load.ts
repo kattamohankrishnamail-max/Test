@@ -63,7 +63,7 @@ export const getHomes = cache(async () => {
     if (!slugs.has(d.meta.microMarket)) throw new Error(`${d.file}: unknown microMarket "${d.meta.microMarket}"`);
   }
   const list = published(docs);
-  if (list.length > 12) throw new Error("The collection is capped at 12 homes — mark some as draft.");
+  if (list.length > 12) throw new Error("The collection is capped at 12 homes. Mark some as draft.");
   return list;
 });
 

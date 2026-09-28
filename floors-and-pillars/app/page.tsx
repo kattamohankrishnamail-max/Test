@@ -3,10 +3,10 @@ import {
   ClosingCta,
   FeaturedHomes,
   Hero,
-  HowWeAdvise,
   JournalTeaser,
+  Method,
   Philosophy,
-  Teaser,
+  Reader,
   TrustStrip,
   WhatYouReceive,
 } from "@/components/home/Sections";
@@ -24,9 +24,9 @@ export default async function HomePage() {
   return (
     <>
       <Hero />
-      <Teaser />
+      <Reader markets={markets} />
       <Philosophy />
-      <HowWeAdvise />
+      <Method />
       <FeaturedHomes homes={(featured.length ? featured : homes.slice(0, 3)).map((h) => h.meta)} marketNames={marketNames} />
       <WhatYouReceive />
       <BengaluruUnderstood markets={markets} guideSlugs={guides.map((g) => g.meta.slug)} />

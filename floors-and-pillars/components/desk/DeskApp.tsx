@@ -9,6 +9,7 @@ import { extractRequirements, mergeRequirements, toSpecJson } from "@/lib/engine
 import { areaText, locationText, or, priceText } from "@/lib/engine/format";
 import { matchProperties } from "@/lib/engine/match";
 import type { DatasetMeta, Match, Property, Requirements } from "@/lib/engine/types";
+import { SkeletonBlock } from "@/components/ui/Skeleton";
 
 interface DeskData {
   dataset: { meta: DatasetMeta; stats: { total: number; visible: number; apartments: number; villas: number }; properties: Property[] } | null;
@@ -31,11 +32,11 @@ function requirementsFor(b: DeliveredBrief, markets: Market[]): Requirements {
 
 function shortlistText(matches: Match[], who: string) {
   return [
-    `Shortlist — first cut for ${who}`,
+    `Shortlist: first cut for ${who}`,
     "",
     ...matches.map((m, i) =>
       [
-        `${i + 1}. ${m.property.projectName} (${or(m.property.developer)}) — ${m.score}% fit`,
+        `${i + 1}. ${m.property.projectName} (${or(m.property.developer)}), ${m.score}% fit`,
         `   ${locationText(m.property)} · ${or(m.property.configurationLabel)} · ${areaText(m.property)} · ${priceText(m.property)} · Possession ${or(m.property.possessionLabel)}`,
         ...m.reasons.map((r) => `   + ${r}`),
         ...m.gaps.map((g) => `   – ${g}`),
@@ -122,16 +123,32 @@ export default function DeskApp({ needsPasscode, markets }: { needsPasscode: boo
         <label htmlFor="desk-pass" className="block font-medium">
           Desk passcode
         </label>
-        <input id="desk-pass" type="password" value={passcode} onChange={(e) => setPasscode(e.target.value)} className="min-h-12 w-full border border-line bg-white px-4" />
+        <input id="desk-pass" type="password" value={passcode} onChange={(e) => setPasscode(e.target.value)} className="min-h-12 w-full border border-line bg-paper px-4" />
         <button className="min-h-12 bg-ink px-6 text-limestone">Open desk</button>
       </form>
+    );
+  }
+
+  if (!data) {
+    return (
+      <div role="status" aria-label="Loading the desk" className="grid gap-10 lg:grid-cols-[22rem_1fr]">
+        <div className="space-y-4">
+          <SkeletonBlock className="h-32 w-full" />
+          <SkeletonBlock className="h-56 w-full" />
+        </div>
+        <div className="space-y-4">
+          <SkeletonBlock className="h-8 w-2/3" />
+          <SkeletonBlock className="h-28 w-full" />
+          <SkeletonBlock className="h-28 w-full" />
+        </div>
+      </div>
     );
   }
 
   return (
     <div className="grid gap-10 lg:grid-cols-[22rem_1fr]">
       <aside className="space-y-8">
-        <section className="bg-white p-6">
+        <section className="border border-ink bg-paper p-6">
           <h2 className="font-medium">Property database</h2>
           {data?.dataset ? (
             <p className="mt-2 text-[0.92rem] text-ink-soft">
@@ -152,7 +169,7 @@ export default function DeskApp({ needsPasscode, markets }: { needsPasscode: boo
           )}
         </section>
 
-        <section className="bg-white p-6">
+        <section className="border border-ink bg-paper p-6">
           <h2 className="font-medium">Briefs</h2>
           {data && data.briefs.length === 0 && (
             <p className="mt-2 text-[0.88rem] text-stone">
@@ -195,11 +212,11 @@ export default function DeskApp({ needsPasscode, markets }: { needsPasscode: boo
             onChange={(e) => setManual(e.target.value)}
             rows={4}
             placeholder="e.g. 4 BHK apartment around ₹6 Cr in East Bengaluru, low density, ready within a year"
-            className="mb-8 w-full border border-line bg-white px-4 py-3"
+            className="mb-8 w-full border border-line bg-paper px-4 py-3"
           />
         )}
         {brief && (
-          <div className="mb-8 bg-white p-6 text-[0.92rem] text-ink-soft">
+          <div className="mb-8 bg-paper p-6 text-[0.92rem] text-ink-soft">
             <p className="font-medium text-ink">{brief.name}</p>
             <p>
               {brief.phone} · {brief.email} · prefers {brief.contactPref}
@@ -217,7 +234,14 @@ export default function DeskApp({ needsPasscode, markets }: { needsPasscode: boo
         {requirements && (
           <details className="mb-8 text-[0.85rem] text-stone">
             <summary className="cursor-pointer">How the engine read this brief</summary>
-            <pre className="mt-2 overflow-x-auto bg-white p-4">{JSON.stringify(toSpecJson(requirements), null, 2)}</pre>
+            <dl className="mt-2 border-t border-ink bg-paper">
+              {Object.entries(toSpecJson(requirements)).map(([k, v]) => (
+                <div key={k} className="grid grid-cols-[10rem_1fr] border-b border-line px-3 py-2">
+                  <dt className="text-stone">{k.replace(/_/g, " ")}</dt>
+                  <dd className="text-ink">{Array.isArray(v) ? v.join(", ") || "Not stated" : v === null ? "Not stated" : String(v)}</dd>
+                </div>
+              ))}
+            </dl>
           </details>
         )}
         {!data?.dataset && <p className="text-stone">Upload the property database to see matches.</p>}
@@ -242,7 +266,7 @@ export default function DeskApp({ needsPasscode, markets }: { needsPasscode: boo
             {result.explanation && <p className="mt-2 text-ink-soft">{result.explanation}</p>}
             <ol className="mt-6 space-y-4">
               {shortlist.map((m) => (
-                <li key={m.property.id} className="bg-white p-6">
+                <li key={m.property.id} className="border-t border-ink bg-paper p-6">
                   <div className="flex flex-wrap items-baseline justify-between gap-3">
                     <p className="display-sm">{m.property.projectName}</p>
                     <span className="text-[0.9rem] text-verdigris">

@@ -19,7 +19,7 @@ export function pageMetadata({
   type?: "website" | "article";
   noindex?: boolean;
 }): Metadata {
-  const fullTitle = path === "/" ? `${site.name} — ${title}` : `${title} · ${site.name}`;
+  const fullTitle = path === "/" ? `${site.name} · ${title}` : `${title} · ${site.name}`;
   return {
     title: fullTitle,
     description,
