@@ -112,25 +112,29 @@ const ratio = (a: string, b: string) => {
 };
 // [foreground, background, minimum] — 4.5 for body text, 3 for large text / UI only.
 const PAIRS: [string, string, number][] = [
+  // Brand Guidelines §03: Charcoal or Oxblood on Warm Stone, and Warm Stone on Oxblood, for all text.
   ["ink", "limestone", 4.5],
   ["ink", "paper", 4.5],
   ["ink", "limestone-deep", 4.5],
+  ["oxblood", "limestone", 4.5],
+  ["oxblood", "paper", 4.5],
+  ["limestone", "oxblood", 4.5],
+  ["limestone", "olive", 4.5],
+  ["limestone", "ink", 4.5],
   ["ink-soft", "limestone", 4.5],
   ["ink-soft", "paper", 4.5],
-  ["ink-soft", "limestone-deep", 4.5],
   ["stone", "limestone", 4.5],
   ["stone", "paper", 4.5],
   ["stone", "limestone-deep", 4.5],
   ["bronze-deep", "limestone", 4.5],
   ["bronze-deep", "paper", 4.5],
-  ["verdigris", "limestone", 4.5],
-  ["limestone", "ink", 4.5],
-  ["limestone", "verdigris", 4.5],
-  ["limestone", "stone", 4.5],
+  ["bronze-light", "oxblood", 4.5],
+  ["on-dark-soft", "oxblood", 4.5],
+  ["on-dark-soft", "olive", 4.5],
   ["error", "paper", 4.5],
   ["error", "limestone", 4.5],
-  ["bronze", "limestone", 3], // numerals and display accents only
-  ["bronze", "paper", 3],
+  // Rose Bronze: large display type, hairlines and logo only (never body text).
+  ["bronze", "limestone", 3],
 ];
 const contrast: string[] = [];
 for (const [fg, bg, min] of PAIRS) {
@@ -152,7 +156,7 @@ const DESIGN_RULES: [RegExp, string][] = [
   [/\bborder-l-(2|4|8)\b|border-left:\s*[2-9]px/, "coloured left stripe"],
   [/\btransition(-\w+)?\b|\bduration-\d|\banimate-(?!none)/, "hover/transition animation"],
   [/lucide|heroicons|react-icons/, "icon library"],
-  [/[✓✔✨⭐→➜➔]/u, "checkmark, sparkle or arrow glyph"],
+  [/[✓✔✨⭐➜➔]/u, "checkmark or sparkle glyph"], // a static → is part of the brand CTA ("Explore our perspective →")
   [/(?![©®™])\p{Extended_Pictographic}/u, "emoji"],
   [/\b(Inter|Geist|Space_Grotesk|Space Grotesk)\b\s*[,(]/, "Inter/Geist/Space Grotesk"],
 ];
@@ -173,6 +177,9 @@ for (const file of copySources) {
     .forEach((line, i) => {
       const code = file.startsWith("content/") ? line : line.replace(/^\s*(\/\/|\*|\/\*).*$/, "").replace(/\/\/.*$|\{\/\*.*?\*\/\}/g, "");
       if (code.includes("—")) errors.push(`${file}:${i + 1} em dash in copy`);
+      // Brand Guidelines §01: "Luxury living, Advised." exactly. Never "Luxury Living Advised" or "Luxury living, advised."
+      if (/luxury\s+living,?\s+advised/i.test(code) && !code.includes("Luxury living, Advised.")) errors.push(`${file}:${i + 1} tagline must read "Luxury living, Advised."`);
+      if (/!["'`\s<]/.test(code) && file.startsWith("content/") && !/!\[|!=|<!--/.test(code)) errors.push(`${file}:${i + 1} exclamation mark in copy`);
       if (/\b(isn't|is not|it's not|it is not)\b[^.]{0,80}\.\s+It(')?s\b|\bnot (just|only|about) [^,.]{1,60}, (but|it's)\b/i.test(code)) {
         errors.push(`${file}:${i + 1} "not X, it's Y" construction`);
       }

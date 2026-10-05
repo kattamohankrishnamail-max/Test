@@ -305,12 +305,12 @@ export default function BriefForm({
               type="button"
               onClick={() => v.description.trim() && applyText(v.description, false)}
               disabled={!v.description.trim()}
-              className="inline-flex min-h-11 items-center border border-ink px-5 text-[0.92rem] text-ink hover:bg-ink hover:text-limestone disabled:cursor-not-allowed disabled:opacity-40"
+              className="inline-flex min-h-11 items-center border border-ink px-5 text-[0.92rem] text-ink hover:bg-oxblood hover:text-limestone disabled:cursor-not-allowed disabled:opacity-40"
             >
               {copy.describe.button}
             </button>
             {prefillNote && (
-              <p role="status" className="text-[0.92rem] text-verdigris">
+              <p role="status" className="text-[0.92rem] text-oxblood">
                 {prefillNote}
               </p>
             )}
@@ -323,7 +323,7 @@ export default function BriefForm({
         <ol className="mb-10 grid grid-cols-4 gap-2" aria-label="Progress">
           {STEP_TITLES.map((t, i) => (
             <li key={t} aria-current={i === step ? "step" : undefined}>
-              <span className={`block h-1 ${i <= step ? "bg-ink" : "bg-line"}`} />
+              <span className={`block h-1 ${i <= step ? "bg-oxblood" : "bg-line"}`} />
               <span className={`mt-2 hidden text-[0.8rem] sm:block ${i === step ? "text-ink" : "text-stone"}`}>
                 {i + 1}. {t}
               </span>
@@ -413,7 +413,7 @@ export default function BriefForm({
               aria-invalid={!!err("consent")}
               aria-describedby={err("consent") ? "consent-error" : undefined}
               required
-              className="mt-1 h-5 w-5 shrink-0 accent-[var(--verdigris)]"
+              className="mt-1 h-5 w-5 shrink-0 accent-[var(--oxblood)]"
             />
             <span>
               {L.consent}{" "}
@@ -434,14 +434,14 @@ export default function BriefForm({
           </button>
         )}
         {enhanced && step < STEP_TITLES.length - 1 ? (
-          <button type="button" onClick={next} className="ml-auto inline-flex min-h-12 items-center bg-ink px-8 text-[0.95rem] tracking-wide text-limestone hover:bg-verdigris">
+          <button type="button" onClick={next} className="ml-auto inline-flex min-h-12 items-center bg-oxblood px-8 text-[0.95rem] tracking-wide text-limestone hover:bg-ink">
             {copy.continue}
           </button>
         ) : (
           <button
             type="submit"
             disabled={status === "sending"}
-            className="ml-auto inline-flex min-h-12 items-center bg-ink px-8 text-[0.95rem] tracking-wide text-limestone hover:bg-verdigris disabled:opacity-60"
+            className="ml-auto inline-flex min-h-12 items-center bg-oxblood px-8 text-[0.95rem] tracking-wide text-limestone hover:bg-ink disabled:opacity-60"
           >
             {status === "sending" ? copy.submitting : copy.submit}
           </button>
@@ -532,8 +532,8 @@ function Choice({
           return (
             <label
               key={o.value}
-              className={`inline-flex min-h-11 cursor-pointer items-center border px-4 text-[0.95rem] has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ink ${
-                checked ? "border-ink bg-ink text-limestone" : error ? "border-error bg-paper text-ink-soft" : "border-line bg-paper text-ink hover:border-ink"
+              className={`inline-flex min-h-11 cursor-pointer items-center border px-4 text-[0.95rem] has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-oxblood ${
+                checked ? "border-ink bg-oxblood text-limestone" : error ? "border-error bg-paper text-ink-soft" : "border-line bg-paper text-ink hover:border-ink"
               } ${disabled ? "cursor-not-allowed opacity-45" : ""}`}
             >
               <input

@@ -78,7 +78,8 @@ const js = await esbuild.build({
   target: "es2020",
   jsx: "automatic",
   tsconfig: path.join(root, "tsconfig.json"),
-  define: { "process.env.NODE_ENV": '"production"' },
+  // site.config.ts reads NEXT_PUBLIC_SITE_URL; in a plain file there is no process.env.
+  define: { "process.env.NODE_ENV": '"production"', "process.env.NEXT_PUBLIC_SITE_URL": '""' },
   plugins: [shims],
   logLevel: "warning",
 });

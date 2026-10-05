@@ -44,26 +44,36 @@ The script captures every page from the production build, re-mounts the interact
 
 ## Design rules
 
-The site is designed as a **drawing set**: an architect's sheet set or a printed monograph.
+The visual system follows **Floors & Pillars Brand Guidelines v1.0**:
 
-- **Structure:** a 12-column grid, sheet numbers in the margin, heavy ink rules over each sheet, and figure captions on imagery.
-- **Lists:** numbered registers and schedules take the place of card rows.
-- **Type:** display in **Instrument Serif**; text in **Libre Franklin**. Libre Franklin also supplies the ₹ glyph, which Instrument Serif lacks.
-- **Surfaces:** `limestone` (page), `paper` (raised surfaces) and `limestone-deep` (image blocks and bands). There is never any pure white.
+- **Colour (§03):** Warm Stone `#EDE6DA` (background), Deep Oxblood `#421D1B` (primary), Charcoal `#292321` (type), Rose Bronze `#A8785F` (hairlines and large display only), Deep Olive `#343C32` (sparingly). Tokens and the AA-safe derived tints are in `app/globals.css`; `content:check` verifies every pair.
+- **Type (§04):** Cormorant Garamond for headlines, property names and the tagline (italic). Hanken Grotesk for body, navigation, labels and data. Only Regular and Medium are loaded; the guideline asks to avoid Bold.
+- **Logo (§02):**
+  - The FP seal is `components/brand/Seal.tsx`. Its outlines are traced from the guideline's own Cormorant glyphs, with a double hairline frame, and the guideline's small-size cut is used below 32px.
+  - The header carries the Horizontal logo (version B). The footer uses the Minimal wordmark (version D), so the logo appears once per page.
+  - The favicon is the seal-only cut.
+  - The circular badge version of the logo isn't used, because the guideline lists "a badge around the seal" under *Never*.
+- **Copy (§01, §05):**
+  - The tagline must read exactly "Luxury living, Advised." (checked).
+  - The hero uses the guideline's website lines.
+  - There are no exclamation marks (checked).
+  - The legal name "Floors & Pillars Infraventures LLP" appears only in the legal footer.
+- **Motion (§06):** gentle fades on the hero's secondary lines at load only, held still under reduced motion. Nothing moves on hover.
+- **Layout:** registers, schedules and numbered sections, with square corners and flat colour.
 
 It was built to avoid a list of patterns that make a site read as generated. `content:check` enforces the ones that can be detected in source:
 
 | Pattern | How the site handles it | Enforced by `content:check` |
 |---|---|---|
 | Harsh gradients, radial orbs, dot grids | Flat fills only | Gradients |
-| Lucide or other icon libraries, sparkle icons | No icon library; two hand-drawn SVGs (wordmark, placeholder cross) | Icon imports, sparkle glyphs |
+| Lucide or other icon libraries, sparkle icons | No icon library; the brand seal and a placeholder cross are the only SVGs | Icon imports, sparkle glyphs |
 | Pure white background | `limestone` / `paper` / `limestone-deep` | `white`, `#fff` |
-| Rainbow, neon, basic pastels, purple and black | Brand palette only: ink, limestone, bronze, verdigris | Review |
+| Rainbow, neon, basic pastels, purple and black | Brand palette only: Warm Stone, Oxblood, Charcoal, Rose Bronze, Deep Olive | Review |
 | Drop shadows, liquid glass | None | `shadow-*`, `backdrop-blur` |
 | Three feature cards in a row, bento grids | Numbered registers, tables and schedules | Review |
-| Emoji, checkmark bullets, animated arrows | Roman and Arabic numerals, underlined text links | Emoji, check, sparkle and arrow glyphs |
+| Emoji, checkmark bullets, animated arrows | Roman and Arabic numerals; one static → in the brand CTA "Explore our perspective →" | Emoji, check and sparkle glyphs |
 | Em dashes; "It's not X, it's Y" | Rewritten copy | Both, in all visitor-facing text |
-| Inter, Geist, Space Grotesk | Instrument Serif + Libre Franklin | Font imports |
+| Inter, Geist, Space Grotesk | Cormorant Garamond + Hanken Grotesk (brand typefaces) | Font imports |
 | Coloured left stripe | Full borders or ink bands | `border-l-2/4/8` |
 | Fake testimonials | None; "questions we often hear" is set as a plain table | Review |
 | Terminal windows | None (the desk shows a definition list) | Review |

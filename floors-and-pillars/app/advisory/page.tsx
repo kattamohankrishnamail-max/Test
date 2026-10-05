@@ -23,10 +23,10 @@ export default function AdvisoryPage() {
         <table className="mt-12 w-full border-t border-ink text-left">
           <thead className="max-md:sr-only">
             <tr className="border-b border-ink">
-              <th scope="col" className="label w-14 py-2 font-semibold">No.</th>
-              <th scope="col" className="label w-44 py-2 font-semibold">{cols.stage}</th>
-              <th scope="col" className="label py-2 pr-6 font-semibold">{cols.happens}</th>
-              <th scope="col" className="label py-2 font-semibold">{cols.receive}</th>
+              <th scope="col" className="label w-14 py-2 font-medium">No.</th>
+              <th scope="col" className="label w-44 py-2 font-medium">{cols.stage}</th>
+              <th scope="col" className="label py-2 pr-6 font-medium">{cols.happens}</th>
+              <th scope="col" className="label py-2 font-medium">{cols.receive}</th>
             </tr>
           </thead>
           <tbody>
@@ -80,7 +80,7 @@ export default function AdvisoryPage() {
                 <dl className="mt-6 border-t border-ink">
                   {copy.noteMock.sections.map((sct, i) => (
                     <div key={sct.heading} className="border-b border-line py-3 pl-8">
-                      <dt className="-indent-8 text-[0.9rem] font-semibold text-ink">
+                      <dt className="-indent-8 text-[0.9rem] font-medium text-ink">
                         <span className="numeral inline-block w-8 indent-0 font-normal">{i + 1}</span>
                         {sct.heading}
                       </dt>
@@ -95,10 +95,10 @@ export default function AdvisoryPage() {
         </div>
       </Section>
 
-      <section aria-labelledby="standard-title" className="bg-ink py-20 text-limestone sm:py-28">
+      <section aria-labelledby="standard-title" className="bg-oxblood py-20 text-limestone sm:py-28">
         <Container>
-          <div className="grid grid-cols-12 gap-x-6 border-t border-limestone/60 pt-5">
-            <p id="standard-title" className="col-span-12 text-[0.78rem] font-semibold tracking-[0.16em] text-limestone/75 sm:col-span-2">
+          <div className="grid grid-cols-12 gap-x-6 border-t border-bronze-light pt-5">
+            <p id="standard-title" className="col-span-12 text-[0.78rem] font-medium tracking-[0.16em] text-on-dark-soft sm:col-span-2">
               {copy.standard.eyebrow.toUpperCase()}
             </p>
             <p className="display-lg col-span-12 mt-4 text-limestone sm:col-span-10 sm:mt-0 lg:col-span-9">{copy.standard.quote}</p>
@@ -122,8 +122,8 @@ export default function AdvisoryPage() {
         <table className="mt-12 w-full border-t border-ink text-left">
           <thead className="max-md:sr-only">
             <tr className="border-b border-ink">
-              <th scope="col" className="label py-2 font-semibold md:w-2/5">{copy.audienceColumns.who}</th>
-              <th scope="col" className="label py-2 font-semibold">{copy.audienceColumns.ask}</th>
+              <th scope="col" className="label py-2 font-medium md:w-2/5">{copy.audienceColumns.who}</th>
+              <th scope="col" className="label py-2 font-medium">{copy.audienceColumns.ask}</th>
             </tr>
           </thead>
           <tbody>
@@ -145,7 +145,7 @@ export default function AdvisoryPage() {
               <summary className="grid min-h-16 cursor-pointer list-none grid-cols-[2.5rem_1fr_auto] items-baseline gap-x-2 py-4 text-[1.05rem] text-ink [&::-webkit-details-marker]:hidden">
                 <span className="numeral">{String(i + 1).padStart(2, "0")}</span>
                 <span>{f.q}</span>
-                <span aria-hidden className="text-[0.75rem] font-semibold tracking-[0.14em] text-stone">
+                <span aria-hidden className="text-[0.75rem] font-medium tracking-[0.14em] text-stone">
                   <span className="group-open:hidden">OPEN</span>
                   <span className="hidden group-open:inline">CLOSE</span>
                 </span>

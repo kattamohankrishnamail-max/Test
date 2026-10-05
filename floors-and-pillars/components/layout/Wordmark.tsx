@@ -1,14 +1,34 @@
+import Seal from "@/components/brand/Seal";
+import { site } from "@/site.config";
+
 /**
- * Placeholder wordmark. Replace the inner markup with the final SVG logo when it's ready;
- * give it an accessible name of "Floors & Pillars" (e.g. <title> or aria-label on the <svg>).
+ * Logo version B (Horizontal): seal left, wordmark and tagline right. Used once per page, in the
+ * header. `minimal` gives version D (wordmark and tagline, no seal) for footers and running heads.
+ * The wordmark is set in Cormorant Garamond, the brand's own face; never re-set it in another.
  */
-export default function Wordmark({ className = "", tone = "ink" }: { className?: string; tone?: "ink" | "light" }) {
+export default function Wordmark({
+  tone = "ink",
+  minimal = false,
+  showTagline = true,
+  className = "",
+}: {
+  tone?: "ink" | "light";
+  minimal?: boolean;
+  showTagline?: boolean;
+  className?: string;
+}) {
+  const light = tone === "light";
   return (
-    <span className={`flex items-center gap-3 ${tone === "light" ? "text-limestone" : "text-ink"} ${className}`}>
-      <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M2 3h20M2 21h20M6 3v18M18 3v18" />
-      </svg>
-      <span className="text-[0.82rem] font-semibold uppercase tracking-[0.3em]">Floors &amp; Pillars</span>
+    <span className={`flex items-center gap-3.5 ${className}`}>
+      {!minimal && <Seal size={40} tone={light ? "bronze" : "oxblood"} />}
+      <span className="flex flex-col">
+        <span className={`font-serif text-[1.05rem] font-medium uppercase leading-none tracking-[0.28em] ${light ? "text-limestone" : "text-oxblood"}`}>
+          Floors &amp; Pillars
+        </span>
+        {showTagline && (
+          <span className={`tagline mt-1 text-[0.95rem] leading-none ${light ? "text-on-dark-soft" : "text-bronze-deep"}`}>{site.tagline}</span>
+        )}
+      </span>
     </span>
   );
 }

@@ -6,17 +6,20 @@
  * Contrast pairs are verified by `npm run content:check`.
  */
 :root {
-  --ink: #1c1b18;
-  --ink-soft: #46423b;
-  --stone: #625c52;
-  --line: #d6cdbd;
-  --line-strong: #1c1b18;
-  --limestone: #f3eee4; /* page */
-  --paper: #f8f4ec; /* raised surfaces: forms, registers (never pure white) */
-  --limestone-deep: #e7dfcf; /* image placeholders, bands */
-  --bronze: #9c6b3e; /* decoration and large display accents only (≈3.96:1) */
-  --bronze-deep: #7e5530; /* links and small accent text (≈5.6:1) */
-  --verdigris: #3f5b4e;
+  /* Brand Guidelines v1.0 · proportion in any layout: Warm Stone 50 · Oxblood 25 · Charcoal 15 · Rose Bronze 7 · Deep Olive 3 */
+  --limestone: #ede6da; /* Warm Stone · background, paper */
+  --paper: #f4efe7; /* lighter Warm Stone for raised surfaces (never pure white) */
+  --limestone-deep: #e2d8c8; /* darker Warm Stone for image blocks */
+  --oxblood: #421d1b; /* Deep Oxblood · primary brand colour */
+  --ink: #292321; /* Charcoal · typography and rules */
+  --ink-soft: #4a403b;
+  --stone: #5f534c; /* muted text, AA on every stone tone */
+  --line: #d8cdbc; /* hairlines */
+  --bronze: #a8785f; /* Rose Bronze · hairlines, large display, logo only (3.07:1 on stone) */
+  --bronze-light: #c9977c; /* seal and numerals on Oxblood (5.76:1) */
+  --bronze-deep: #7a5240; /* small bronze-toned text on stone (5.45:1) */
+  --olive: #343c32; /* Deep Olive · secondary, used sparingly */
+  --on-dark-soft: #c9b8a6; /* secondary text on Oxblood / Olive */
   --error: #8a3a2b;
   color-scheme: light;
 }
@@ -29,13 +32,16 @@
   --color-limestone: var(--limestone);
   --color-paper: var(--paper);
   --color-limestone-deep: var(--limestone-deep);
+  --color-oxblood: var(--oxblood);
   --color-bronze: var(--bronze);
+  --color-bronze-light: var(--bronze-light);
   --color-bronze-deep: var(--bronze-deep);
-  --color-verdigris: var(--verdigris);
+  --color-olive: var(--olive);
+  --color-on-dark-soft: var(--on-dark-soft);
   --color-error: var(--error);
-  /* Instrument Serif has no ₹ glyph; Libre Franklin (already loaded) supplies it. */
-  --font-serif: var(--font-display), var(--font-text), "Iowan Old Style", Georgia, serif;
-  --font-sans: var(--font-text), "Franklin Gothic Book", "Helvetica Neue", Arial, sans-serif;
+  /* Cormorant Garamond carries taste and judgement; Hanken Grotesk carries research and analysis. */
+  --font-serif: var(--font-display), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-text), "Helvetica Neue", Arial, sans-serif;
   --radius-none: 0;
 }
 
@@ -47,9 +53,9 @@ body {
 
 body {
   font-family: var(--font-sans);
-  font-size: 1.0625rem;
-  line-height: 1.68;
-  font-feature-settings: "kern", "liga", "onum";
+  font-size: 1.0625rem; /* 17px: guideline body 16–18px */
+  line-height: 1.7;
+  font-feature-settings: "kern", "liga";
   -webkit-font-smoothing: antialiased;
 }
 
@@ -64,49 +70,58 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--oxblood);
   outline-offset: 3px;
 }
 
-/* ── Type scale: serif only at display sizes ─────────────────────────────── */
+/* ── Type scale (Brand Guidelines §04): Cormorant for headlines, Hanken for everything else ── */
 .display-xl {
+  /* Hero: 64–88px desktop, 40–48px mobile */
   font-family: var(--font-serif);
-  font-weight: 400;
-  font-size: clamp(3rem, 8.2vw, 7.5rem);
-  line-height: 0.94;
-  letter-spacing: -0.02em;
+  font-weight: 500;
+  font-size: clamp(2.6rem, 6.2vw, 5.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.005em;
 }
 .display-lg {
+  /* H1/H2: 36–64px desktop, 26–40px mobile */
   font-family: var(--font-serif);
-  font-weight: 400;
-  font-size: clamp(2.3rem, 4.8vw, 4.2rem);
-  line-height: 1;
-  letter-spacing: -0.012em;
+  font-weight: 500;
+  font-size: clamp(1.75rem, 3.6vw, 3.25rem);
+  line-height: 1.08;
 }
 .display-md {
+  /* H3: 26–32px desktop, 20–24px mobile */
   font-family: var(--font-serif);
-  font-weight: 400;
-  font-size: clamp(1.75rem, 2.8vw, 2.4rem);
-  line-height: 1.08;
+  font-weight: 500;
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  line-height: 1.15;
 }
 .display-sm {
   font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.55rem;
+  line-height: 1.2;
+}
+.tagline {
+  /* Cormorant Garamond Italic, never larger than the brand name */
+  font-family: var(--font-serif);
+  font-style: italic;
   font-weight: 400;
-  font-size: 1.6rem;
-  line-height: 1.15;
 }
 .eyebrow,
 .label {
+  /* Labels: Hanken 10–11px, uppercase, +150 to +250 tracking; avoid bold */
   font-family: var(--font-sans);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--stone);
 }
 .lede {
-  font-size: 1.22rem;
-  line-height: 1.6;
+  font-size: 1.15rem;
+  line-height: 1.65;
   color: var(--ink-soft);
   max-width: 60ch;
 }
@@ -115,8 +130,9 @@ body {
 }
 .numeral {
   font-family: var(--font-serif);
+  font-weight: 500;
   font-feature-settings: "lnum";
-  color: var(--bronze-deep); /* numerals appear at small sizes too, so use the AA-safe bronze */
+  color: var(--bronze-deep);
 }
 
 .link {
@@ -126,7 +142,7 @@ body {
   text-underline-offset: 0.22em;
 }
 .link:hover {
-  color: var(--ink);
+  color: var(--oxblood);
   text-decoration-thickness: 2px;
 }
 
@@ -152,13 +168,13 @@ body {
 }
 .prose-fp h2 {
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: 500;
   font-size: 2rem;
   line-height: 1.1;
   color: var(--ink);
   margin-top: 2em;
   padding-top: 0.6em;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--bronze);
 }
 .prose-fp h3 {
   font-weight: 600;
@@ -200,5 +216,25 @@ body {
 @keyframes skeleton-pulse {
   50% {
     background: var(--line);
+  }
+}
+
+/* ── Brand motion (§06): seal, then wordmark, then tagline, gentle fades. Load only, never hover. ── */
+@media (prefers-reduced-motion: no-preference) {
+  .intro-1,
+  .intro-2,
+  .intro-3 {
+    animation: brand-fade 0.9s ease-out both;
+  }
+  .intro-2 {
+    animation-delay: 0.5s;
+  }
+  .intro-3 {
+    animation-delay: 1s;
+  }
+}
+@keyframes brand-fade {
+  from {
+    opacity: 0;
   }
 }

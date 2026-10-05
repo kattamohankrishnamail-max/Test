@@ -87,7 +87,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             block(
               "drawbacks",
               G.drawbacks,
-              <div className="bg-ink px-6 py-5 text-limestone [&_li]:border-limestone/25 [&_ol]:border-limestone/40 [&_.numeral]:text-limestone/60 [&_ol]:text-limestone">
+              <div className="bg-olive px-6 py-5 text-limestone [&_li]:border-bronze/50 [&_ol]:border-bronze-light [&_.numeral]:text-on-dark-soft [&_ol]:text-limestone">
                 <List items={g.drawbacks} />
               </div>,
             )}

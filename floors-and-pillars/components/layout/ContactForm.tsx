@@ -69,7 +69,7 @@ export default function ContactForm({ initialState }: { initialState?: "sent" | 
           {copy.error}
         </p>
       )}
-      <button type="submit" disabled={state === "sending"} className="inline-flex min-h-12 items-center bg-ink px-8 text-limestone hover:bg-verdigris disabled:opacity-60">
+      <button type="submit" disabled={state === "sending"} className="inline-flex min-h-12 items-center bg-oxblood px-8 text-limestone hover:bg-ink disabled:opacity-60">
         {state === "sending" ? copy.sending : copy.submit}
       </button>
     </form>

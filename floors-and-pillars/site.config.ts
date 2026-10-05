@@ -6,6 +6,12 @@ import { z } from "zod";
  */
 const SiteConfigSchema = z.object({
   name: z.string(),
+  /** Brand architecture level 2. The comma and capital "A" are deliberate. */
+  tagline: z.literal("Luxury living, Advised."),
+  /** Brand architecture level 3. */
+  contentLine: z.string(),
+  /** Appears only on contracts, invoices, legal footers and RERA documents. */
+  legalName: z.string(),
   proposition: z.string(),
   description: z.string(),
   url: z.string().url(),
@@ -29,7 +35,10 @@ export type SiteConfig = z.infer<typeof SiteConfigSchema>;
 
 export const site: SiteConfig = SiteConfigSchema.parse({
   name: "Floors & Pillars",
-  proposition: "Residential advisory for exceptional homes in Bengaluru.",
+  tagline: "Luxury living, Advised.",
+  contentLine: "Curated Homes. Higher Perspectives.",
+  legalName: "Floors & Pillars Infraventures LLP",
+  proposition: "A private advisory house for exceptional homes in Bengaluru.",
   description:
     "Floors & Pillars helps you find, evaluate and buy exceptional apartments and villas in Bengaluru. We don't show you everything. We show you what's worth considering.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",

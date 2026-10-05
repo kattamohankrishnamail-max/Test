@@ -1,24 +1,20 @@
 export const home = {
   meta: {
-    title: "A more considered way to find your next home",
+    title: "Luxury living, Advised.",
     description:
       "Residential advisory for exceptional homes in Bengaluru. We help you find, evaluate and buy a home that fits the way you want to live.",
   },
   hero: {
-    sheet: "Sheet 00 · Residential advisory, Bengaluru",
-    title: "A more considered way to find your next home.",
-    sub: "Residential advisory for exceptional homes in Bengaluru.",
-    support: "We help you find, evaluate and buy a home that fits your requirements and the way you want to live.",
+    sheet: "Private advisory · Bengaluru",
+    // Brand Guidelines §06 · Website: hero copy as specified.
+    title: "Luxury living, Advised.",
+    sub: "A more considered approach to exceptional homes.",
+    support: "We help you find, evaluate and buy a home in Bengaluru that fits your requirements and the way you want to live.",
     primary: { label: "Tell us what you're looking for", href: "/brief" },
-    secondary: { label: "Homes worth considering", href: "/homes" },
-    image: "placeholder:hero photograph of a home at dusk, full width",
+    secondary: { label: "Explore our perspective →", href: "/advisory" },
+    image: "placeholder:architectural photograph of a Bengaluru home at golden hour, calm area on the left for text",
     caption: "Fig. 1",
-    contents: [
-      { n: "01", label: "Read a brief", href: "#reader" },
-      { n: "02", label: "Method", href: "#method" },
-      { n: "03", label: "The collection", href: "#collection" },
-      { n: "04", label: "The city", href: "#city" },
-    ],
+    contentLine: "Curated Homes. Higher Perspectives.",
   },
   reader: {
     sheet: "01",

@@ -183,26 +183,26 @@ export default async function HomeDetailPage({ params }: { params: Promise<{ slu
           )}
         </Block>
 
-        <section aria-labelledby="weigh" className="my-8 bg-ink px-6 py-10 text-limestone sm:px-10">
-          <div className="grid grid-cols-12 gap-x-6 gap-y-6 border-t border-limestone/60 pt-5">
+        <section aria-labelledby="weigh" className="my-8 bg-olive px-6 py-10 text-limestone sm:px-10">
+          <div className="grid grid-cols-12 gap-x-6 gap-y-6 border-t border-bronze-light pt-5">
             <div className="col-span-12 lg:col-span-4">
-              <p className="text-[0.78rem] font-semibold tracking-[0.16em] text-limestone/75">OUR HONEST VIEW</p>
+              <p className="text-[0.78rem] font-medium tracking-[0.16em] text-on-dark-soft">OUR HONEST VIEW</p>
               <h2 id="weigh" className="display-md mt-3 text-limestone">
                 {s.weigh}
               </h2>
-              <p className="mt-3 text-limestone/80">{copy.weighIntro}</p>
+              <p className="mt-3 text-on-dark-soft">{copy.weighIntro}</p>
             </div>
             <div className="col-span-12 lg:col-span-8">
-              <ol className="border-t border-limestone/40">
+              <ol className="border-t border-bronze-light">
                 {h.whatToWeigh.map((w, i) => (
-                  <li key={w} className="grid grid-cols-[2.5rem_1fr] border-b border-limestone/25 py-4 text-limestone">
-                    <span className="font-serif text-[1.2rem] text-limestone/60">{String(i + 1).padStart(2, "0")}</span>
+                  <li key={w} className="grid grid-cols-[2.5rem_1fr] border-b border-bronze/50 py-4 text-limestone">
+                    <span className="font-serif text-[1.2rem] text-on-dark-soft">{String(i + 1).padStart(2, "0")}</span>
                     {w}
                   </li>
                 ))}
               </ol>
-              <p className="mt-6 text-limestone/85">
-                <span className="font-semibold text-limestone">Consider it if </span>
+              <p className="mt-6 text-on-dark-soft">
+                <span className="font-medium text-limestone">Consider it if </span>
                 {h.considerIf}
               </p>
             </div>

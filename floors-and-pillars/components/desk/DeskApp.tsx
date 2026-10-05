@@ -124,7 +124,7 @@ export default function DeskApp({ needsPasscode, markets }: { needsPasscode: boo
           Desk passcode
         </label>
         <input id="desk-pass" type="password" value={passcode} onChange={(e) => setPasscode(e.target.value)} className="min-h-12 w-full border border-line bg-paper px-4" />
-        <button className="min-h-12 bg-ink px-6 text-limestone">Open desk</button>
+        <button className="min-h-12 bg-oxblood px-6 text-limestone">Open desk</button>
       </form>
     );
   }
@@ -158,12 +158,12 @@ export default function DeskApp({ needsPasscode, markets }: { needsPasscode: boo
           ) : (
             <p className="mt-2 text-[0.92rem] text-stone">None loaded yet.</p>
           )}
-          <label className="mt-4 inline-flex min-h-11 cursor-pointer items-center border border-ink px-4 text-[0.92rem] hover:bg-ink hover:text-limestone">
+          <label className="mt-4 inline-flex min-h-11 cursor-pointer items-center border border-ink px-4 text-[0.92rem] hover:bg-oxblood hover:text-limestone">
             {data?.dataset ? "Replace .xlsx" : "Upload .xlsx"}
             <input type="file" accept=".xlsx" className="sr-only" onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} />
           </label>
           {message && (
-            <p role="status" className="mt-3 text-[0.88rem] text-verdigris">
+            <p role="status" className="mt-3 text-[0.88rem] text-oxblood">
               {message}
             </p>
           )}
@@ -183,7 +183,7 @@ export default function DeskApp({ needsPasscode, markets }: { needsPasscode: boo
                   type="button"
                   onClick={() => setSelected(b.id)}
                   aria-pressed={selected === b.id}
-                  className={`w-full px-3 py-2 text-left text-[0.9rem] ${selected === b.id ? "bg-ink text-limestone" : "hover:bg-limestone"}`}
+                  className={`w-full px-3 py-2 text-left text-[0.9rem] ${selected === b.id ? "bg-oxblood text-limestone" : "hover:bg-limestone"}`}
                 >
                   {briefLabel(b)}
                   <span className="block text-[0.78rem] opacity-70">{new Date(b.receivedAt).toLocaleString("en-IN")}</span>
@@ -195,7 +195,7 @@ export default function DeskApp({ needsPasscode, markets }: { needsPasscode: boo
                 type="button"
                 onClick={() => setSelected("manual")}
                 aria-pressed={selected === "manual"}
-                className={`w-full px-3 py-2 text-left text-[0.9rem] ${selected === "manual" ? "bg-ink text-limestone" : "hover:bg-limestone"}`}
+                className={`w-full px-3 py-2 text-left text-[0.9rem] ${selected === "manual" ? "bg-oxblood text-limestone" : "hover:bg-limestone"}`}
               >
                 Type or paste a brief…
               </button>
@@ -252,7 +252,7 @@ export default function DeskApp({ needsPasscode, markets }: { needsPasscode: boo
               {shortlist.length > 0 && (
                 <button
                   type="button"
-                  className="min-h-11 border border-ink px-4 text-[0.9rem] hover:bg-ink hover:text-limestone"
+                  className="min-h-11 border border-ink px-4 text-[0.9rem] hover:bg-oxblood hover:text-limestone"
                   onClick={async () => {
                     await navigator.clipboard.writeText(shortlistText(shortlist, brief?.name ?? "client"));
                     setCopied(true);
@@ -269,7 +269,7 @@ export default function DeskApp({ needsPasscode, markets }: { needsPasscode: boo
                 <li key={m.property.id} className="border-t border-ink bg-paper p-6">
                   <div className="flex flex-wrap items-baseline justify-between gap-3">
                     <p className="display-sm">{m.property.projectName}</p>
-                    <span className="text-[0.9rem] text-verdigris">
+                    <span className="text-[0.9rem] text-oxblood">
                       {m.score}% fit{m.exact ? "" : " · near match"}
                     </span>
                   </div>

@@ -104,7 +104,7 @@ export default function BriefReader({ markets }: { markets: Market[] }) {
           <tbody>
             {(rows ?? Object.values(c.rows).map((key) => ({ key, value: undefined }))).map((r) => (
               <tr key={r.key} className="border-b border-line">
-                <th scope="row" className="w-40 py-3 pr-4 align-top text-[0.82rem] font-semibold tracking-[0.04em] text-stone">
+                <th scope="row" className="w-40 py-3 pr-4 align-top text-[0.82rem] font-medium tracking-[0.04em] text-stone">
                   {r.key}
                 </th>
                 <td className={`py-3 align-top text-[1rem] ${r.value ? "text-ink" : "text-stone"}`}>{r.value ?? (rows ? c.notYet : "")}</td>
@@ -117,7 +117,7 @@ export default function BriefReader({ markets }: { markets: Market[] }) {
             type="button"
             onClick={continueToBrief}
             disabled={!text.trim()}
-            className="inline-flex min-h-12 items-center bg-ink px-7 text-[0.92rem] font-medium text-limestone hover:bg-verdigris disabled:cursor-not-allowed disabled:bg-stone"
+            className="inline-flex min-h-12 items-center bg-oxblood px-7 text-[0.92rem] font-medium text-limestone hover:bg-ink disabled:cursor-not-allowed disabled:bg-stone"
           >
             {c.cta}
           </button>

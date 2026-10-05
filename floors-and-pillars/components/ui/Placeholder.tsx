@@ -25,7 +25,7 @@ export default function Placeholder({
         <line x1="0" y1="0" x2="100" y2="100" stroke="var(--line)" strokeWidth="0.25" vectorEffect="non-scaling-stroke" />
         <line x1="100" y1="0" x2="0" y2="100" stroke="var(--line)" strokeWidth="0.25" vectorEffect="non-scaling-stroke" />
       </svg>
-      <span className="relative m-3 self-start bg-limestone-deep px-1 text-[0.72rem] font-semibold tracking-[0.14em] text-stone">{figure ?? ""}</span>
+      <span className="relative m-3 self-start bg-limestone-deep px-1 text-[0.72rem] font-medium tracking-[0.14em] text-stone">{figure ?? ""}</span>
       <span className="relative m-3 self-start bg-limestone-deep px-1 text-[0.8rem] text-stone">[[PLACEHOLDER: {label}]]</span>
     </div>
   );

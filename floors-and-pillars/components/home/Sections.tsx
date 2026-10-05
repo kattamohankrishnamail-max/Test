@@ -12,43 +12,27 @@ import BriefReader from "./BriefReader";
 export function Hero() {
   const h = home.hero;
   return (
-    <section aria-labelledby="hero-title" className="border-b border-ink">
-      <Container className="pt-10 sm:pt-14">
-        <div className="grid grid-cols-12 gap-x-6">
-          <p className="label col-span-12">{h.sheet}</p>
-          <h1 id="hero-title" className="display-xl col-span-12 mt-6 lg:col-span-10">
+    <section aria-labelledby="hero-title" className="bg-oxblood text-limestone">
+      <Container className="grid grid-cols-12 gap-x-6 gap-y-10 py-14 sm:py-20 lg:min-h-[78svh] lg:items-center">
+        <div className="col-span-12 lg:col-span-5">
+          <p className="label !text-on-dark-soft">{h.sheet}</p>
+          <h1 id="hero-title" className="display-xl tagline mt-6 text-limestone">
             {h.title}
           </h1>
-        </div>
-        <div className="mt-10 grid grid-cols-12 gap-x-6 gap-y-8 border-t border-ink pt-6">
-          <div className="col-span-12 md:col-span-6 lg:col-span-5">
-            <p className="font-serif text-[1.7rem] leading-snug text-ink">{h.sub}</p>
-            <p className="lede mt-3">{h.support}</p>
-            <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
-              <ButtonLink href={h.primary.href} event="advisor_cta_click" eventProps={{ location: "hero" }}>
-                {h.primary.label}
-              </ButtonLink>
-              <ButtonLink href={h.secondary.href} variant="text">
-                {h.secondary.label}
-              </ButtonLink>
-            </div>
+          <hr className="intro-1 mt-8 w-16 border-0 border-t border-bronze-light" />
+          <p className="intro-1 mt-8 font-serif text-[1.65rem] font-medium leading-snug text-limestone">{h.sub}</p>
+          <p className="intro-2 mt-4 max-w-[46ch] text-[1.05rem] leading-relaxed text-on-dark-soft">{h.support}</p>
+          <div className="intro-3 mt-10 flex flex-wrap items-center gap-x-8 gap-y-3">
+            <ButtonLink href={h.primary.href} variant="light" event="advisor_cta_click" eventProps={{ location: "hero" }}>
+              {h.primary.label}
+            </ButtonLink>
+            <Link href={h.secondary.href} className="inline-flex min-h-11 items-center text-[0.78rem] font-medium uppercase tracking-[0.18em] text-limestone underline decoration-bronze-light underline-offset-[0.5em] hover:decoration-limestone">
+              {h.secondary.label}
+            </Link>
           </div>
-          <nav aria-label="On this page" className="col-span-12 md:col-span-5 md:col-start-8 lg:col-span-4 lg:col-start-9">
-            <p className="label">Contents</p>
-            <ol className="mt-2 border-t border-line">
-              {h.contents.map((c) => (
-                <li key={c.n} className="border-b border-line">
-                  <a href={c.href} className="grid min-h-11 grid-cols-[2.5rem_1fr] items-center py-1 text-ink hover:underline">
-                    <span className="numeral">{c.n}</span>
-                    <span>{c.label}</span>
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </nav>
         </div>
-        <figure className="mt-12 pb-10">
-          <Placeholder label={h.image.replace(/^placeholder:/, "")} ratio="21/9" figure={h.caption} className="max-sm:!aspect-[4/3]" />
+        <figure className="col-span-12 lg:col-span-7">
+          <Placeholder label={h.image.replace(/^placeholder:/, "")} ratio="4/3" figure={h.caption} />
         </figure>
       </Container>
     </section>
@@ -122,7 +106,7 @@ export function WhatYouReceive() {
   return (
     <Section tone="ink" labelledBy="receive-title">
       <SheetHead n={r.sheet} id="receive-title" title={r.title} tone="light" />
-      <table className="mt-12 w-full border-t border-limestone/60 text-left">
+      <table className="mt-12 w-full border-t border-bronze-light text-left">
         <thead className="sr-only">
           <tr>
             <th scope="col">{r.columns.doc}</th>
@@ -131,12 +115,12 @@ export function WhatYouReceive() {
         </thead>
         <tbody>
           {r.items.map((item, i) => (
-            <tr key={item.name} className="border-b border-limestone/30 max-sm:flex max-sm:flex-col max-sm:py-5">
+            <tr key={item.name} className="border-b border-bronze/50 max-sm:flex max-sm:flex-col max-sm:py-5">
               <th scope="row" className="py-6 pr-6 align-baseline font-normal sm:w-1/2 max-sm:py-0">
-                <span className="mr-5 font-serif text-[1.4rem] text-limestone/60">{String.fromCharCode(65 + i)}</span>
+                <span className="mr-5 font-serif text-[1.4rem] text-on-dark-soft">{String.fromCharCode(65 + i)}</span>
                 <span className="font-serif text-[2rem] leading-tight text-limestone">{item.name}</span>
               </th>
-              <td className="py-6 align-baseline text-limestone/85 max-sm:pt-2 max-sm:pb-0">{item.text}</td>
+              <td className="py-6 align-baseline text-on-dark-soft max-sm:pt-2 max-sm:pb-0">{item.text}</td>
             </tr>
           ))}
         </tbody>
@@ -166,10 +150,10 @@ export function MarketIndex({ markets, guideSlugs }: { markets: Market[]; guideS
     <table className="w-full border-t border-ink text-left">
       <thead>
         <tr className="border-b border-ink">
-          <th scope="col" className="label w-12 py-2 font-semibold">No.</th>
-          <th scope="col" className="label py-2 font-semibold">Micro-market</th>
-          <th scope="col" className="label hidden py-2 font-semibold sm:table-cell">Zone</th>
-          <th scope="col" className="label py-2 text-right font-semibold">Guide</th>
+          <th scope="col" className="label w-12 py-2 font-medium">No.</th>
+          <th scope="col" className="label py-2 font-medium">Micro-market</th>
+          <th scope="col" className="label hidden py-2 font-medium sm:table-cell">Zone</th>
+          <th scope="col" className="label py-2 text-right font-medium">Guide</th>
         </tr>
       </thead>
       <tbody>
@@ -253,14 +237,14 @@ export function TrustStrip({ advisors }: { advisors: Advisor[] }) {
 
 export function ClosingCta({ title = home.closing.title, cta = home.closing.cta, href = "/brief", location = "closing" }) {
   return (
-    <section aria-labelledby="closing-title" className="bg-verdigris py-20 text-limestone sm:py-28">
+    <section aria-labelledby="closing-title" className="bg-limestone-deep py-20 sm:py-28">
       <Container>
-        <div className="grid grid-cols-12 gap-x-6 gap-y-8 border-t border-limestone/60 pt-6">
-          <h2 id="closing-title" className="display-lg col-span-12 text-limestone lg:col-span-8">
+        <div className="grid grid-cols-12 gap-x-6 gap-y-8 border-t border-bronze/60 pt-6">
+          <h2 id="closing-title" className="display-lg col-span-12 text-oxblood lg:col-span-8">
             {title}
           </h2>
           <div className="col-span-12 lg:col-span-4 lg:self-end lg:text-right">
-            <ButtonLink href={href} variant="light" event="advisor_cta_click" eventProps={{ location }}>
+            <ButtonLink href={href} event="advisor_cta_click" eventProps={{ location }}>
               {cta}
             </ButtonLink>
           </div>

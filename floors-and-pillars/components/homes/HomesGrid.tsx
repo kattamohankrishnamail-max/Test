@@ -16,7 +16,7 @@ export default function HomesGrid({ homes, marketNames }: { homes: HomeMeta[]; m
   const shown = homes.filter((h) => (type === "all" || h.type === type) && (band === "all" || h.priceBand === band));
 
   const chip = (active: boolean) =>
-    `inline-flex min-h-11 items-center border px-4 text-[0.9rem] ${active ? "border-ink bg-ink text-limestone" : "border-line bg-paper text-ink hover:border-ink"}`;
+    `inline-flex min-h-11 items-center border px-4 text-[0.9rem] ${active ? "border-ink bg-oxblood text-limestone" : "border-line bg-paper text-ink hover:border-ink"}`;
 
   return (
     <>

@@ -12,7 +12,7 @@ const TONES = {
   limestone: "bg-limestone",
   paper: "bg-paper",
   deep: "bg-limestone-deep",
-  ink: "bg-ink text-limestone",
+  ink: "bg-oxblood text-limestone",
 };
 
 /**
@@ -39,7 +39,7 @@ export function Section({
   );
 }
 
-/** Sheet header: number in the left margin, title spanning the rest, a rule above. */
+/** Section head in the brand-guideline style: bronze numeral, Cormorant title, a fine bronze rule above. */
 export function SheetHead({
   n,
   title,
@@ -53,16 +53,14 @@ export function SheetHead({
   aside?: ReactNode;
   tone?: "ink" | "light";
 }) {
-  const rule = tone === "light" ? "border-limestone/60" : "border-ink";
+  const light = tone === "light";
   return (
-    <div className={`grid grid-cols-12 gap-x-6 border-t pt-5 ${rule}`}>
-      <p className={`col-span-12 mb-4 text-[0.78rem] font-semibold tracking-[0.16em] sm:col-span-2 sm:mb-0 ${tone === "light" ? "text-limestone/75" : "text-stone"}`}>
-        {n ? `SHEET ${n}` : ""}
-      </p>
-      <h2 id={id} className={`display-lg col-span-12 sm:col-span-10 lg:col-span-7 ${tone === "light" ? "text-limestone" : ""}`}>
+    <div className={`grid grid-cols-12 gap-x-6 border-t pt-6 ${light ? "border-bronze-light/70" : "border-bronze/60"}`}>
+      <h2 id={id} className={`display-lg col-span-12 lg:col-span-8 ${light ? "text-limestone" : "text-ink"}`}>
+        {n && <span className={`mr-4 align-baseline text-[0.6em] ${light ? "text-bronze-light" : "text-bronze-deep"}`}>{n}</span>}
         {title}
       </h2>
-      {aside && <div className="col-span-12 mt-6 sm:col-span-10 sm:col-start-3 lg:col-span-3 lg:col-start-10 lg:mt-2 lg:text-right">{aside}</div>}
+      {aside && <div className="col-span-12 mt-5 lg:col-span-4 lg:mt-3 lg:text-right">{aside}</div>}
     </div>
   );
 }
