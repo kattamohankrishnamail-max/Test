@@ -32,6 +32,7 @@ export const homeDetail = {
     size: "Size range",
     price: "Price band",
     possession: "Possession",
+    scale: "Scale",
     developer: "Developer",
     rera: "RERA ID",
   },
@@ -39,5 +40,7 @@ export const homeDetail = {
   numbers: { psf: "Price per sq ft", market: "Micro-market range", maintenance: "Maintenance" },
   cta: "Speak to an advisor about this home",
   note: "Details are indicative and subject to change by the developer. We'll verify current pricing and availability with you.",
+  asOf: (when: string) => `Figures as observed in ${when}, from the public sources below.`,
+  sources: "Sources",
   notSpecified: "To be confirmed",
 };

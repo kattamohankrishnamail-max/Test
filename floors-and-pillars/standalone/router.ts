@@ -1,5 +1,5 @@
 /**
- * Hash router for the single-file demo: "#/homes/home-a?x=y" ↔ "/homes/home-a?x=y".
+ * Hash router for the single-file demo: "#/homes/brigade-avalon?x=y" ↔ "/homes/brigade-avalon?x=y".
  * Hashes that don't start with "#/" (e.g. "#main") are left to the browser.
  */
 const listeners = new Set<() => void>();

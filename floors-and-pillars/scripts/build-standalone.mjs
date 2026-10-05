@@ -42,6 +42,23 @@ for (const route of [...routes, "/404"]) {
   if (!main) throw new Error(`No <main> found for ${route}`);
   pages[route] = { title: title.replace(/&amp;/g, "&"), html: main.replace(/<script[\s\S]*?<\/script>/g, "") };
 }
+// Optimised images (/_next/image?url=…) can't load from a file: inline the originals from /public.
+const inlined = new Map();
+const dataUri = (src) => {
+  if (!inlined.has(src)) {
+    const ext = path.extname(src).slice(1).replace("jpg", "jpeg");
+    inlined.set(src, `data:image/${ext};base64,${readFileSync(path.join(root, "public", src)).toString("base64")}`);
+  }
+  return inlined.get(src);
+};
+for (const page of Object.values(pages)) {
+  page.html = page.html.replace(/<img([^>]*?)>/g, (tag) => {
+    const m = tag.match(/src="\/_next\/image\?url=([^&"]+)/);
+    if (!m) return tag;
+    const src = decodeURIComponent(m[1]);
+    return tag.replace(/\s(srcset|sizes)="[^"]*"/gi, "").replace(/src="[^"]*"/, `src="${dataUri(src)}"`);
+  });
+}
 const footer = firstHtml.match(/<footer[\s\S]*?<\/footer>/)?.[0] ?? "";
 
 // ── 2. Styles and fonts (Latin + Latin-extended subsets, inlined) ────────────

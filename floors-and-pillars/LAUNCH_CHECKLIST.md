@@ -37,7 +37,7 @@ Every placeholder that must be replaced before launch, grouped by owner. `LAUNCH
 
 | Item | Where |
 |---|---|
-| **Homes A, B, C:** replace with real homes. Name, developer, configurations, sizes, `priceFromCr`, possession, summary, why we like it, consider-it-if, what to weigh, commute times, schools, hospitals, developer track record, the numbers, and the three body sections. Every figure needs a source. | `content/homes/home-a.mdx`, `home-b.mdx`, `home-c.mdx` |
+| **The 12 curated homes:** facts (configurations, sizes, prices, possession, density, K-RERA where known) come from the research database as observed Sep 2026, with public sources listed on each page. Before launch, re-check every price and availability line with the developer, confirm missing K-RERA numbers, have an advisor review the summary, why we like it, consider-it-if and what-to-weigh lines, and add site-visit notes, commute times, schools, hospitals, developer track record, the numbers and photographs. | `content/homes/*.mdx` |
 | Micro-market one-line summaries (8) | `content/markets.json` |
 | **Guides:** Central Bengaluru and Sarjapur Road. Dek, who it suits, character, price bands, notable developments, infrastructure (with sources), drawbacks. Then set `draft: false`. | `content/bengaluru/*.mdx` |
 | **Articles:** "What ₹5 Cr buys you across Bengaluru", "How to assess a ₹10 Cr villa", "What actually makes a luxury apartment luxurious?". Dek and body, then set `draft: false` and a real `date`. | `content/journal/*.mdx` |

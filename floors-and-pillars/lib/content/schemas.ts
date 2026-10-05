@@ -24,6 +24,9 @@ export const HomeSchema = z.object({
   priceBand: z.enum(PRICE_BANDS),
   possession: placeholderOr,
   reraId: z.string().optional(),
+  /** Number of homes in the development and site area, where published. */
+  units: z.number().int().positive().optional(),
+  landAcres: z.number().positive().optional(),
   summary: placeholderOr,
   whyWeLikeIt: z.array(z.string()).min(1).max(4),
   considerIf: placeholderOr,
@@ -42,6 +45,10 @@ export const HomeSchema = z.object({
     .optional(),
   /** Short notes used by the matching engine, e.g. "low-density", "large-format". */
   tags: z.array(z.string()).default([]),
+  /** When the figures above were observed, e.g. "Sep 2026". */
+  factsAsOf: z.string().optional(),
+  /** Public sources for the figures (developer, K-RERA, press, listings). */
+  sources: z.array(z.url()).default([]),
 });
 export type HomeMeta = z.infer<typeof HomeSchema>;
 

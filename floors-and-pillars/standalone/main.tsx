@@ -23,7 +23,7 @@ declare global {
   }
 }
 
-const homes = data.homes as HomeMeta[];
+const homes = data.homes as unknown as HomeMeta[];
 const markets = data.markets as Market[];
 const marketNames = Object.fromEntries(markets.map((m) => [m.slug, m.name]));
 const DEMO_KEY = "fp-demo-submissions";

@@ -112,7 +112,7 @@ Pages in `app/` read from `content/` and never hold copy themselves. Anyone comf
 Every content file is validated when the site builds. A missing or wrong field fails the build, with the file name and the field in the error.
 
 ### A home
-1. Copy `content/homes/home-a.mdx` to `content/homes/<slug>.mdx`. The slug must use lowercase letters and hyphens.
+1. Copy `content/homes/prestige-pine-forest.mdx` to `content/homes/<slug>.mdx`. The slug must use lowercase letters and hyphens.
 2. Fill in the frontmatter:
    - `type`: `apartment` or `villa`.
    - `microMarket`: a slug from `content/markets.json`.

@@ -112,7 +112,10 @@ test("thank-you matching ranks the fitting home first", () => {
     schools: [],
     hospitals: [],
     tags: ["large-format", "green"],
+    sources: [],
   };
+  const dense = homeToProperty({ ...base, units: 316, landAcres: 9 }, markets[0]);
+  assert.equal(Math.round(dense.unitsPerAcre!), 35);
   const villa: HomeMeta = { ...base, slug: "b", type: "villa", microMarket: "north-bengaluru", priceBand: "10+", configurations: ["5 BHK"] };
   const req = briefToRequirements({ ...valid, possession: "1-3y" }, markets);
   const now = new Date("2026-09-25");

@@ -15,4 +15,11 @@ export function sizeRange(h: HomeMeta) {
   return a === b ? `${f(a)} sq ft` : `${f(a)}–${f(b)} sq ft`;
 }
 
+export function scale(h: HomeMeta) {
+  if (h.units && h.landAcres) return `${h.units.toLocaleString("en-IN")} homes on ${h.landAcres} acres`;
+  if (h.units) return `${h.units.toLocaleString("en-IN")} homes`;
+  if (h.landAcres) return `${h.landAcres}-acre site`;
+  return null;
+}
+
 export const typeLabel = (t: HomeMeta["type"]) => (t === "villa" ? "Villa" : "Apartment");

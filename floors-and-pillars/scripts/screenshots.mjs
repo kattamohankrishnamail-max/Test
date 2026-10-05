@@ -8,7 +8,7 @@ import { chromium } from "playwright";
 
 const BASE = process.env.BASE_URL ?? "http://localhost:3000";
 const ROUTES = [
-  "/", "/brief", "/brief/thank-you", "/homes", "/homes/home-a", "/advisory", "/bengaluru", "/bengaluru/central-bengaluru",
+  "/", "/brief", "/brief/thank-you", "/homes", "/homes/prestige-pine-forest", "/advisory", "/bengaluru", "/bengaluru/central-bengaluru",
   "/journal", "/journal/what-5-cr-buys-you", "/about", "/contact", "/privacy", "/terms", "/this-page-does-not-exist",
 ];
 const SHOT_WIDTHS = [390, 1440];

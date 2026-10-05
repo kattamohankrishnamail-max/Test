@@ -7,7 +7,7 @@ import ContentImage from "@/components/ui/ContentImage";
 import { Container } from "@/components/ui/Section";
 import { homeDetail as copy } from "@/content/pages/homes";
 import { getHome, getHomes, getMarkets, marketName, sections } from "@/lib/content/load";
-import { priceFrom, sizeRange, typeLabel } from "@/lib/content/format";
+import { priceFrom, scale, sizeRange, typeLabel } from "@/lib/content/format";
 import { Mdx } from "@/lib/content/mdx";
 import { pageMetadata } from "@/lib/seo";
 
@@ -50,6 +50,7 @@ export default async function HomeDetailPage({ params }: { params: Promise<{ slu
     [copy.glance.size, sizeRange(h)],
     [copy.glance.price, priceFrom(h)],
     [copy.glance.possession, h.possession],
+    [copy.glance.scale, scale(h)],
     [copy.glance.developer, h.developer],
     [copy.glance.rera, h.reraId ?? null],
   ];
@@ -87,9 +88,9 @@ export default async function HomeDetailPage({ params }: { params: Promise<{ slu
         <Block id="glance" title={s.glance}>
           <dl className="grid gap-x-10 sm:grid-cols-2">
             {glance.map(([k, v]) => (
-              <div key={k} className="flex justify-between gap-6 border-b border-line py-4">
-                <dt className="text-stone">{k}</dt>
-                <dd className={`text-right ${v ? "text-ink" : "italic text-stone"}`}>{v ?? copy.notSpecified}</dd>
+              <div key={k} className="flex flex-wrap justify-between gap-x-6 gap-y-1 border-b border-line py-4">
+                <dt className="shrink-0 text-stone">{k}</dt>
+                <dd className={`min-w-0 text-right [overflow-wrap:anywhere] ${v ? "text-ink" : "italic text-stone"}`}>{v ?? copy.notSpecified}</dd>
               </div>
             ))}
           </dl>
@@ -230,7 +231,26 @@ export default async function HomeDetailPage({ params }: { params: Promise<{ slu
             {copy.cta}
           </ButtonLink>
         </div>
-        <p className="pb-16 text-[0.88rem] text-stone">{copy.note}</p>
+        <div className="pb-16 text-[0.88rem] text-stone">
+          <p className="measure">
+            {h.factsAsOf ? `${copy.asOf(h.factsAsOf)} ` : ""}
+            {copy.note}
+          </p>
+          {h.sources.length > 0 && (
+            <>
+              <h2 className="label mt-6">{copy.sources}</h2>
+              <ol className="mt-2 space-y-1">
+                {h.sources.map((src) => (
+                  <li key={src} className="break-all">
+                    <a href={src} rel="noopener noreferrer" className="inline-flex min-h-11 items-center underline decoration-1 underline-offset-4 hover:text-ink sm:min-h-0">
+                      {new URL(src).hostname.replace(/^www\./, "")}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </>
+          )}
+        </div>
       </Container>
     </article>
   );
