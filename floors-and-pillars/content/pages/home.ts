@@ -12,7 +12,10 @@ export const home = {
     support: "We help you find, evaluate and buy a home in Bengaluru that fits your requirements and the way you want to live.",
     primary: { label: "Tell us what you're looking for", href: "/brief" },
     secondary: { label: "Explore our perspective →", href: "/advisory" },
-    image: "placeholder:architectural photograph of a Bengaluru home at golden hour, calm area on the left for text",
+    image: {
+      src: "/images/home-golden-hour.webp",
+      alt: "A covered terrace at golden hour: a limestone wall patterned with leaf shadows, an infinity pool and a low lounge, looking over a tree canopy to a city skyline at sunset.",
+    },
     caption: "Fig. 1",
     contentLine: "Curated Homes. Higher Perspectives.",
   },

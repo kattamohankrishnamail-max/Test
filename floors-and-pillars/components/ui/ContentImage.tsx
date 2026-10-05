@@ -23,7 +23,7 @@ export default function ContentImage({
   }
   return (
     <div className={`relative w-full bg-limestone-deep ${className}`} style={{ aspectRatio: ratio }}>
-      <Image src={image.src} alt={image.alt} fill sizes={sizes} priority={priority} className="object-cover" />
+      <Image src={image.src} alt={image.alt} fill sizes={sizes} loading={priority ? "eager" : "lazy"} fetchPriority={priority ? "high" : "auto"} className="object-cover" />
     </div>
   );
 }

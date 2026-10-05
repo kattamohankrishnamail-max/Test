@@ -1,8 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import HomeCard from "@/components/homes/HomeCard";
 import ButtonLink from "@/components/ui/ButtonLink";
 import ContentImage from "@/components/ui/ContentImage";
-import Placeholder from "@/components/ui/Placeholder";
 import { Container, Section, SheetHead } from "@/components/ui/Section";
 import { home } from "@/content/pages/home";
 import type { Advisor, ArticleMeta, HomeMeta, Market } from "@/lib/content/load";
@@ -13,16 +13,18 @@ export function Hero() {
   const h = home.hero;
   return (
     <section aria-labelledby="hero-title" className="bg-oxblood text-limestone">
-      <Container className="grid grid-cols-12 gap-x-6 gap-y-10 py-14 sm:py-20 lg:min-h-[78svh] lg:items-center">
-        <div className="col-span-12 lg:col-span-5">
+      <Container className="grid grid-cols-12 gap-x-6 gap-y-8 pt-14 pb-12 sm:pt-20 lg:items-end lg:pb-16">
+        <div className="col-span-12 lg:col-span-7">
           <p className="label !text-on-dark-soft">{h.sheet}</p>
           <h1 id="hero-title" className="display-xl tagline mt-6 text-limestone">
             {h.title}
           </h1>
           <hr className="intro-1 mt-8 w-16 border-0 border-t border-bronze-light" />
-          <p className="intro-1 mt-8 font-serif text-[1.65rem] font-medium leading-snug text-limestone">{h.sub}</p>
+        </div>
+        <div className="col-span-12 lg:col-span-5">
+          <p className="intro-1 font-serif text-[1.65rem] font-medium leading-snug text-limestone">{h.sub}</p>
           <p className="intro-2 mt-4 max-w-[46ch] text-[1.05rem] leading-relaxed text-on-dark-soft">{h.support}</p>
-          <div className="intro-3 mt-10 flex flex-wrap items-center gap-x-8 gap-y-3">
+          <div className="intro-3 mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
             <ButtonLink href={h.primary.href} variant="light" event="advisor_cta_click" eventProps={{ location: "hero" }}>
               {h.primary.label}
             </ButtonLink>
@@ -31,10 +33,15 @@ export function Hero() {
             </Link>
           </div>
         </div>
-        <figure className="col-span-12 lg:col-span-7">
-          <Placeholder label={h.image.replace(/^placeholder:/, "")} ratio="4/3" figure={h.caption} />
-        </figure>
       </Container>
+      <figure>
+        <div className="relative aspect-[4/3] w-full sm:aspect-[2000/770]">
+          <Image src={h.image.src} alt={h.image.alt} fill loading="eager" fetchPriority="high" sizes="100vw" className="object-cover object-[72%_50%]" />
+        </div>
+        <Container>
+          <figcaption className="py-3 text-[0.72rem] font-medium tracking-[0.14em] text-on-dark-soft">{h.caption}</figcaption>
+        </Container>
+      </figure>
     </section>
   );
 }
