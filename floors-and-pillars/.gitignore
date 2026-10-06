@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+.env
+.env*.local
+# Briefs, uploaded databases and enquiries never go into git.
+data/*
+!data/.gitkeep
+*.xlsx
+standalone/.generated/

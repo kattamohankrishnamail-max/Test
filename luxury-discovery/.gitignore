@@ -1,0 +1,11 @@
+node_modules/
+.next/
+next-env.d.ts
+*.tsbuildinfo
+.env*.local
+.env
+# Uploaded property databases and enquiries stay local — never commit client data.
+data/*
+!data/.gitkeep
+*.xlsx
+*.xls

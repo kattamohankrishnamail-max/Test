@@ -1,0 +1,85 @@
+export const home = {
+  meta: {
+    title: "Luxury living, Advised.",
+    description:
+      "Residential advisory for exceptional homes in Bengaluru. We help you find, evaluate and buy a home that fits the way you want to live.",
+  },
+  hero: {
+    sheet: "Private advisory · Bengaluru",
+    // Brand Guidelines §06 · Website: hero copy as specified.
+    title: "Luxury living, Advised.",
+    sub: "A more considered approach to exceptional homes.",
+    support: "We help you find, evaluate and buy a home in Bengaluru that fits your requirements and the way you want to live.",
+    primary: { label: "Tell us what you're looking for", href: "/brief" },
+    secondary: { label: "Explore our perspective →", href: "/advisory" },
+    image: {
+      src: "/images/home-golden-hour.webp",
+      alt: "A covered terrace at golden hour: a limestone wall patterned with leaf shadows, an infinity pool and a low lounge, looking over a tree canopy to a city skyline at sunset.",
+    },
+    caption: "Fig. 1",
+    contentLine: "Curated Homes. Higher Perspectives.",
+  },
+  reader: {
+    sheet: "01",
+    title: "Write it the way you'd say it.",
+    body: "Describe the home in a sentence or two. The reading on the right updates as you type, showing how we understand your brief before an advisor picks it up. Nothing is sent until you choose to continue.",
+    label: "Your brief",
+    placeholder: "A quiet 4 BHK for a family of five near good schools, around ₹6 Cr, ready within a year.",
+    examples: [
+      "A 4 BHK apartment around ₹5 crore in East Bengaluru, spacious and low density.",
+      "A private villa in North Bengaluru with airport access, ₹8 to 10 Cr, 5 BHK.",
+      "Something central and ready to move, 3 BHK, with room for my parents.",
+    ],
+    tryLabel: "Or start from an example",
+    readingTitle: "Our reading",
+    empty: "Waiting for your brief.",
+    notYet: "Not stated",
+    rows: { type: "Home type", configuration: "Configuration", budget: "Budget", areas: "Areas", timeline: "Timeline", size: "Size", priorities: "Priorities" },
+    cta: "Continue with this brief",
+    note: "You'll confirm every detail on the next page.",
+  },
+  philosophy: {
+    sheet: "02",
+    title: "The market is full of homes. Finding the right one is different.",
+    body: "Thousands of homes are for sale across Bengaluru. Our work is to understand what matters to you, filter the market against it, and bring forward the few that deserve your time.",
+  },
+  method: {
+    sheet: "03",
+    title: "We advise before we sell.",
+    steps: [
+      { name: "Understand", text: "Your requirements, lifestyle, family and priorities." },
+      { name: "Curate", text: "Relevant homes from across Bengaluru's premium market." },
+      { name: "Evaluate", text: "Location, product, developer, design, pricing and trade-offs." },
+      { name: "Acquire", text: "Visits, negotiation and transaction support." },
+    ],
+    link: { label: "How we advise, stage by stage", href: "/advisory" },
+  },
+  homes: {
+    sheet: "04",
+    title: "Homes worth considering.",
+    link: { label: "See the full collection", href: "/homes" },
+  },
+  receive: {
+    sheet: "05",
+    title: "What you receive.",
+    columns: { doc: "Document", holds: "What it holds" },
+    items: [
+      { name: "Shortlist Brief", text: "Three to seven homes chosen around your brief." },
+      { name: "Property Notes", text: "Why each home made the list, who it suits, and what to weigh carefully." },
+      { name: "Comparison Sheet", text: "Your shortlisted homes set against each other on the points that matter to you." },
+    ],
+  },
+  bengaluru: {
+    sheet: "06",
+    title: "Bengaluru, understood.",
+    body: "We know the city by how people live in it: commutes, schools, weekends. Price per square foot is one line in that picture.",
+    link: { label: "Explore the city", href: "/bengaluru" },
+  },
+  journal: {
+    sheet: "07",
+    title: "From the Journal.",
+    link: { label: "All articles", href: "/journal" },
+  },
+  trust: { sheet: "08", title: "The people you'll speak to." },
+  closing: { title: "Start with a conversation.", cta: "Talk to an Advisor" },
+};

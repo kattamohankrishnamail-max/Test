@@ -1,0 +1,240 @@
+@import "tailwindcss";
+
+/*
+ * Floors & Pillars · "drawing set" system.
+ * Flat surfaces, hairline rules, square corners, no shadows, blur, gradients or hover motion.
+ * Contrast pairs are verified by `npm run content:check`.
+ */
+:root {
+  /* Brand Guidelines v1.0 · proportion in any layout: Warm Stone 50 · Oxblood 25 · Charcoal 15 · Rose Bronze 7 · Deep Olive 3 */
+  --limestone: #ede6da; /* Warm Stone · background, paper */
+  --paper: #f4efe7; /* lighter Warm Stone for raised surfaces (never pure white) */
+  --limestone-deep: #e2d8c8; /* darker Warm Stone for image blocks */
+  --oxblood: #421d1b; /* Deep Oxblood · primary brand colour */
+  --ink: #292321; /* Charcoal · typography and rules */
+  --ink-soft: #4a403b;
+  --stone: #5f534c; /* muted text, AA on every stone tone */
+  --line: #d8cdbc; /* hairlines */
+  --bronze: #a8785f; /* Rose Bronze · hairlines, large display, logo only (3.07:1 on stone) */
+  --bronze-light: #c9977c; /* seal and numerals on Oxblood (5.76:1) */
+  --bronze-deep: #7a5240; /* small bronze-toned text on stone (5.45:1) */
+  --olive: #343c32; /* Deep Olive · secondary, used sparingly */
+  --on-dark-soft: #c9b8a6; /* secondary text on Oxblood / Olive */
+  --error: #8a3a2b;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-stone: var(--stone);
+  --color-line: var(--line);
+  --color-limestone: var(--limestone);
+  --color-paper: var(--paper);
+  --color-limestone-deep: var(--limestone-deep);
+  --color-oxblood: var(--oxblood);
+  --color-bronze: var(--bronze);
+  --color-bronze-light: var(--bronze-light);
+  --color-bronze-deep: var(--bronze-deep);
+  --color-olive: var(--olive);
+  --color-on-dark-soft: var(--on-dark-soft);
+  --color-error: var(--error);
+  /* Cormorant Garamond carries taste and judgement; Hanken Grotesk carries research and analysis. */
+  --font-serif: var(--font-display), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-text), "Helvetica Neue", Arial, sans-serif;
+  --radius-none: 0;
+}
+
+html,
+body {
+  background: var(--limestone);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem; /* 17px: guideline body 16–18px */
+  line-height: 1.7;
+  font-feature-settings: "kern", "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+*,
+*::before,
+*::after {
+  border-radius: 0 !important; /* square corners, everywhere */
+}
+
+::selection {
+  background: var(--limestone-deep);
+}
+
+:focus-visible {
+  outline: 2px solid var(--oxblood);
+  outline-offset: 3px;
+}
+
+/* ── Type scale (Brand Guidelines §04): Cormorant for headlines, Hanken for everything else ── */
+.display-xl {
+  /* Hero: 64–88px desktop, 40–48px mobile */
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(2.6rem, 6.2vw, 5.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.005em;
+}
+.display-lg {
+  /* H1/H2: 36–64px desktop, 26–40px mobile */
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(1.75rem, 3.6vw, 3.25rem);
+  line-height: 1.08;
+}
+.display-md {
+  /* H3: 26–32px desktop, 20–24px mobile */
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  line-height: 1.15;
+}
+.display-sm {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.55rem;
+  line-height: 1.2;
+}
+.tagline {
+  /* Cormorant Garamond Italic, never larger than the brand name */
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+.eyebrow,
+.label {
+  /* Labels: Hanken 10–11px, uppercase, +150 to +250 tracking; avoid bold */
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+.lede {
+  font-size: 1.15rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 60ch;
+}
+.measure {
+  max-width: 68ch;
+}
+.numeral {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-feature-settings: "lnum";
+  color: var(--bronze-deep);
+}
+
+.link {
+  color: var(--bronze-deep);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+.link:hover {
+  color: var(--oxblood);
+  text-decoration-thickness: 2px;
+}
+
+/* Hairlines */
+.rule {
+  height: 1px;
+  border: 0;
+  background: var(--line);
+}
+.rule-strong {
+  height: 1px;
+  border: 0;
+  background: var(--ink);
+}
+
+/* ── Long-form reading (MDX) ─────────────────────────────────────────────── */
+.prose-fp {
+  max-width: 66ch;
+  color: var(--ink-soft);
+}
+.prose-fp > * + * {
+  margin-top: 1.2em;
+}
+.prose-fp h2 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 2rem;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-top: 2em;
+  padding-top: 0.6em;
+  border-top: 1px solid var(--bronze);
+}
+.prose-fp h3 {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--ink);
+  margin-top: 1.8em;
+}
+.prose-fp ul {
+  list-style: square;
+  padding-left: 1.2em;
+}
+.prose-fp ol {
+  list-style: decimal;
+  padding-left: 1.2em;
+}
+.prose-fp li + li {
+  margin-top: 0.4em;
+}
+.prose-fp a {
+  color: var(--bronze-deep);
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}
+.prose-fp strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ── Skeleton loaders: static tone blocks (no shimmer) ───────────────────── */
+.skeleton {
+  background: var(--limestone-deep);
+  color: transparent;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .skeleton {
+    animation: skeleton-pulse 1.6s steps(2, jump-none) infinite;
+  }
+}
+@keyframes skeleton-pulse {
+  50% {
+    background: var(--line);
+  }
+}
+
+/* ── Brand motion (§06): seal, then wordmark, then tagline, gentle fades. Load only, never hover. ── */
+@media (prefers-reduced-motion: no-preference) {
+  .intro-1,
+  .intro-2,
+  .intro-3 {
+    animation: brand-fade 0.9s ease-out both;
+  }
+  .intro-2 {
+    animation-delay: 0.5s;
+  }
+  .intro-3 {
+    animation-delay: 1s;
+  }
+}
+@keyframes brand-fade {
+  from {
+    opacity: 0;
+  }
+}
